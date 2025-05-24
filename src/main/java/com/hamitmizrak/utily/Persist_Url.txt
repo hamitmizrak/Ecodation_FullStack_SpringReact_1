@@ -1,0 +1,11 @@
+http://localhost:4444
+http://localhost:4444/h2-console
+http://localhost:4444/swagger-ui/index.html
+
+----------------------------------------------------------
+https://spring.io/projects/spring-boot
+https://start.spring.io/
+https://docs.spring.io/spring-framework/docs/3.2.x/spring-framework-reference/html/overview.html
+
+Banner Ascii
+https://manytools.org/hacker-tools/ascii-banner/
