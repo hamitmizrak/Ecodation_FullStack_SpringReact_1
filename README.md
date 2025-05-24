@@ -1,4 +1,4 @@
-# Hatay İskenderun Oyak Madenler Spring Boot
+# Java Ecodation Full Stack-1 Spring Boot
 **Spring Boot**
 ---
 
