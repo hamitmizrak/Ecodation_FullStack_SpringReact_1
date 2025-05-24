@@ -1,4 +1,4 @@
-#  2025 Backend-1
+#  2025 Full Stack Ecodation-1
 ---
 
 ## Maven Compiler
@@ -13,13 +13,13 @@ mvn clean install
 project name: _2025_backend_1
 spring boot version: 3.3.7
 JDK: 17
-git url: https://github.com/hamitmizrak/_2025_backend_1.git
+git url: https://github.com/hamitmizrak/Ecodation_FullStack_SpringReact_1
 ```
 ---
 
 ## Git Clone
 ```sh 
-git clone https://github.com/hamitmizrak/_2025_backend_1.git 
+git clone https://github.com/hamitmizrak/Ecodation_FullStack_SpringReact_1
 ```
 ---
 

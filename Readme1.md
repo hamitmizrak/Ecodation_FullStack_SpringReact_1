@@ -2,11 +2,11 @@
 **Spring Boot**
 ---
 
-[GitHub](https://github.com/hamitmizrak/Hatay_maden_SpringBoot.git )
+[GitHub](https://github.com/hamitmizrak/Ecodation_FullStack_SpringReact_1)
 
 ## Project GitHub clone 
 ```sh
-git clone https://github.com/hamitmizrak/Hatay_maden_SpringBoot
+git clone https://github.com/hamitmizrak/Ecodation_FullStack_SpringReact_1
 ```
 ---
 
@@ -31,7 +31,7 @@ git commit -m "spring boot init"
 git remote add origin URL
 git push -u origin master
 
-git clone https://github.com/hamitmizrak/hatay_springboot_redis
+git clone https://github.com/hamitmizrak/Ecodation_FullStack_SpringReact_1
 ```
 ---
 
