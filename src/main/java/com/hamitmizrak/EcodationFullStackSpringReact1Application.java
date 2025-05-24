@@ -18,7 +18,7 @@ import java.util.TimeZone;
 // @EnableAsync
 
 // SCAN
-//@EntityScan(basePackages = "com.hamitmizrak.techcareer_2025_backend_1.data.entity") //Entity bulamadığı zaman
+//@EntityScan(basePackages = "com.hamitmizrak.techcareer_2025_backend_1.data.entity")//Entity bulamadığı zaman
 //@EnableJpaRepositories(basePackages = "com.hamitmizrak.techcareer_2025_backend_1.data.repository") //Repository bulamadığı zaman
 //@ComponentScan("com")
 
@@ -50,7 +50,6 @@ import java.util.TimeZone;
 )
 //@SpringBootApplication
 public class EcodationFullStackSpringReact1Application {
-
 
     // Normal Constructor
     public EcodationFullStackSpringReact1Application() {
@@ -90,5 +89,4 @@ public class EcodationFullStackSpringReact1Application {
         // Main
         SpringApplication.run(EcodationFullStackSpringReact1Application.class, args);
     }
-
 }
