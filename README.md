@@ -51,7 +51,7 @@ public void springData() {
     apiResult = new ApiResult();
 }
 ```
-## Spring Boot
+## Spring Framework Nedir ?
 ```sh 
 
 ```
@@ -117,7 +117,7 @@ Spring Framework, Java tabanlı uygulamalar geliştirmek için güçlü ve esnek
 
 Daha fazla bilgiye ihtiyacınız varsa veya herhangi bir modül hakkında ayrıntılı bir açıklama isterseniz, yardımcı olmaktan memnuniyet duyarım.
 
-## Spring Boot
+## Spring Data Nedir ?
 ```sh 
 
 ```
@@ -188,7 +188,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
 Bu metotlar sayesinde SQL sorgusu yazmaya gerek kalmadan veri işlemleri yapılabilir.
 
-## Spring Boot
+## Spring Data (deliveredQuery, named query, JPQL, native SQL)
 ```sh 
 
 ```
@@ -270,7 +270,7 @@ Bu örneklerde:
 Her bir yöntem, sorgu ihtiyaçlarınıza göre kullanabileceğiniz esnek çözümler sağlar.
 
 
-## Spring Boot
+## Spring Boot (Delivered Query, Named Queries, JPQL ve Native SQL Nedir)
 ```sh 
 
 ```
@@ -537,13 +537,11 @@ Her bir sorgu türü farklı senaryolarda kullanıma uygundur. Uygulamanızın i
 Bu dört sorgu türü sayesinde Spring Data JPA, her türlü veri tabanı sorgulama ihtiyacına esnek ve güçlü çözümler sunar.
 
 
-## Spring Boot
+## Spring Boot (Custom Queries (Özelleştirilmiş Sorgular))
 ```sh 
 
 ```
 ---
-
-
 
 ### Custom Queries (Özelleştirilmiş Sorgular)
 
@@ -692,7 +690,7 @@ Bu sorguda, doğrudan veritabanı tablosu ve sütun adları kullanılarak SQL so
 
 JPQL ve Native SQL, Spring Boot ve JPA ile çalışırken veritabanı işlemlerini optimize etmek için kullanabileceğiniz güçlü araçlardır. Tercih ettiğiniz yöntem, projenizin ihtiyaçlarına ve veritabanı yapınıza bağlı olarak değişiklik gösterebilir.
 
-## Spring Boot
+## Spring Boot ( Named Queries )
 ```sh 
 
 ```
@@ -857,7 +855,7 @@ Bu örnekte doğrudan SQL ile yazılmış bir sorgu kullanılmıştır.
 Her üç yöntemin de kendine özgü avantajları ve kullanım alanları vardır. Projenizin ihtiyaçlarına göre en uygun sorgu yöntemi belirlenmelidir.
 
 
-## Spring Boot
+## Spring Boot (Sayfalandırma ve Sıralama (Pagination and Sorting))
 ```sh 
 
 ```
@@ -936,7 +934,7 @@ Spring Data, veri tabanıyla çalışan uygulamalar için büyük kolaylıklar s
 
 Daha fazla detay isterseniz veya herhangi bir özel konu hakkında örnekler görmek isterseniz, size yardımcı olmaktan memnuniyet duyarım.
 
-## Spring Boot
+## Spring Boot (Delivered Query , Named Queries,  JPQL ve Native SQL Arasındaki Farklar)
 ```sh 
 
 ```
@@ -1144,7 +1142,7 @@ Daha detaylı bir konu veya örnek ile ilgili sorularınız varsa, daha ayrınt�
 
 
 
-## Spring Boot
+## Spring Boot (Spring Security)
 ```sh 
 
 ```
@@ -1322,7 +1320,7 @@ Spring Security, uygulamalarda güçlü bir güvenlik altyapısı sunarak veri g
 
 Daha ayrıntılı örnekler veya belirli bir konuyla ilgili daha fazla bilgiye ihtiyacınız varsa, size yardımcı olmaktan memnuniyet duyarım.
 
-## Spring Boot
+## ModelMapper
 ```sh 
 
 ```
@@ -1575,7 +1573,7 @@ Detaylı veya özel dönüşüm senaryolarında ModelMapper’ın sunduğu yapı
 
 
 
-## Spring Boot
+## ModelMapper kullanırken dikkat etmeniz gereken bazı kurallar
 ```sh 
 
 ```
@@ -1687,13 +1685,11 @@ ModelMapper, veri dönüşümlerini hızlı ve kolay hale getiren güçlü bir k
 
 Dikkat etmeniz gereken bu kurallar sayesinde ModelMapper’ı daha verimli kullanabilir ve veri dönüştürme işlemlerini yönetilebilir bir yapıya kavuşturabilirsiniz.
 
-## Spring Boot
+## Lombok
 ```sh 
 
 ```
 ---
-
-
 Lombok, Java geliştiricilerinin daha az kod yazarak daha okunabilir ve bakım yapılabilir kodlar geliştirmesini sağlamak amacıyla kullanılan bir kütüphanedir. Java dilinde, getter ve setter metodları, `toString()`, `equals()`, `hashCode()`, constructor (yapıcı metodlar) gibi birçok tekrarlayan kod yazmak gerekmektedir. Lombok, bu tarz kodları otomatik olarak oluşturarak, geliştiricinin kod tekrarını azaltmasını sağlar ve kodu daha temiz hale getirir.
 
 ### Lombok’un Amacı ve Faydaları
@@ -2009,22 +2005,7 @@ Lombok’un özelliklerinden en iyi şekilde faydalanmak için ihtiyaca göre do
 
 
 
-## Spring Boot
-```sh 
-
-```
----
-
-## Spring Boot
-```sh 
-
-```
----
-
-
-
-
-## Spring Boot
+## Spring Boot (@PostConstruct)
 ```sh 
 
 ```
@@ -2799,7 +2780,7 @@ Spring Data JPA ile kullanılan bu terimler, bir veritabanı üzerinde otomatik 
 
 
 
-## Spring Boot
+## Spring Data (ilişkiler  (relationships))
 ```sh 
 
 ```
@@ -2991,7 +2972,7 @@ Spring Boot’ta veri modelleri arasında anlamlı bağlantılar kurmak ve bu il
 
 
 
-## Spring Boot
+## Spring API (@RequestParam) 
 ```sh 
 
 ```
@@ -3086,7 +3067,7 @@ Yukarıdaki örnekte:
 - **Sorgu veya filtre parametreleri için** `@RequestParam` kullanılır.
 - RESTful API’lerde kimlikleri `@PathVariable` ile, opsiyonel sorgu parametrelerini ise `@RequestParam` ile almak iyi bir pratiktir.
 
-## Spring Boot
+## Java 8 ile gelen Stream API
 ```sh 
 
 ```
@@ -3215,7 +3196,7 @@ Java 8 `Stream API`, veri işlemeyi daha kolay ve etkili hale getiren güçlü b
 
 
 
-## Spring Boot
+## Java 8 Stream API'nin sağladığı metotlar
 ```sh 
 
 ```
@@ -3349,7 +3330,7 @@ Terminal işlemler, bir `Stream` üzerindeki işlemleri sonlandırır ve bir son
 
 Java 8 Stream API’nin sağladığı bu metotlar, veri üzerinde filtreleme, dönüştürme, sıralama, toplama ve daha fazlasını gerçekleştirmek için idealdir. Stream işlemleri, veri üzerinde işlem yapmayı çok daha basit ve etkili hale getirir, bu da kodun okunabilirliğini ve bakımını kolaylaştırır. Bu metotların işlevlerini doğru bir şekilde anlayarak, veri işleme ihtiyaçlarınıza göre uygun `Stream` işlemlerini seçebilirsiniz.
 
-## Spring Boot
+## Spring Boot (@PostConstruct Annotation)
 ```sh 
 
 ```
@@ -3401,7 +3382,7 @@ public class ExampleService {
 Bu örnekte:
 - **Constructor** çağrıldığında bağımlılık enjekte edilmiş olsa da, `@PostConstruct` çağrıldığında tüm bileşenler eksiksiz olarak yüklenmiş durumdadır.
 
-## Spring Boot
+## Spring Boot (Injection)
 ```sh 
 
 ```
@@ -3483,7 +3464,7 @@ Bu örnekte:
 ### Sonuç:
 Injection, Spring'in bağımlılık yönetimini sağladığı bir mekanizmadır ve projelerde daha düzenli, modüler ve test edilebilir bir yapı sağlar. Diğer yandan, instance oluşturma yöntemi manuel bir yöntem olup daha basit projelerde kullanılabilir, ancak bağımlılıkların yönetimi kullanıcıya bırakıldığından kod karmaşık hale gelebilir.
 
-## Spring Boot
+## Spring Boot (Manuel Bağımlılık)
 ```sh 
 
 ```
@@ -3567,7 +3548,7 @@ Yukarıdaki örnekte:
 ### Sonuç
 Manuel bağımlılık yönetimi, bağımlılıkların doğrudan kod içinde `new` ile oluşturulması ve yönetilmesi anlamına gelir. Ancak bu yöntem, kodun karmaşık hale gelmesine ve bakımının zorlaşmasına neden olabilir. Spring gibi bağımlılık enjeksiyon araçları, bağımlılıkları yöneterek kodu daha esnek, test edilebilir ve modüler hale getirir.
 
-## Spring Boot
+## Spring Data (@EmbeddedId)
 ```sh 
 
 ```
@@ -3685,7 +3666,7 @@ Her iki yöntemde de ID yönetiminde doğru bir şekilde `equals()` ve `hashCode
 
 
 
-## Spring Boot
+## Design Pattern (Creational) tasarım desenleri)
 ```sh 
 
 ```
@@ -3712,7 +3693,7 @@ oluşturım (Creational) tasarım desenleri, nesne oluşturma süreçlerini yön
 Bu desenler, nesne oluşturma süreçlerini daha esnek hale getirir ve kodun bakımını kolaylaştırır.
 
 
-## Spring Boot
+## Singleton tasarım deseni
 ```sh 
 
 ```
@@ -3843,7 +3824,7 @@ public class Singleton {
 Her bir yöntem, farklı kullanım senaryoları için uygundur ve uygulamanın ihtiyaçlarına göre seçilmelidir.
 
 
-## Spring Boot
+## IntelliJ IDEA'da sıklıkla kullanılan kısayollar
 ```sh 
 
 ```
@@ -3945,12 +3926,11 @@ Her bir yöntem, farklı kullanım senaryoları için uygundur ve uygulamanın i
 Bu kısayollar, IntelliJ IDEA'da hızlı bir şekilde çalışmanızı sağlar ve projelerdeki üretkenliğinizi artırır.
 
 
-## Spring Boot
+## Application Server (Wildfly)
 ```sh 
 
 ```
 ---
-
 
 JBoss'ın yeni ismi WildFly olarak değiştirildi. Red Hat tarafından geliştirilen JBoss Application Server, 2013 yılında yapılan bir değişiklikle WildFly olarak yeniden adlandırıldı. Bu değişiklikle, JBoss topluluğunun ücretsiz ve açık kaynaklı uygulama sunucusu sürümünü ifade etmek için "WildFly" ismi kullanılırken, ticari sürüm için Red Hat JBoss Enterprise Application Platform (EAP) ismi kullanılmaktadır.
 
@@ -3992,7 +3972,7 @@ WildFly, Java EE ve Jakarta EE uyumlu, yüksek performanslı bir uygulama sunucu
 Sizin gereksinimlerinize göre en uygun seçeneği yukarıdaki açıklamalara göre seçebilirsiniz.
 
 
-## Spring Boot
+## Spring Data (JdbcTemplate)
 ```sh 
 
 ```
@@ -4166,7 +4146,7 @@ Spring Boot ve Spring Framework, veritabanı işlemleri için `JdbcTemplate` dı
 `JdbcTemplate`, SQL sorgularını manuel yazmak isteyen veya ORM kullanmadan doğrudan veritabanıyla etkileşim kurmak isteyen Spring Boot geliştiricileri için güçlü ve kullanışlı bir araçtır. JDBC işlemlerini kolaylaştırarak, kaynak yönetimi, hata işleme ve parametre güvenliği gibi konularda standart çözümler sunar.
 
 
-## Spring Boot
+## Spring Data (JdbcTemplate)
 ```sh 
 
 ```
@@ -4425,13 +4405,6 @@ Delivered Query, Named Query, JPQL ve Native Query her biri farklı ihtiyaçlara
 
 Her yöntemi, uygulamanın ihtiyaçlarına ve veri tabanı erişim gereksinimlerine göre seçerek etkili bir veri erişim stratejisi oluşturabilirsiniz.
 
-## Spring Boot
-```sh 
-
-```
----
-
-
 
 ## Spring Boot Delivered Query, Named Query, JPQL, Native Query Örnekleri
 ```sh 
@@ -4539,28 +4512,6 @@ Bu örnekler, veri tabanı sorgularını çeşitli şekillerde kullanmanıza ola
 - JPQL, Java varlıklarına dayalı SQL benzeri sorgular oluşturur,
 - Native Query ise doğrudan SQL kullanılarak daha karmaşık veya veri tabanına özel sorguların gerçekleştirilmesine olanak tanır.
 
-
-
-## Spring Boot
-```sh 
-
-```
----
-
-
-## Spring Boot
-```sh 
-
-```
----
-
-
-
-## Spring Boot
-```sh 
-
-```
----
 
 
 ## Spring Boot
