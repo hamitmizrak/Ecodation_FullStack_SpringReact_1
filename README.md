@@ -117,6 +117,123 @@ Spring Framework, Java tabanlı uygulamalar geliştirmek için güçlü ve esnek
 
 Daha fazla bilgiye ihtiyacınız varsa veya herhangi bir modül hakkında ayrıntılı bir açıklama isterseniz, yardımcı olmaktan memnuniyet duyarım.
 
+## Spring Bean Kavramı
+```sh 
+
+```
+---
+
+## 🔧 `@Bean` Anotasyonu Özellikleri
+
+Spring Framework’te `@Bean` anotasyonu, bir metodun dönüş değerinin Spring IoC Container’a bir bean olarak kaydedileceğini belirtir. `@Bean`, aşağıdaki özellikleri alabilir:
+
+| Özellik         | Açıklama                                                                              |
+| --------------- | ------------------------------------------------------------------------------------- |
+| `name`          | Bean’in ismini özelleştirmek için kullanılır. Aksi halde metodun ismi bean ismi olur. |
+| `initMethod`    | Bean oluşturulduktan hemen sonra çalıştırılacak metodu tanımlar.                      |
+| `destroyMethod` | Uygulama kapanırken bean yok edilmeden önce çalıştırılacak metodu tanımlar.           |
+| `autowire`      | (Eski) Otomatik bağımlılık çözümleme stratejisini belirtir (genellikle kullanılmaz).  |
+
+---
+
+## ✅ Örnek Kullanım – Özellikleriyle Birlikte
+
+Aşağıda `@Bean` anotasyonu tüm özellikleriyle kullanılmış bir örnek:
+
+```java
+@Bean(
+    name = "customModelMapper",
+    initMethod = "customInit",
+    destroyMethod = "customDestroy"
+)
+public ModelMapper modelMapperMethod() {
+    return new ModelMapper();
+}
+```
+
+Ve aynı sınıf içinde aşağıdaki destekleyici metotlar bulunabilir:
+
+```java
+public void customInit() {
+    System.out.println("ModelMapper init edildi.");
+}
+
+public void customDestroy() {
+    System.out.println("ModelMapper yok edilirken çalıştı.");
+}
+```
+
+> 💡 `name` yerine `@Bean("customModelMapper")` şeklinde de kullanılabilir.
+
+---
+
+## 🔍 Bean Yaşam Döngüsüne Etkisi
+
+* `initMethod`: Bean oluşturulup container'a eklendikten hemen sonra çalışır.
+* `destroyMethod`: Bean yok edilmeden hemen önce çalışır (özellikle `@Scope("singleton")` ise önemlidir).
+* Spring Boot uygulamasında çoğu zaman bunlara gerek kalmaz ama özel durumlarda çok işe yarar (örneğin kaynak açma/kapama işlemleri gibi).
+
+---
+
+## Örneğin: ModelMapperBean
+
+```java
+@Configuration
+public class ModelMapperBean {
+
+    @Bean(name = "modelMapper", initMethod = "onInit", destroyMethod = "onDestroy")
+    public ModelMapper modelMapperMethod() {
+        return new ModelMapper();
+    }
+
+    public void onInit() {
+        System.out.println("ModelMapper initialized.");
+    }
+
+    public void onDestroy() {
+        System.out.println("ModelMapper destroyed.");
+    }
+}
+```
+
+
+package com.hamitmizrak.bean;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class ModelMapperBean {
+
+    /**
+     * ModelMapper nesnesini Spring Context'e bean olarak tanımlar.
+     * Bean ismi: "modelMapper"
+     * initMethod: Bean oluşturulduktan hemen sonra çalışır
+     * destroyMethod: Uygulama kapanırken çalışır
+     */
+    @Bean(name = "modelMapper", initMethod = "onInit", destroyMethod = "onDestroy")
+    public ModelMapper modelMapperMethod() {
+        return new ModelMapper();
+    }
+
+    /**
+     * Bean oluşturulduğunda çalışacak metod
+     */
+    public void onInit() {
+        System.out.println("✅ ModelMapper bean initialized.");
+    }
+
+    /**
+     * Bean yok edilmeden önce çalışacak metod
+     */
+    public void onDestroy() {
+        System.out.println("🧹 ModelMapper bean destroyed.");
+    }
+}
+
+
+
 ## Spring Data Nedir ?
 ```sh 
 
