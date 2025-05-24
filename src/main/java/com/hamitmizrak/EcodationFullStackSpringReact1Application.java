@@ -26,13 +26,12 @@ import java.util.TimeZone;
 // @EnableCaching
 
 // Auditing Aktif etmek
-// Dikkat: auditorAwareBeanMethod bu isimlendirme Auditing Bean ismidir.
-// @EnableJpaAuditing(auditorAwareRef = "auditorAwareBeanMethod")
+// Dikkat: public class AuditingAwareBean içindeki method ismi:auditorAwareBeanMethod
+@EnableJpaAuditing(auditorAwareRef = "auditingAwareBeanMethod")
 
 // Spring Security: Şimdilik dahil etme, çünkü Bcrypted kullancağım ancak Spring security için gerekli kütüphaneleri dahil
 // Buradaki exclude ne zaman kapatmam gerekiyor ? cevap: Spring Security ile çalıştığımız zaman kapat
 @SpringBootApplication(exclude = {
-
         // Spring Security Dahil etme
         //SecurityAutoConfiguration.class,
         org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class,
