@@ -33,7 +33,7 @@ public class _1_ProjectDataSet implements CommandLineRunner {
     // RUN
     @Override
     public void run(String... args) throws Exception {
-        System.out.println("Project Data set -1 ");
+        System.out.println("CommandLine Runner -1 Project Data set -1 ");
         log.info("Project Data set -1 ");
         //addressSave();
         //saveCustomer();

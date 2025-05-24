@@ -15,7 +15,7 @@ public class _2_ProjectDataSet {
     @Bean
     public CommandLineRunner commandLineRunner() {
         return args -> {
-            System.out.println("Project Data set -2 ");
+            System.out.println("CommandLine Runner -2 Project Data set -2 ");
             log.info("Project Data set -2 ");
         };
     } // end Bean
