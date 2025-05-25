@@ -1,10 +1,10 @@
 package com.hamitmizrak.examples.javacore.project.dao;
 
-import com.hamitmizrak.dto.ETeacherSubject;
-import com.hamitmizrak.dto.TeacherDto;
-import com.hamitmizrak.exception.TeacherNotFoundException;
-import com.hamitmizrak.iofiles.SpecialFileHandler;
-import com.hamitmizrak.utils.SpecialColor;
+import com.hamitmizrak.examples.javacore.project.dto.ETeacherSubject;
+import com.hamitmizrak.examples.javacore.project.dto.TeacherDto;
+import com.hamitmizrak.examples.javacore.project.exception.TeacherNotFoundException;
+import com.hamitmizrak.examples.javacore.project.iofiles.SpecialFileHandler;
+import com.hamitmizrak.examples.javacore.project.utils.SpecialColor;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

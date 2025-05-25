@@ -1,7 +1,7 @@
 package com.hamitmizrak.examples.javacore.tutorials.tutorials_2024.oop.accessmodifierother;
 
 
-import com.hamitmizrak.tutorials.tutorials_2024.oop.abstractx.Student;
+import com.hamitmizrak.examples.javacore.tutorials.tutorials_2024.oop.Student;
 
 public class Manager {
     public static void main(String[] args) {

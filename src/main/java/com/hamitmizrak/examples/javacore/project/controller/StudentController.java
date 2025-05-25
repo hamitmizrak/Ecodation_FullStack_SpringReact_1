@@ -1,9 +1,9 @@
 package com.hamitmizrak.examples.javacore.project.controller;
 
-import com.hamitmizrak.dao.IDaoGenerics;
-import com.hamitmizrak.dao.StudentDao;
-import com.hamitmizrak.dto.StudentDto;
-import com.hamitmizrak.log.LogExecutionTime;
+import com.hamitmizrak.examples.javacore.project.dao.IDaoGenerics;
+import com.hamitmizrak.examples.javacore.project.dao.StudentDao;
+import com.hamitmizrak.examples.javacore.project.dto.StudentDto;
+import com.hamitmizrak.examples.javacore.project.log.LogExecutionTime;
 
 import java.util.Collections;
 import java.util.List;

@@ -1,8 +1,9 @@
 package com.hamitmizrak.examples.javacore.tutorials.tutorials_2024.oop._3_AccessModifier;
 
 
-import com.hamitmizrak.tutorials.tutorials_2024._3_week.Week3_02_Access_1_PublicAccessModifier;
-import com.hamitmizrak.utils.SpecialColor;
+import com.hamitmizrak.examples.javacore.project.utils.SpecialColor;
+import com.hamitmizrak.examples.javacore.  tutorials.tutorials_2024._3_week.Week3_02_Access_1_PublicAccessModifier;
+
 
 public class _4_AllAccessModifier {
 

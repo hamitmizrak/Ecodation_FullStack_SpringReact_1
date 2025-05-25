@@ -2,9 +2,7 @@ package com.hamitmizrak.examples.javacore.tutorials.tutorials_2024._3_week;
 
 
 
-
-
-import com.hamitmizrak.utils.SpecialColor;
+import com.hamitmizrak.examples.javacore.project.utils.SpecialColor;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -81,7 +79,7 @@ public class Week3_01_Examples_1 {
     // Faktöriyel Programını Çalıştırma
     private static void runFactorialProgram() {
         while (true) {
-            System.out.println("\n" + com.hamitmizrak.utils.SpecialColor.YELLOW + "Lütfen bir seçim yapınız:\n1) İteratif Faktöriyel\n2) Özyinelemeli Faktöriyel\n3) Sistem Özellikler\n4) Çıkış\n" + SpecialColor.RESET);
+            System.out.println("\n" + SpecialColor.YELLOW + "Lütfen bir seçim yapınız:\n1) İteratif Faktöriyel\n2) Özyinelemeli Faktöriyel\n3) Sistem Özellikler\n4) Çıkış\n" + SpecialColor.RESET);
             int choice = getUserChoice();
 
             switch (choice) {

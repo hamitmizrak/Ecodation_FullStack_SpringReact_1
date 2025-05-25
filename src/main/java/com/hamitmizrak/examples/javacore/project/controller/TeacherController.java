@@ -1,10 +1,10 @@
 package com.hamitmizrak.examples.javacore.project.controller;
 
-import com.hamitmizrak.dao.IDaoGenerics;
-import com.hamitmizrak.dao.TeacherDao;
-import com.hamitmizrak.dto.ETeacherSubject;
-import com.hamitmizrak.dto.TeacherDto;
-import com.hamitmizrak.log.LogExecutionTime;
+import com.hamitmizrak.examples.javacore.project.dao.IDaoGenerics;
+import com.hamitmizrak.examples.javacore.project.dao.TeacherDao;
+import com.hamitmizrak.examples.javacore.project.dto.ETeacherSubject;
+import com.hamitmizrak.examples.javacore.project.dto.TeacherDto;
+import com.hamitmizrak.examples.javacore.project.log.LogExecutionTime;
 
 import java.time.LocalDate;
 import java.util.*;

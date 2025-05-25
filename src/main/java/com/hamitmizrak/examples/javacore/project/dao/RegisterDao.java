@@ -1,9 +1,9 @@
 package com.hamitmizrak.examples.javacore.project.dao;
 
-import com.hamitmizrak.dto.RegisterDto;
-import com.hamitmizrak.exception.RegisterNotFoundException;
-import com.hamitmizrak.iofiles.SpecialFileHandler;
-import com.hamitmizrak.utils.SpecialColor;
+import com.hamitmizrak.examples.javacore.project.dto.RegisterDto;
+import com.hamitmizrak.examples.javacore.project.exception.RegisterNotFoundException;
+import com.hamitmizrak.examples.javacore.project.iofiles.SpecialFileHandler;
+import com.hamitmizrak.examples.javacore.project.utils.SpecialColor;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

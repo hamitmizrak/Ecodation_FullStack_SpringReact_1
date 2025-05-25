@@ -1,6 +1,6 @@
 package com.hamitmizrak.examples.javacore.project.dto;
 
-import com.hamitmizrak.utils.SpecialColor;
+import com.hamitmizrak.examples.javacore.project.utils.SpecialColor;
 
 import java.io.Serializable;
 import java.time.LocalDate;

@@ -1,6 +1,6 @@
 package com.hamitmizrak.examples.javacore.project.iofiles;
 
-import com.hamitmizrak.utils.SpecialColor;
+import com.hamitmizrak.examples.javacore.project.utils.SpecialColor;
 
 import java.io.*;
 import java.util.ArrayList;

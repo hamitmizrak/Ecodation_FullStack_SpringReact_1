@@ -1,11 +1,11 @@
 package com.hamitmizrak.examples.javacore.project.dao;
 
-import com.hamitmizrak.dto.ERole;
-import com.hamitmizrak.dto.EStudentType;
-import com.hamitmizrak.dto.StudentDto;
-import com.hamitmizrak.exception.StudentNotFoundException;
-import com.hamitmizrak.iofiles.SpecialFileHandler;
-import com.hamitmizrak.utils.SpecialColor;
+import com.hamitmizrak.examples.javacore.project.dto.ERole;
+import com.hamitmizrak.examples.javacore.project.dto.EStudentType;
+import com.hamitmizrak.examples.javacore.project.dto.StudentDto;
+import com.hamitmizrak.examples.javacore.project.exception.StudentNotFoundException;
+import com.hamitmizrak.examples.javacore.project.iofiles.SpecialFileHandler;
+import com.hamitmizrak.examples.javacore.project.utils.SpecialColor;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

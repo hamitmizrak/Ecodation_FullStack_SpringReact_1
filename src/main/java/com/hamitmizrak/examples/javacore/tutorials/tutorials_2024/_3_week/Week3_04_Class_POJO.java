@@ -5,7 +5,7 @@ package com.hamitmizrak.examples.javacore.tutorials.tutorials_2024._3_week;
 // Sadece fields + getter and setter
 
 
-import com.hamitmizrak.utils.SpecialColor;
+import com.hamitmizrak.examples.javacore.project.utils.SpecialColor;
 
 // this: global nesneyi işaret eder,
 public class Week3_04_Class_POJO {

@@ -1,8 +1,7 @@
 package com.hamitmizrak.examples.javacore.tutorials.tutorials_2024._5_week;
 
 
-
-import com.hamitmizrak.utils.SpecialColor;
+import com.hamitmizrak.examples.javacore.project.utils.SpecialColor;
 
 import java.util.ArrayList;
 import java.util.Arrays;

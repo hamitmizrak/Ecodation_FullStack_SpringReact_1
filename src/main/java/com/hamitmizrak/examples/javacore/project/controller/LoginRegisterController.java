@@ -1,11 +1,11 @@
 package com.hamitmizrak.examples.javacore.project.controller;
 
-import com.hamitmizrak.controller.TeacherController;
-import com.hamitmizrak.dao.RegisterDao;
-import com.hamitmizrak.dao.StudentDao;
-import com.hamitmizrak.dao.TeacherDao;
-import com.hamitmizrak.dto.*;
-import com.hamitmizrak.utils.SpecialColor;
+
+import com.hamitmizrak.examples.javacore.project. dao.RegisterDao;
+import com.hamitmizrak.examples.javacore.project.dao.StudentDao;
+import com.hamitmizrak.examples.javacore.project.dao.TeacherDao;
+import com.hamitmizrak.examples.javacore.project.dto.*;
+import com.hamitmizrak.examples.javacore.project.utils.SpecialColor;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;

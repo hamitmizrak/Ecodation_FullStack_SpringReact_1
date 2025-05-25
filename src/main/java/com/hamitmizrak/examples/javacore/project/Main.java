@@ -1,6 +1,6 @@
 package com.hamitmizrak.examples.javacore.project;
 
-import com.hamitmizrak.controller.LoginRegisterController;
+import com.hamitmizrak.examples.javacore.project.controller.LoginRegisterController;
 
 import java.util.logging.Logger;
 

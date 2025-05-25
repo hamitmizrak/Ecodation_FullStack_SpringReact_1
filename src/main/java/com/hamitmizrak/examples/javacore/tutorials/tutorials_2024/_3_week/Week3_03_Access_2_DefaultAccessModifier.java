@@ -1,7 +1,7 @@
 package com.hamitmizrak.examples.javacore.tutorials.tutorials_2024._3_week;
 
 
-import com.hamitmizrak.utils.SpecialColor;
+import com.hamitmizrak.examples.javacore.project.utils.SpecialColor;
 
 public class Week3_03_Access_2_DefaultAccessModifier {
 

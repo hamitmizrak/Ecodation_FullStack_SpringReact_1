@@ -1,4 +1,4 @@
-package com.hamitmizrak.examples.java8_other;
+package com.hamitmizrak.examples.javacore.java8_other;
 
 public class StringAppendBuilder {
 
