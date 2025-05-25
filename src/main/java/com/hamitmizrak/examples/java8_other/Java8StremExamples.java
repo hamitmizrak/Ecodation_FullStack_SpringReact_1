@@ -1,4 +1,4 @@
-package com.hamitmizrak.examples;
+package com.hamitmizrak.examples.java8_other;
 
 import java.util.ArrayList;
 import java.util.Comparator;

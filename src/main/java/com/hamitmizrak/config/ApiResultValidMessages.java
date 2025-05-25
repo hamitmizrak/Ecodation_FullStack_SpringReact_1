@@ -42,4 +42,4 @@ public class ApiResultValidMessages  implements WebMvcConfigurer {
         registry.addInterceptor(localeChangeInterceptor()); // Interceptor'ı kaydediyoruz
     }
 
-}
+} //end ApiResultValidMessages

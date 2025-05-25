@@ -20,12 +20,13 @@ public class ModelMapperBean extends BeanAllMethod {
 
     // Instance
     private final ModelMapper modelMapper = new ModelMapper();
+
+    // Bean
     @Bean(name = "modelMapper")
     public ModelMapper modelMapperMethod() {
         //return new ModelMapper(); // 1.YOL
         return modelMapper;         // 2.YOL
     }
-
 
     /**
      * Bean oluşturulduğunda çalışacak metod

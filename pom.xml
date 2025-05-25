@@ -16,22 +16,39 @@
     <artifactId>Ecodation_FullStack_SpringReact_1</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Ecodation_FullStack_SpringReact_1</name>
-    <description>Ecodation_FullStack_SpringReact_1</description>
-    <url/>
+    <description>Spring Boot ve React tabanlı tam kapsamlı full stack eğitim uygulaması</description>
+    <url>https://github.com/HamitMizrak</url>
 
-    <!--for project information-->
+    <!-- Proje Lisansı -->
     <licenses>
-        <license/>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+        </license>
     </licenses>
 
+    <!-- Geliştirici Bilgileri -->
     <developers>
-        <developer/>
+        <developer>
+            <id>hamitmizrak</id>
+            <name>Hamit Mızrak</name>
+            <email>hamitmizrak@gmail.com</email>
+            <url>https://github.com/HamitMizrak</url>
+            <roles>
+                <role>lead developer</role>
+                <role>architect</role>
+            </roles>
+            <timezone>+3</timezone>
+        </developer>
     </developers>
+
+    <!-- Versiyon Kontrol Sistemi Bilgisi (SCM) -->
     <scm>
-        <connection/>
-        <developerConnection/>
-        <tag/>
-        <url/>
+        <connection>scm:git:https://github.com/HamitMizrak/Ecodation_FullStack_SpringReact_1.git</connection>
+        <developerConnection>scm:git:ssh://github.com/HamitMizrak/Ecodation_FullStack_SpringReact_1.git</developerConnection>
+        <url>https://github.com/HamitMizrak/Ecodation_FullStack_SpringReact_1</url>
+        <tag>main</tag>
     </scm>
 
     <!--

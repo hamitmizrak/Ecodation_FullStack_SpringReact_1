@@ -68,7 +68,7 @@ public class EcodationFullStackSpringReact1Application {
         TimeZone.setDefault(TimeZone.getTimeZone("IST"));
     }
 
-
+    // PSVM
     public static void main(String[] args) {
 
         // devtools active isActive
@@ -88,4 +88,4 @@ public class EcodationFullStackSpringReact1Application {
         // Main
         SpringApplication.run(EcodationFullStackSpringReact1Application.class, args);
     }
-}
+} //end @SpringBootApplication

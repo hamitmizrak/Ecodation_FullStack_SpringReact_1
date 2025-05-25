@@ -35,8 +35,8 @@ public class _1_ProjectDataSet implements CommandLineRunner {
     public void run(String... args) throws Exception {
         System.out.println("CommandLine Runner -1 Project Data set -1 ");
         log.info("Project Data set -1 ");
-        //addressSave();
-        //saveCustomer();
+        // addressSave();
+        // saveCustomer();
         // Order Kaydet
     }
-}
+} // end _1_ProjectDataSet

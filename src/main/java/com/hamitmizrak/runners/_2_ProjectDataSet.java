@@ -9,7 +9,7 @@ import org.springframework.core.annotation.Order;
 // LOMBOK
 @Log4j2
 @Configuration
-@Order(2)
+@Order(2) //Sıralama Öncelikle Diğer runners çalışır sonra bu class çalışacak
 public class _2_ProjectDataSet {
 
     @Bean
