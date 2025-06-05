@@ -17,17 +17,15 @@ public class AddressMapper {
         addressDto.setSystemCreatedDate(addressEntity.getSystemCreatedDate());
 
         // Embeddable varsa
-        if(addressEntity.getAddressEntityEmbeddable()!=null){
-            AddressEntityEmbeddable addressEntityEmbeddable=addressEntity.getAddressEntityEmbeddable();
-            addressDto.setState(addressEntityEmbeddable.getState());
-            addressDto.setCity(addressEntityEmbeddable.getCity());
-            addressDto.setAddressQrCode(addressEntityEmbeddable.getAddressQrCode());
-            addressDto.setCountry(addressEntityEmbeddable.getCountry());
-            addressDto.setStreet(addressEntityEmbeddable.getStreet());
-            addressDto.setZipCode(addressEntityEmbeddable.getZipCode());
-            addressDto.setDoorNumber(addressEntityEmbeddable.getDoorNumber());
-            addressDto.setDescription(addressEntityEmbeddable.getDescription());
-        }
+        AddressEntityEmbeddable addressEntityEmbeddable=addressEntity.getAddressEntityEmbeddable();
+        addressDto.setState(addressEntityEmbeddable.getState());
+        addressDto.setCity(addressEntityEmbeddable.getCity());
+        addressDto.setAddressQrCode(addressEntityEmbeddable.getAddressQrCode());
+        addressDto.setCountry(addressEntityEmbeddable.getCountry());
+        addressDto.setStreet(addressEntityEmbeddable.getStreet());
+        addressDto.setZipCode(addressEntityEmbeddable.getZipCode());
+        addressDto.setDoorNumber(addressEntityEmbeddable.getDoorNumber());
+        addressDto.setDescription(addressEntityEmbeddable.getDescription());
         return addressDto;
     }
 
@@ -41,14 +39,14 @@ public class AddressMapper {
         addressEntity.setSystemCreatedDate(addressDto.getSystemCreatedDate());
 
         AddressEntityEmbeddable addressEntityEmbeddable=addressEntity.getAddressEntityEmbeddable();
-        addressEntityEmbeddable.setState(addressEntityEmbeddable.getState());
-        addressEntityEmbeddable.setCity(addressEntityEmbeddable.getCity());
-        addressEntityEmbeddable.setAddressQrCode(addressEntityEmbeddable.getAddressQrCode());
-        addressEntityEmbeddable.setCountry(addressEntityEmbeddable.getCountry());
-        addressEntityEmbeddable.setStreet(addressEntityEmbeddable.getStreet());
-        addressEntityEmbeddable.setZipCode(addressEntityEmbeddable.getZipCode());
-        addressEntityEmbeddable.setDoorNumber(addressEntityEmbeddable.getDoorNumber());
-        addressEntityEmbeddable.setDescription(addressEntityEmbeddable.getDescription());
+        addressEntityEmbeddable.setState(addressDto.getState());
+        addressEntityEmbeddable.setCity(addressDto.getCity());
+        addressEntityEmbeddable.setAddressQrCode(addressDto.getAddressQrCode());
+        addressEntityEmbeddable.setCountry(addressDto.getCountry());
+        addressEntityEmbeddable.setStreet(addressDto.getStreet());
+        addressEntityEmbeddable.setZipCode(addressDto.getZipCode());
+        addressEntityEmbeddable.setDoorNumber(addressDto.getDoorNumber());
+        addressEntityEmbeddable.setDescription(addressDto.getDescription());
 
         // AddressDetails'i mutlaka AddressEntity içine eklemeliyiz.
         addressEntity.setAddressEntityEmbeddable(addressEntityEmbeddable);
