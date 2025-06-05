@@ -11,6 +11,9 @@ import com.hamitmizrak.exception._404_NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.actuate.web.mappings.MappingsEndpoint;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -135,7 +138,7 @@ public class AddressServiceImpl implements IAddressService<AddressDto, AddressEn
     // DELETE
     @Override
     @Transactional // Create, Update, Delete
-    public AddressDto addressServiceDelete(Long id) {
+    public AddressDto addressServiceDeleteById(Long id) {
         // ID VARSA
         AddressEntity addressEntityDelete= dtoAddressToEntity(addressServiceFindById(id));
         iAddressRepository.delete(addressEntityDelete);
@@ -146,25 +149,42 @@ public class AddressServiceImpl implements IAddressService<AddressDto, AddressEn
     // PAGINATION
     @Override
     public Page<AddressDto> addressServicePagination(int currentPage, int pageSize) {
-        return null;
+        Pageable pageable= PageRequest.of(currentPage, pageSize);
+        Page<AddressDto> addressDtoPage =(Page<AddressDto>) iAddressRepository.findAll(pageable)
+                .stream()
+                .map(AddressMapper::AddressEntityToDto)
+                .collect(Collectors.toList());
+        return addressDtoPage;
     }
 
-    // SORTED
+    // SORTED (Herhangi bir kolon)
     @Override
     public List<AddressDto> addressServiceAllSortedBy(String sortedBy) {
-        return List.of();
+        return iAddressRepository.findAll(
+                Sort.by(Sort.Direction.ASC,sortedBy) )
+                .stream()
+                .map(AddressMapper::AddressEntityToDto)
+                .collect(Collectors.toList());
     }
 
-    // SORTED ASC
+    // SORTED ASC (CITY)
     @Override
     public List<AddressDto> addressServiceAllSortedByCityAsc() {
-        return List.of();
+        return iAddressRepository.findAll(
+                        Sort.by(Sort.Direction.ASC,"addressEntityEmbeddable.city") )
+                .stream()
+                .map(AddressMapper::AddressEntityToDto)
+                .collect(Collectors.toList());
     }
 
     // SORTED DESC
     @Override
     public List<AddressDto> addressServiceAllSortedByCityDesc() {
-        return List.of();
+        return  iAddressRepository.findAll(
+                        Sort.by(Sort.Direction.DESC,"addressEntityEmbeddable.city") )
+                .stream()
+                .map(AddressMapper::AddressEntityToDto)
+                .collect(Collectors.toList());
     }
 
 } // end AddressServiceImpl

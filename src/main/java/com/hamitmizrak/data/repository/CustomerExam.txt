@@ -1,0 +1,197 @@
+`findBy` kullanarak Spring Data JPA’da basit alanlara göre sorgular oluşturmak oldukça güçlü ve esnek bir özelliktir. Bu metod isimlendirme kurallarına göre sorguları otomatik olarak oluşturur. Aşağıda, çeşitli alanlar ve koşullara göre yapılabilecek çok sayıda `findBy` sorgu örneği verilmiştir:
+
+### 1. **Temel Alanlara Göre Sorgular**
+
+Bu sorgular, tek bir alanı temel alarak yapılan en basit sorgulardır.
+
+#### Örnekler:
+```java
+// İsimle müşteri bul
+List<CustomerEntity> findByName(String name);
+
+// E-posta ile müşteri bul
+CustomerEntity findByEmail(String email);
+
+// Yaşa göre müşterileri bul
+List<CustomerEntity> findByAge(int age);
+
+// Cinsiyete göre müşterileri bul
+List<CustomerEntity> findByGender(String gender);
+
+// Şehirdeki müşterileri bul
+List<CustomerEntity> findByCity(String city);
+```
+
+### 2. **İki veya Daha Fazla Alan ile Sorgular**
+
+Birden fazla alanı temel alarak yapılan sorgular.
+
+#### Örnekler:
+```java
+// İsim ve soyad ile müşteri bul
+List<CustomerEntity> findByNameAndSurname(String name, String surname);
+
+// Şehir ve yaşı belirli olan müşterileri bul
+List<CustomerEntity> findByCityAndAge(String city, int age);
+
+// İsim ve e-posta ile müşteri bul
+CustomerEntity findByNameAndEmail(String name, String email);
+
+// Cinsiyet ve yaşı belirli olan müşterileri bul
+List<CustomerEntity> findByGenderAndAge(String gender, int age);
+
+// Ülke ve şehirdeki müşterileri bul
+List<CustomerEntity> findByCountryAndCity(String country, String city);
+```
+
+### 3. **Karşılaştırma Operatörleri ile Sorgular**
+
+Spring Data JPA, çeşitli karşılaştırma operatörlerini kullanarak sorgular oluşturmayı destekler.
+
+#### Örnekler:
+```java
+// Yaşı belirli bir değerden büyük olan müşterileri bul
+List<CustomerEntity> findByAgeGreaterThan(int age);
+
+// Yaşı belirli bir değerden küçük olan müşterileri bul
+List<CustomerEntity> findByAgeLessThan(int age);
+
+// Yaşı belirli bir aralıkta olan müşterileri bul
+List<CustomerEntity> findByAgeBetween(int startAge, int endAge);
+
+// Yaşı belirtilen yaş veya daha büyük olan müşterileri bul
+List<CustomerEntity> findByAgeGreaterThanEqual(int age);
+
+// Yaşı belirtilen yaş veya daha küçük olan müşterileri bul
+List<CustomerEntity> findByAgeLessThanEqual(int age);
+
+// Kayıt tarihi belirli bir tarihten sonra olan müşterileri bul
+List<CustomerEntity> findByRegistrationDateAfter(LocalDate date);
+
+// Kayıt tarihi belirli bir tarihten önce olan müşterileri bul
+List<CustomerEntity> findByRegistrationDateBefore(LocalDate date);
+```
+
+### 4. **İçerik Arayan Sorgular (Like, Contains)**
+
+Belirli bir alanın içerdiği değeri aramak için `Like`, `Contains`, `StartingWith`, ve `EndingWith` gibi anahtar kelimeler kullanılabilir.
+
+#### Örnekler:
+```java
+// İsimde belirli bir harf ya da kelime geçen müşterileri bul (Contains)
+List<CustomerEntity> findByNameContaining(String keyword);
+
+// E-posta adresi belirli bir alanla başlayan müşterileri bul (StartingWith)
+List<CustomerEntity> findByEmailStartingWith(String prefix);
+
+// E-posta adresi belirli bir alanla biten müşterileri bul (EndingWith)
+List<CustomerEntity> findByEmailEndingWith(String suffix);
+
+// İsimde belirli bir kelime ile başlayan müşterileri bul
+List<CustomerEntity> findByNameStartingWith(String name);
+
+// Soyadı belirli bir kelime ile biten müşterileri bul
+List<CustomerEntity> findBySurnameEndingWith(String suffix);
+```
+
+### 5. **Boş veya Dolu Alanlara Göre Sorgular**
+
+Boş veya dolu (`null` veya `not null`) alanlara göre sorgular oluşturabilirsiniz.
+
+#### Örnekler:
+```java
+// E-posta adresi olmayan (boş olan) müşterileri bul
+List<CustomerEntity> findByEmailIsNull();
+
+// E-posta adresi olan (boş olmayan) müşterileri bul
+List<CustomerEntity> findByEmailIsNotNull();
+
+// Telefon numarası boş olan müşterileri bul
+List<CustomerEntity> findByPhoneNumberIsNull();
+
+// Adresi olan (boş olmayan) müşterileri bul
+List<CustomerEntity> findByAddressIsNotNull();
+```
+
+### 6. **Mantıksal Operatörler ile Sorgular (Or, And)**
+
+Birden fazla koşulu `OR` veya `AND` operatörleri ile birleştirerek sorgular oluşturabilirsiniz.
+
+#### Örnekler:
+```java
+// Yaşı belirli bir değerden büyük veya şehirde yaşayan müşterileri bul
+List<CustomerEntity> findByAgeGreaterThanOrCity(int age, String city);
+
+// Cinsiyeti erkek olan veya yaşı belirli bir değerden küçük olan müşterileri bul
+List<CustomerEntity> findByGenderOrAgeLessThan(String gender, int age);
+
+// Yaşı belirli bir değerden büyük ve şehirde yaşayan müşterileri bul
+List<CustomerEntity> findByAgeGreaterThanAndCity(int age, String city);
+
+// E-posta adresi olan ve yaşı belirli bir değerden küçük olan müşterileri bul
+List<CustomerEntity> findByEmailIsNotNullAndAgeLessThan(int age);
+```
+
+### 7. **Sıralama (Order By) ile Sorgular**
+
+Sonuçları belirli bir alana göre sıralamak için `OrderBy` anahtar kelimesini kullanabilirsiniz.
+
+#### Örnekler:
+```java
+// İsim alanına göre sıralanmış müşterileri getir
+List<CustomerEntity> findByOrderByNameAsc();
+
+// Yaşa göre azalan sırada sıralanmış müşterileri getir
+List<CustomerEntity> findByOrderByAgeDesc();
+
+// Şehirdeki müşterileri isimlerine göre sıralayarak getir
+List<CustomerEntity> findByCityOrderByNameAsc(String city);
+
+// Yaşı belirli bir değerden büyük olan müşterileri kayıt tarihine göre sıralayarak getir
+List<CustomerEntity> findByAgeGreaterThanOrderByRegistrationDateDesc(int age);
+```
+
+### 8. **Top ve İlk Kayıtları Getiren Sorgular**
+
+Sonuç setinden sadece en üstteki belirli sayıda kaydı almak için `Top` veya `First` anahtar kelimelerini kullanabilirsiniz.
+
+#### Örnekler:
+```java
+// Yaşa göre en yaşlı müşteriyi getir
+CustomerEntity findTopByOrderByAgeDesc();
+
+// Yaşa göre en genç müşteriyi getir
+CustomerEntity findTopByOrderByAgeAsc();
+
+// Belirli bir şehirdeki en genç müşteriyi getir
+CustomerEntity findTopByCityOrderByAgeAsc(String city);
+
+// Yaşa göre en yaşlı 3 müşteriyi getir
+List<CustomerEntity> findTop3ByOrderByAgeDesc();
+
+// Kayıt tarihine göre en son eklenen 5 müşteriyi getir
+List<CustomerEntity> findTop5ByOrderByRegistrationDateDesc();
+```
+
+### 9. **İlişkili Tablolara Göre Sorgular**
+
+İlişkili tablolardaki alanlara göre sorgular yazabilirsiniz (örneğin müşteri ve adres gibi ilişkiler).
+
+#### Örnekler:
+```java
+// Müşterilerin adreslerinin bulunduğu şehre göre sorgu
+List<CustomerEntity> findByAddressCity(String city);
+
+// Müşterilerin adreslerinde ülkeye göre sorgu
+List<CustomerEntity> findByAddressCountry(String country);
+
+// Müşterilerin sipariş sayısına göre sorgu (ManyToMany ilişkisi)
+List<CustomerEntity> findByOrdersSizeGreaterThan(int size);
+
+// Müşterilerin siparişlerinin toplam miktarına göre sorgu
+List<CustomerEntity> findByOrdersTotalAmountGreaterThan(double amount);
+```
+
+### Sonuç
+
+`findBy` ile Spring Data JPA, metod isimlendirmesi kullanarak birçok farklı sorgu türü oluşturmanızı sağlar. Temel alanlar, karşılaştırma operatörleri, içerik arama, mantıksal operatörler ve sıralama gibi birçok kombinasyon ile esnek sorgular yazabilirsiniz. Ayrıca, ilişkili tablolarla ve ilişkili alanlarla çalışmak da mümkündür.
