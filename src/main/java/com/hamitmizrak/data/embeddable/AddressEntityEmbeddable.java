@@ -13,7 +13,7 @@ import lombok.Setter;
 @Embeddable // Class Entity yapıları için daha okunaklı olması içindir
 public class AddressEntityEmbeddable {
 
-    // DOOR
+    // DOOR NUMBER
     @Column(name = "door_number")
     private String doorNumber;
 
@@ -21,22 +21,24 @@ public class AddressEntityEmbeddable {
     private String street;
 
     // CITY
+    @Column(name = "city")
     private String city;
 
-    // STATE
-    private String state;
 
     // ZIP CODE
     @Column(name = "zip_code")
     private String zipCode;
 
+    // STATE
+    private String state;
+
     // ADDRESS QR CODE
     @Column(name = "address_qr_code")
     private String addressQrCode;
 
-    // COUNTRY
-    private String country;
-
     // DESCRIPTION
+    @Column(name = "description")
     private String description;
-}
+} //end AddressEntityEmbeddable
+
+

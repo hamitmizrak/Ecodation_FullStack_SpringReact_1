@@ -9,7 +9,6 @@ import com.hamitmizrak.data.entity.AddressEntity;
 import com.hamitmizrak.data.repository.IAddressRepository;
 import com.hamitmizrak.exception._404_NotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.actuate.web.mappings.MappingsEndpoint;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -21,22 +20,24 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 // LOMBOK
-//@RequiredArgsConstructor(onConstructor = @__(@Autowired))
-@RequiredArgsConstructor // for Constructor
+@RequiredArgsConstructor // for injection
 
-// Asıl iş yükünü yapan yer
+// Asıl iş yükünü yapan Bean
 @Service
 public class AddressServiceImpl implements IAddressService<AddressDto, AddressEntity> {
 
-    // INJECTION
+    // FIELD INJECTION
     // 1.YOL
     /*
     @Autowired
-     private IAddressRepository iAddressRepository;
+    private IAddressRepository iAddressRepository;
+
+    @Autowired
+    private final ModelMapperBean modelMapperBean;
      */
 
-    // 2.YOL
     // CONSTRUCTOR INJECTION
+    // 2.YOL
     /*
     private final IAddressRepository iAddressRepository;
     private final ModelMapperBean modelMapperBean;
@@ -45,48 +46,41 @@ public class AddressServiceImpl implements IAddressService<AddressDto, AddressEn
         this.iAddressRepository = iAddressRepository;
         this.modelMapperBean = modelMapperBean;
     }
-     */
+    */
 
-    // 3.YOL
     // LOMBOK CONSTRUCTOR INJECTION
+    // 3.YOL
     private final IAddressRepository iAddressRepository;
     private final ModelMapperBean modelMapperBean;
-    private final MappingsEndpoint mappingsEndpoint;
 
-    //////////////////////////////////////////////////////////////////////
     // MODEL MAPPER
     @Override
     public AddressDto entityAddressToDto(AddressEntity addressEntity) {
-        // 1.YOL (ModelMapper)
-        //return modelMapperBean.modelMapperMethod().map(addressEntity, AddressDto.class);
 
-        // 2.YOL (BİZİM YAZDIĞIMIZ)
+        // 1.YOL
+        // return modelMapperBean.getModelMapper().map(addressEntity, AddressDto.class);
+
+        // 2.YOL
         return AddressMapper.AddressEntityToDto(addressEntity);
     }
 
     @Override
     public AddressEntity dtoAddressToEntity(AddressDto addressDto) {
-        // 1.YOL (ModelMapper)
-        // return modelMapperBean.modelMapperMethod().map(addressDto, AddressEntity.class);
+        // 1.YOL
+        // return modelMapperBean.getModelMapper().map(addressDto, AddressEntity.class);
 
-        // 2.YOL (BİZİM YAZDIĞIMIZ)
+        //  2.YOL
         return AddressMapper.AddressDtoToEntity(addressDto);
     }
 
-    //////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
     // CRUD
-    // @Transactional = import org.springframework.transaction.annotation.Transactional;
-
     // CREATE
+    @Transactional // create, delete, update (manipulation)
     @Override
-    @Transactional // Create, Update, Delete
     public AddressDto addressServiceCreate(AddressDto addressDto) {
-        // 1.YOL
-        // AddressEntity addressEntity = AddressMapper.AddressDtoToAddressEntity(addressDto);
-
-        // 2.YOL
-        AddressEntity addressEntityCreate=dtoAddressToEntity(addressDto);
-        addressEntityCreate=iAddressRepository.save(addressEntityCreate);
+        AddressEntity addressEntityCreate = dtoAddressToEntity(addressDto);
+        addressEntityCreate = iAddressRepository.save(addressEntityCreate);
         return entityAddressToDto(addressEntityCreate);
     }
 
@@ -95,96 +89,90 @@ public class AddressServiceImpl implements IAddressService<AddressDto, AddressEn
     public List<AddressDto> addressServiceList() {
         return iAddressRepository.findAll()
                 .stream()
-                // 1.YOL
-                //.map(AddressMapper::AddressEntityToDto)
-                //.sorted(Comparator.comparing((temp)->temp.getAddressEntityEmbeddable))
-
-                // 2.YOL
-                .map((temp) -> AddressMapper.AddressEntityToDto(temp))
+                //.map(AddressMapper::AddressEntityToDto)// 1.YOL Method Referance
+                //.sorted(Comparator.comparing((temp)->temp.getAddressEntityEmbeddable().getCity()))
+                .map((temp) -> AddressMapper.AddressEntityToDto(temp))// 2.YOL Lambda Expression
                 .collect(Collectors.toList());
     }
-
 
     // FIND BY ID
     @Override
     public AddressDto addressServiceFindById(Long id) {
         return iAddressRepository.findById(id)
-                .map(AddressMapper::AddressEntityToDto)
-                .orElseThrow(()-> new _404_NotFoundException(id+" nolu Address yoktur"));
+                .map(AddressMapper::AddressEntityToDto)// 1.YOL Method Referance
+                //.map((temp)->AddressMapper.AddressEntityToDto(temp))// 2.YOL Lambda Expression
+                .orElseThrow(() -> new _404_NotFoundException(id + " nolu Address yoktur"));
     }
 
-
     // UPDATE
+    @Transactional // create, delete, update (manipulation)
     @Override
-    @Transactional // Create, Update, Delete
     public AddressDto addressServiceUpdate(Long id, AddressDto addressDto) {
-
-        // ID VARSA
-        AddressEntity addressEntityUpdate= dtoAddressToEntity(addressServiceFindById(id));
+        // ID Varsa
+        AddressEntity addressEntityUpdate = dtoAddressToEntity(addressServiceFindById(id));
 
         // Embeddable
         AddressEntityEmbeddable addressEntityEmbeddable = new AddressEntityEmbeddable();
         addressEntityEmbeddable.setZipCode(addressDto.getZipCode());
         addressEntityEmbeddable.setCity(addressDto.getCity());
         addressEntityEmbeddable.setState(addressDto.getState());
-        addressEntityEmbeddable.setStreet(addressDto.getState());
+        addressEntityEmbeddable.setStreet(addressDto.getStreet());
         addressEntityEmbeddable.setDoorNumber(addressDto.getDoorNumber());
         addressEntityEmbeddable.setDescription(addressDto.getDescription());
-        addressEntityEmbeddable.setAddressQrCode(addressDto.getAddressQrCode());
-        addressEntityEmbeddable.setCountry(addressDto.getCountry());
+        addressEntityUpdate = iAddressRepository.saveAndFlush(addressEntityUpdate);
         return entityAddressToDto(addressEntityUpdate);
     }
 
     // DELETE
+    @Transactional // create, delete, update (manipulation)
     @Override
-    @Transactional // Create, Update, Delete
     public AddressDto addressServiceDeleteById(Long id) {
-        // ID VARSA
-        AddressEntity addressEntityDelete= dtoAddressToEntity(addressServiceFindById(id));
+        // ID Varsa
+        AddressEntity addressEntityDelete = dtoAddressToEntity(addressServiceFindById(id));
         iAddressRepository.delete(addressEntityDelete);
         return entityAddressToDto(addressEntityDelete);
     }
 
-    //////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////
+    // SORTING / PAGINATION
     // PAGINATION
     @Override
+    // Page, Pageable : org.springframework.data.domain;
     public Page<AddressDto> addressServicePagination(int currentPage, int pageSize) {
-        Pageable pageable= PageRequest.of(currentPage, pageSize);
-        Page<AddressDto> addressDtoPage =(Page<AddressDto>) iAddressRepository.findAll(pageable)
+        Pageable pageable = PageRequest.of(currentPage, pageSize);
+        Page<AddressDto> addressDtoPage = (Page<AddressDto>) iAddressRepository.findAll(pageable)
                 .stream()
                 .map(AddressMapper::AddressEntityToDto)
                 .collect(Collectors.toList());
         return addressDtoPage;
     }
 
-    // SORTED (Herhangi bir kolon)
+    // SORTING (Herhangi bir Kolono)
     @Override
     public List<AddressDto> addressServiceAllSortedBy(String sortedBy) {
-        return iAddressRepository.findAll(
-                Sort.by(Sort.Direction.ASC,sortedBy) )
+        return iAddressRepository.findAll(Sort.by(Sort.Direction.ASC, sortedBy))
                 .stream()
                 .map(AddressMapper::AddressEntityToDto)
                 .collect(Collectors.toList());
     }
 
-    // SORTED ASC (CITY)
+    // SORTING (CITY ASC)
     @Override
     public List<AddressDto> addressServiceAllSortedByCityAsc() {
-        return iAddressRepository.findAll(
-                        Sort.by(Sort.Direction.ASC,"addressEntityEmbeddable.city") )
+        return iAddressRepository.findAll(Sort.by(Sort.Direction.ASC, "addressEntityEmbeddable.city"))
                 .stream()
                 .map(AddressMapper::AddressEntityToDto)
                 .collect(Collectors.toList());
     }
 
-    // SORTED DESC
+    // SORTING (CITY DESC)
+    // Dikkat: Embeddable aldığımdan dolayı  yazdım=> addressEntityEmbeddable.city
     @Override
     public List<AddressDto> addressServiceAllSortedByCityDesc() {
-        return  iAddressRepository.findAll(
-                        Sort.by(Sort.Direction.DESC,"addressEntityEmbeddable.city") )
+        return iAddressRepository.findAll(Sort.by(Sort.Direction.DESC, "addressEntityEmbeddable.city"))
                 .stream()
                 .map(AddressMapper::AddressEntityToDto)
                 .collect(Collectors.toList());
     }
 
-} // end AddressServiceImpl
+}

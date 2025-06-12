@@ -6,52 +6,48 @@ import com.hamitmizrak.data.entity.AddressEntity;
 
 public class AddressMapper {
 
-    // AddressEntity To Dto
-    public static AddressDto AddressEntityToDto(AddressEntity addressEntity){
-
+    // Address Entity To Dto
+    public static AddressDto AddressEntityToDto(AddressEntity addressEntity) {
         // Instance (AddressDto)
-        AddressDto addressDto=new AddressDto();
+        AddressDto addressDto = new AddressDto();
 
         // ID
         addressDto.setId(addressEntity.getId());
         addressDto.setSystemCreatedDate(addressEntity.getSystemCreatedDate());
 
-        // Embeddable varsa
-        AddressEntityEmbeddable addressEntityEmbeddable=addressEntity.getAddressEntityEmbeddable();
-        addressDto.setState(addressEntityEmbeddable.getState());
-        addressDto.setCity(addressEntityEmbeddable.getCity());
-        addressDto.setAddressQrCode(addressEntityEmbeddable.getAddressQrCode());
-        addressDto.setCountry(addressEntityEmbeddable.getCountry());
-        addressDto.setStreet(addressEntityEmbeddable.getStreet());
-        addressDto.setZipCode(addressEntityEmbeddable.getZipCode());
-        addressDto.setDoorNumber(addressEntityEmbeddable.getDoorNumber());
-        addressDto.setDescription(addressEntityEmbeddable.getDescription());
+        if (addressEntity.getAddressEntityEmbeddable() != null) {
+            AddressEntityEmbeddable addressEntityEmbeddable = addressEntity.getAddressEntityEmbeddable();
+            addressDto.setState(addressEntityEmbeddable.getState());
+            addressDto.setCity(addressEntityEmbeddable.getCity());
+            addressDto.setAddressQrCode(addressEntityEmbeddable.getAddressQrCode());
+            addressDto.setStreet(addressEntityEmbeddable.getStreet());
+            addressDto.setZipCode(addressEntityEmbeddable.getZipCode());
+            addressDto.setDescription(addressEntityEmbeddable.getDescription());
+            addressDto.setDoorNumber(addressEntityEmbeddable.getDoorNumber());
+        }
         return addressDto;
     }
 
-    // Dto  To AddressEntity
-    public static AddressEntity AddressDtoToEntity(AddressDto addressDto){
+    // Address Dto To Entity
+    public static AddressEntity AddressDtoToEntity(AddressDto addressDto) {
         // Instance (AddressDto)
-        AddressEntity addressEntity=new AddressEntity();
+        AddressEntity addressEntity = new AddressEntity();
 
         // ID
         addressEntity.setId(addressDto.getId());
+        AddressEntityEmbeddable addressEntityEmbeddable = new AddressEntityEmbeddable();
         addressEntity.setSystemCreatedDate(addressDto.getSystemCreatedDate());
-
-        AddressEntityEmbeddable addressEntityEmbeddable=addressEntity.getAddressEntityEmbeddable();
         addressEntityEmbeddable.setState(addressDto.getState());
         addressEntityEmbeddable.setCity(addressDto.getCity());
-        addressEntityEmbeddable.setAddressQrCode(addressDto.getAddressQrCode());
-        addressEntityEmbeddable.setCountry(addressDto.getCountry());
         addressEntityEmbeddable.setStreet(addressDto.getStreet());
         addressEntityEmbeddable.setZipCode(addressDto.getZipCode());
-        addressEntityEmbeddable.setDoorNumber(addressDto.getDoorNumber());
+        addressEntityEmbeddable.setAddressQrCode(addressDto.getAddressQrCode());
         addressEntityEmbeddable.setDescription(addressDto.getDescription());
+        addressEntityEmbeddable.setDoorNumber(addressDto.getDoorNumber());
 
-        // AddressDetails'i mutlaka AddressEntity içine eklemeliyiz.
+        // AdressDetails'i AdressEntity Ekle
         addressEntity.setAddressEntityEmbeddable(addressEntityEmbeddable);
 
         return addressEntity;
     }
-
-} // end AddressMapper
+}

@@ -7,7 +7,6 @@ import lombok.*;
 import lombok.extern.log4j.Log4j2;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.io.Serializable;
 import java.util.Date;
 
 // LOMBOK
@@ -18,15 +17,12 @@ import java.util.Date;
 @Builder
 @Log4j2
 
-// Entity
-@Entity(name="Addreses") // JPQL için kullanılacak varlıkları özelleştirmek için
-@Table(name = "addresses") // Database Tablo adı
+// ENTITY
+@Entity(name = "Adresses") // JPQL için kullanılacak varlıklar için özelleştirme için
+@Table(name = "adresses") // Database tablo adı
 
 // Address(1) - Customer(1)
-public class AddressEntity extends AuditingAwareBaseEntity implements Serializable {
-
-    // SERILEŞTIRME
-    public static final Long serialVersionUID=1L;
+public class AddressEntity extends AuditingAwareBaseEntity {
 
     // FIELD
     @Id
@@ -37,13 +33,13 @@ public class AddressEntity extends AuditingAwareBaseEntity implements Serializab
     @Embedded
     private AddressEntityEmbeddable addressEntityEmbeddable;
 
-
     // DATE
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="system_created_date")
+    @Column(name = "system_created_date")
     private Date systemCreatedDate;
 
     // RELATION
+    // Address(1) - Customer(1)
 
-} //end  AddressDto
+} //end  AddressEntity
