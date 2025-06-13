@@ -1,7 +1,9 @@
 package com.hamitmizrak.runner;
 
 import com.hamitmizrak.business.dto.AddressDto;
+import com.hamitmizrak.business.dto.CustomerDto;
 import com.hamitmizrak.business.services.IAddressService;
+import com.hamitmizrak.business.services.ICustomerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.CommandLineRunner;
@@ -26,6 +28,7 @@ public class _1_ProjectDataSet implements CommandLineRunner {
 
     // Injection
     private final IAddressService iAddressService;
+    private final ICustomerService iCustomerService;
 
 
     // AddressDto List Save
@@ -60,11 +63,32 @@ public class _1_ProjectDataSet implements CommandLineRunner {
     }
 
 
+    private CustomerDto saveOnCustomerViaAdress(){
+        // Address Dto Save
+        AddressDto addressDto = saveAddress();
+
+        // CustomerDto Save
+        CustomerDto customerDto = new CustomerDto();
+        customerDto.setFirstName("Müşteri Adı");
+        customerDto.setLastName("Müşteri Soyadı");
+        customerDto.setNotes("Müşteri Notu");
+
+        //Composition
+        customerDto.setAddressDto(addressDto);
+
+        // Database Save
+        iCustomerService.customerServiceCreate(customerDto);
+        System.out.println(customerDto);
+        return customerDto;
+    }
+
+
 
     @Override
     public void run(String... args) throws Exception {
         System.out.println("Project Data set -1 ");
         log.info("Project Data set -1 ");
-        addressSave();
+        //addressSave();
+        saveOnCustomerViaAdress();
     }
 }

@@ -106,8 +106,8 @@ public class AddressServiceImpl implements IAddressService<AddressDto, AddressEn
     }
 
     // UPDATE
-    @Transactional // create, delete, update (manipulation)
     @Override
+    @Transactional // create, delete, update (manipulation)
     public AddressDto addressServiceUpdate(Long id, AddressDto addressDto) {
         // ID Varsa
         AddressEntity addressEntityUpdate = dtoAddressToEntity(addressServiceFindById(id));
@@ -115,18 +115,20 @@ public class AddressServiceImpl implements IAddressService<AddressDto, AddressEn
         // Embeddable
         AddressEntityEmbeddable addressEntityEmbeddable = new AddressEntityEmbeddable();
         addressEntityEmbeddable.setZipCode(addressDto.getZipCode());
+        addressEntityEmbeddable.setAddressQrCode(addressDto.getAddressQrCode());
         addressEntityEmbeddable.setCity(addressDto.getCity());
         addressEntityEmbeddable.setState(addressDto.getState());
         addressEntityEmbeddable.setStreet(addressDto.getStreet());
         addressEntityEmbeddable.setDoorNumber(addressDto.getDoorNumber());
         addressEntityEmbeddable.setDescription(addressDto.getDescription());
-        addressEntityUpdate = iAddressRepository.saveAndFlush(addressEntityUpdate);
+        //addressEntityUpdate = iAddressRepository.saveAndFlush(addressEntityUpdate);
+        addressEntityUpdate = iAddressRepository.save(addressEntityUpdate);
         return entityAddressToDto(addressEntityUpdate);
     }
 
     // DELETE
-    @Transactional // create, delete, update (manipulation)
     @Override
+    @Transactional // create, delete, update (manipulation)
     public AddressDto addressServiceDeleteById(Long id) {
         // ID Varsa
         AddressEntity addressEntityDelete = dtoAddressToEntity(addressServiceFindById(id));
