@@ -40,5 +40,11 @@ public class CustomerDto extends AuditingAwareBaseDto implements Serializable {
     @Builder.Default
     private Date systemCreatedDate=new Date(System.currentTimeMillis());
 
+    ////////////////////////////////////////////////////////////////////////
+    // COMPOSITON
     // RELATION
+    // Customer(1) - Address(1)
+    private AddressDto addressDto;
+
+
 } //end class AddressDto

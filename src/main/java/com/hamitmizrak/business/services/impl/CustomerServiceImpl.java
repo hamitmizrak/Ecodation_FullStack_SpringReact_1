@@ -3,12 +3,14 @@ package com.hamitmizrak.business.services.impl;
 import com.hamitmizrak.bean.ModelMapperBean;
 import com.hamitmizrak.business.dto.CustomerDto;
 import com.hamitmizrak.business.mapper.AddressMapper;
+import com.hamitmizrak.business.mapper.CustomerMapper;
 import com.hamitmizrak.business.services.ICustomerService;
 import com.hamitmizrak.data.embeddable.AddressEntityEmbeddable;
 import com.hamitmizrak.data.entity.CustomerEntity;
 import com.hamitmizrak.data.repository.ICustomerRepository;
 import com.hamitmizrak.exception._404_NotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,14 +19,13 @@ import java.util.stream.Collectors;
 
 // LOMBOK
 @RequiredArgsConstructor // for injection
+@Log4j2
 
 // Asıl iş yükünü yapan Bean
 @Service
 public class CustomerServiceImpl implements ICustomerService<CustomerDto, CustomerEntity> {
 
     // FIELD INJECTION
-
-    // LOMBOK CONSTRUCTOR INJECTION
     private final ICustomerRepository iCustomerRepository;
     private final ModelMapperBean modelMapperBean;
 
@@ -45,14 +46,14 @@ public class CustomerServiceImpl implements ICustomerService<CustomerDto, Custom
         // return modelMapperBean.getModelMapper().map(customerDto, CustomerEntity.class);
 
         //  2.YOL
-        return CustomerMapper.CustomerDtoToEntity(CustomerDto);
+        return CustomerMapper.CustomerDtoToEntity(customerDto);
     }
 
     /////////////////////////////////////////////////////////////////
     // CRUD
     // CREATE
-    @Transactional // create, delete, update (manipulation)
     @Override
+    @Transactional // create, delete, update (manipulation)
     public CustomerDto customerServiceCreate(CustomerDto customerDto) {
         CustomerEntity customerEntityCreate = dtoCustomerToEntity(customerDto);
         customerEntityCreate = iCustomerRepository.save(customerEntityCreate);
@@ -80,27 +81,21 @@ public class CustomerServiceImpl implements ICustomerService<CustomerDto, Custom
     }
 
     // UPDATE
-    @Transactional // create, delete, update (manipulation)
     @Override
+    @Transactional // create, delete, update (manipulation)
     public CustomerDto customerServiceUpdate(Long id, CustomerDto customerDto) {
         // ID Varsa
         CustomerEntity customerEntityUpdate = dtoCustomerToEntity(customerServiceFindById(id));
-
-        // Embeddable
-        AddressEntityEmbeddable addressEntityEmbeddable = new AddressEntityEmbeddable();
-        addressEntityEmbeddable.setZipCode(customerDto.getZipCode());
-        addressEntityEmbeddable.setCity(customerDto.getCity());
-        addressEntityEmbeddable.setState(customerDto.getState());
-        addressEntityEmbeddable.setStreet(customerDto.getStreet());
-        addressEntityEmbeddable.setDoorNumber(customerDto.getDoorNumber());
-        addressEntityEmbeddable.setDescription(customerDto.getDescription());
+        customerEntityUpdate.setFirstName(customerDto.getFirstName());
+        customerEntityUpdate.setLastName(customerDto.getLastName());
+        customerEntityUpdate.setNotes(customerDto.getNotes());
         customerEntityUpdate = iCustomerRepository.saveAndFlush(customerEntityUpdate);
         return entityCustomerToDto(customerEntityUpdate);
     }
 
     // DELETE
-    @Transactional // create, delete, update (manipulation)
     @Override
+    @Transactional // create, delete, update (manipulation)
     public CustomerDto customerServiceDeleteById(Long id) {
         // ID Varsa
         CustomerEntity customerEntityDelete = dtoCustomerToEntity(customerServiceFindById(id));
@@ -108,4 +103,4 @@ public class CustomerServiceImpl implements ICustomerService<CustomerDto, Custom
         return entityCustomerToDto(customerEntityDelete);
     }
     
-}
+} // end CustomerServiceImpl

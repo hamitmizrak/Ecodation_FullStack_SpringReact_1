@@ -1,53 +1,54 @@
 package com.hamitmizrak.business.mapper;
 
-import com.hamitmizrak.business.dto.AddressDto;
-import com.hamitmizrak.data.embeddable.AddressEntityEmbeddable;
-import com.hamitmizrak.data.entity.AddressEntity;
+import com.hamitmizrak.business.dto.CustomerDto;
+import com.hamitmizrak.data.entity.CustomerEntity;
+import lombok.extern.log4j.Log4j2;
+
+// LOMBOK
+@Log4j2
 
 public class CustomerMapper {
 
-    // Address Entity To Dto
-    public static AddressDto AddressEntityToDto(AddressEntity addressEntity) {
-        // Instance (AddressDto)
-        AddressDto addressDto = new AddressDto();
+    // Customer Entity To Dto
+    public static CustomerDto CustomerEntityToDto(CustomerEntity customerEntity) {
+        // Instance (CustomerDto)
+        CustomerDto customerDto = new CustomerDto();
 
         // ID
-        addressDto.setId(addressEntity.getId());
-        addressDto.setSystemCreatedDate(addressEntity.getSystemCreatedDate());
+        customerDto.setId(customerEntity.getId());
+        customerDto.setFirstName(customerEntity.getFirstName());
+        customerDto.setLastName(customerEntity.getLastName());
+        customerDto.setNotes(customerEntity.getNotes());
+        customerDto.setSystemCreatedDate(customerEntity.getSystemCreatedDate());
 
-        if (addressEntity.getAddressEntityEmbeddable() != null) {
-            AddressEntityEmbeddable addressEntityEmbeddable = addressEntity.getAddressEntityEmbeddable();
-            addressDto.setState(addressEntityEmbeddable.getState());
-            addressDto.setCity(addressEntityEmbeddable.getCity());
-            addressDto.setAddressQrCode(addressEntityEmbeddable.getAddressQrCode());
-            addressDto.setStreet(addressEntityEmbeddable.getStreet());
-            addressDto.setZipCode(addressEntityEmbeddable.getZipCode());
-            addressDto.setDescription(addressEntityEmbeddable.getDescription());
-            addressDto.setDoorNumber(addressEntityEmbeddable.getDoorNumber());
+        // DİKKAT: Composition Customer(1) -Address(1)
+        if (customerEntity.getAddressCustomerRelationEntiy() != null) {
+           customerDto.setAddressDto(AddressMapper.AddressEntityToDto(customerEntity.getAddressCustomerRelationEntiy()));
+        }else{
+            System.out.println("Customer(1) - Address(1) via Customer with Address relation is not null");
+            log.error("Customer(1) - Address(1) via Customer with Address relation is not null");
         }
-        return addressDto;
+        return customerDto;
     }
 
-    // Address Dto To Entity
-    public static AddressEntity AddressDtoToEntity(AddressDto addressDto) {
-        // Instance (AddressDto)
-        AddressEntity addressEntity = new AddressEntity();
+    // Customer Dto To Entity
+    public static CustomerEntity CustomerDtoToEntity(CustomerDto customerDto) {
+        // Instance (CustomerDto)
+        CustomerEntity customerEntity = new CustomerEntity();
 
         // ID
-        addressEntity.setId(addressDto.getId());
-        AddressEntityEmbeddable addressEntityEmbeddable = new AddressEntityEmbeddable();
-        addressEntity.setSystemCreatedDate(addressDto.getSystemCreatedDate());
-        addressEntityEmbeddable.setState(addressDto.getState());
-        addressEntityEmbeddable.setCity(addressDto.getCity());
-        addressEntityEmbeddable.setStreet(addressDto.getStreet());
-        addressEntityEmbeddable.setZipCode(addressDto.getZipCode());
-        addressEntityEmbeddable.setAddressQrCode(addressDto.getAddressQrCode());
-        addressEntityEmbeddable.setDescription(addressDto.getDescription());
-        addressEntityEmbeddable.setDoorNumber(addressDto.getDoorNumber());
+        customerEntity.setId(customerDto.getId());
+        customerEntity.setFirstName(customerDto.getFirstName());
+        customerEntity.setLastName(customerDto.getLastName());
+        customerEntity.setNotes(customerDto.getNotes());
 
-        // AdressDetails'i AdressEntity Ekle
-        addressEntity.setAddressEntityEmbeddable(addressEntityEmbeddable);
-
-        return addressEntity;
+        // DİKKAT Composition (Customer(1) - Address(1))
+        if(customerDto.getAddressDto() != null){
+            customerEntity.setAddressCustomerRelationEntiy(AddressMapper.AddressDtoToEntity(customerDto.getAddressDto()));
+        }else{
+            System.out.println("Customer(1) - Address(1) via Customer with Address relation is not null");
+            log.error("Customer(1) - Address(1) via Customer with Address relation is not null");
+        }
+        return customerEntity;
     }
 }
