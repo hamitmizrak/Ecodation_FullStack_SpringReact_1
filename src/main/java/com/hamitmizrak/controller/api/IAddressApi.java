@@ -5,36 +5,37 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 // D: Dto
-public interface IAddressApi <D> {
+public interface IAddressApi<D> {
 
     // CRUD
     // CREATE (ADDRESS)
-    public ResponseEntity<D>  addressApiCreate(D d);
+    public ResponseEntity<?> addressApiCreate(D d);
 
-    // LIST   (ADDRESS)
-    public ResponseEntity<List<D>>  addressApiList();
+    // LIST (ADDRESS)
+    public ResponseEntity<List<D>> addressApiList();
 
-    // FIND   (ADDRESS)
-    public ResponseEntity<?>  addressApiFindById(Long id);
+    // FIND (ADDRESS)
+    public ResponseEntity<?> addressApiFindById(Long id);
 
     // UPDATE (ADDRESS)
     public ResponseEntity<?> addressApiUpdate(Long id, D d);
 
-    // DELETE (ADDRESS)
-    public ResponseEntity<?>  addressApiDeleteById(Long id);
+    // DELETE  (ADDRESS)
+    public ResponseEntity<?> addressApiDeleteById(Long id);
 
-    //////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////
     // SORTING / PAGINATION
-
-    // PAGINATION
-    public  ResponseEntity<Page<?> > addressApiPagination(int currentPage, int pageSize);
+    //  PAGINATION
+    public ResponseEntity<Page<?>> addressServicePagination(int currentPage, int pageSize);
 
     // SORTING
-    public  ResponseEntity< List<?> >addressApiAllSortedBy(String sortedBy);
+    // Address Entity içindeki herhangibi bir olan kolana göre sıralama
+    public ResponseEntity<List<?>> addressServiceAllSortedBy(String sortedBy);
 
     // SORTING ASC
-    public  ResponseEntity<List<?>>  addressApiAllSortedByCityAsc();
+    // Address Entity içindeki city olan özel bir alana göre sıralama
+    public ResponseEntity<List<?>> addressServiceAllSortedByCityAsc();
 
     // SORTING DESC
-    public  ResponseEntity<List<?>>  addressApiAllSortedByCityDesc();
+    public ResponseEntity<List<?>> addressServiceAllSortedByCityDesc();
 }

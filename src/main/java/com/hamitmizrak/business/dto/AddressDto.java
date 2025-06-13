@@ -1,11 +1,10 @@
 package com.hamitmizrak.business.dto;
-
+import com.hamitmizrak.annotation.AddressUniqueQrCode;
 import com.hamitmizrak.audit.AuditingAwareBaseDto;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.extern.log4j.Log4j2;
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -42,7 +41,7 @@ public class AddressDto extends AuditingAwareBaseDto implements Serializable {
     private String zipCode;
 
     @NotEmpty(message = "{address.qr_code.validation.constraints.NotNull.message}")
-    //@AddressUniqueQrCode
+    @AddressUniqueQrCode
     private String addressQrCode;
 
     @NotEmpty(message = "{address.description.validation.constraints.NotNull.message}")

@@ -51,7 +51,6 @@ public class CustomErrorHandleWebRequest implements ErrorController {
     private Integer status;
     private Map<String,String> validationErrors;
 
-    // http://localhost:<port>/error
     // http://localhost:4444/error
     // Spring Frameworkten gelen hataları kendimize göre hataları belirledik (ApiResult)
     @RequestMapping("/error")

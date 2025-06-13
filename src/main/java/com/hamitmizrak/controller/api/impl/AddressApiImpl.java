@@ -23,7 +23,7 @@ import java.util.List;
 // 5xx: Server Error
 
 // LOMBOK
-@RequiredArgsConstructor  // for injection
+@RequiredArgsConstructor
 
 // API: Dıi dünyaya açılan kapı
 @RestController
@@ -40,9 +40,9 @@ public class AddressApiImpl implements IAddressApi<AddressDto> {
 
     // http://localhost:4444/api/address/create
     // CREATE (ADDRESS)
-    @Override
     @PostMapping("/create")
-    public ResponseEntity<AddressDto> addressApiCreate(@Valid @RequestBody AddressDto addressDto) {
+    @Override
+    public ResponseEntity<?> addressApiCreate(@Valid @RequestBody AddressDto addressDto) {
         AddressDto addressDtoCreate = (AddressDto) addressService.addressServiceCreate(addressDto);
         // return ResponseEntity.status(200).body(addressDtoCreate);
         // return ResponseEntity.status(HttpStatus.OK).body(addressDtoCreate);
@@ -53,8 +53,8 @@ public class AddressApiImpl implements IAddressApi<AddressDto> {
 
     // http://localhost:4444/api/address/list
     // LIST
-    @Override
     @GetMapping(value = "/list")
+    @Override
     public ResponseEntity<List<AddressDto>> addressApiList() {
         List<AddressDto> addressDtoList = addressService.addressServiceList();
         // Stream
@@ -69,10 +69,10 @@ public class AddressApiImpl implements IAddressApi<AddressDto> {
     // @PathVariable Long id
     // @PathVariable(name="id") Long id, @PathVariable(name="id") Long id
     // FIND
-    @Override
     @GetMapping(value ={"/find/", "/find/{id}"})
+    @Override
     public ResponseEntity<?> addressApiFindById(@PathVariable(name = "id", required = false) Long id) {
-        String message="";
+       String message="";
         if (id == null) {
             throw new NullPointerException("Null Pointer Exception");
         } else if (id == 0) {
@@ -95,13 +95,14 @@ public class AddressApiImpl implements IAddressApi<AddressDto> {
 
     // http://localhost:4444/api/address/update/id
     // UPDATE
-    @Override
     @PutMapping(value ={"/update/", "/update/{id}"})
+    @Override
     public ResponseEntity<?> addressApiUpdate(
             @PathVariable(name = "id", required = false) Long id,
             @Valid @RequestBody AddressDto addressDto) {
         return  ResponseEntity.ok(addressService.addressServiceUpdate(id, addressDto));
     }
+
 
     // http://localhost:4444/api/address/delete/id
     // DELETE BY ID
@@ -111,7 +112,6 @@ public class AddressApiImpl implements IAddressApi<AddressDto> {
         return ResponseEntity.ok(addressService.addressServiceDeleteById(id));
     }
 
-
     ////////////////////////////////////////////////////////////////////////////////////////
     // PAGING AND SORTING
 
@@ -120,11 +120,12 @@ public class AddressApiImpl implements IAddressApi<AddressDto> {
     // currentPage=0 demek ilk sayfa demektir
     @Override
     @GetMapping(value ="/pagination")
-    public ResponseEntity<Page<?>> addressApiPagination(
-            @RequestParam(name = "currentPage", required = false, defaultValue = "0") int currentPage,
-            @RequestParam(name = "pageSize", required = false, defaultValue = "5") int pageSize) {
+    public ResponseEntity<Page<?>> addressServicePagination(
+           @RequestParam(name = "currentPage", required = false, defaultValue = "0") int currentPage,
+           @RequestParam(name = "pageSize", required = false, defaultValue = "5") int pageSize) {
         return  ResponseEntity.ok(addressService.addressServicePagination(currentPage, pageSize));
     }
+
 
     // SORTING BELLI SUTUNA GÖRE
     // http://localhost:4444/api/address/sorting?sortBy=addressEntityEmbeddable.street
@@ -138,7 +139,7 @@ public class AddressApiImpl implements IAddressApi<AddressDto> {
      */
     @GetMapping(value ="/sorting")
     @Override
-    public ResponseEntity<List<?>> addressApiAllSortedBy(
+    public ResponseEntity<List<?>> addressServiceAllSortedBy(
             @RequestParam(name = "sortBy", required = false, defaultValue = "addressEntityEmbeddable.city")  String sortedBy
     ) {
         return ResponseEntity.ok(addressService.addressServiceAllSortedBy(sortedBy));
@@ -148,9 +149,9 @@ public class AddressApiImpl implements IAddressApi<AddressDto> {
     // SORTING ASC
     // http://localhost:4444/api/address/sorting/city/asc
     // Default Olarak Addres Entityden Şehire göre Küçükten Büyüğe Doğru Sıralama
-    @Override
     @GetMapping(value ="/sorting/city/asc")
-    public ResponseEntity<List<?>> addressApiAllSortedByCityAsc() {
+    @Override
+    public ResponseEntity<List<?>> addressServiceAllSortedByCityAsc() {
         return ResponseEntity.ok(addressService.addressServiceAllSortedByCityAsc());
     }
 
@@ -158,9 +159,9 @@ public class AddressApiImpl implements IAddressApi<AddressDto> {
     // SORTING DESC
     // http://localhost:4444/api/address/sorting/city/desc
     // Default Olarak Addres Entityden Şehire göre Büyükten Küçüğe Doğru Sıralama
-    @Override
     @GetMapping(value ="/sorting/city/desc")
-    public ResponseEntity<List<?>> addressApiAllSortedByCityDesc() {
+    @Override
+    public ResponseEntity<List<?>> addressServiceAllSortedByCityDesc() {
         return ResponseEntity.ok(addressService.addressServiceAllSortedByCityDesc());
     }
 

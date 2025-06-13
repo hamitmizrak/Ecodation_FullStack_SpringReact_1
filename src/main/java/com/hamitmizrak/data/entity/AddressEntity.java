@@ -42,4 +42,5 @@ public class AddressEntity extends AuditingAwareBaseEntity {
     // RELATION
     // Address(1) - Customer(1)
 
+
 } //end  AddressEntity
