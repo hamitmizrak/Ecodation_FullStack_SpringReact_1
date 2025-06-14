@@ -109,5 +109,4 @@ public class CustomerApiImpl implements ICustomerApi<CustomerDto> {
     public ResponseEntity<?> customerApiDeleteById(@PathVariable(name = "id", required = false)  Long id) {
         return ResponseEntity.ok(iCustomerService.customerServiceDeleteById(id));
     }
-
 } //end customerApiImpl

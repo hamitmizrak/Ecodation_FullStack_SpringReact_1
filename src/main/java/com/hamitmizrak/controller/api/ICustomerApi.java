@@ -8,19 +8,18 @@ import java.util.List;
 public interface ICustomerApi<D> {
 
     // CRUD
-    // CREATE (customer)
+    // CREATE (CUSTOMER)
     public ResponseEntity<?> customerApiCreate(D d);
 
-    // LIST (customer)
+    // LIST (CUSTOMER)
     public ResponseEntity<List<D>> customerApiList();
 
-    // FIND (customer)
+    // FIND (CUSTOMER)
     public ResponseEntity<?> customerApiFindById(Long id);
 
-    // UPDATE (customer)
+    // UPDATE (CUSTOMER)
     public ResponseEntity<?> customerApiUpdate(Long id, D d);
 
-    // DELETE  (customer)
+    // DELETE  (CUSTOMER)
     public ResponseEntity<?> customerApiDeleteById(Long id);
-
 }

@@ -1,14 +1,14 @@
 package com.hamitmizrak.data.repository;
 
-import com.hamitmizrak.data.entity.CustomerEntity;
+import com.hamitmizrak.data.entity.ProductEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-// CrudRepository<CustomerEntity, Long>
-// PagingAndSortingRepository<CustomerEntity, Long>
+// CrudRepository<ProductEntity, Long>
+// PagingAndSortingRepository<ProductEntity, Long>
 
 @Repository
-public interface ICustomerRepository extends JpaRepository<CustomerEntity, Long> {
+public interface IProductRepository extends JpaRepository<ProductEntity, Long> {
     // Delivered Query
     // Named Query
     // JPQL

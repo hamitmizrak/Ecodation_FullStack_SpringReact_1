@@ -11,20 +11,21 @@ public interface ICustomerService<D, E> {
 
     public E dtoCustomerToEntity(D d);
 
-    /////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////
+
     // CRUD
-    // CREATE (Customer)
+    // CREATE (customer)
     public D customerServiceCreate(D d);
 
-    // LIST (Customer)
+    // LIST (customer)
     public List<D> customerServiceList();
 
-    // FIND (Customer)
+    // FIND (customer)
     public D customerServiceFindById(Long id);
 
-    // UPDATE (Customer)
+    // UPDATE (customer)
     public D customerServiceUpdate(Long id, D d);
 
-    // DELETE  (Customer)
+    // DELETE  (customer)
     public D customerServiceDeleteById(Long id);
 }

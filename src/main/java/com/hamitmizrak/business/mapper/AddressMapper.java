@@ -47,6 +47,7 @@ public class AddressMapper {
 
         // AdressDetails'i AdressEntity Ekle
         addressEntity.setAddressEntityEmbeddable(addressEntityEmbeddable);
+
         return addressEntity;
     }
 }

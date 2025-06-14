@@ -1,13 +1,13 @@
 package com.hamitmizrak.data.entity;
 
 import com.hamitmizrak.audit.AuditingAwareBaseEntity;
-import com.hamitmizrak.data.embeddable.AddressEntityEmbeddable;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.extern.log4j.Log4j2;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
+import java.util.List;
 
 // LOMBOK
 @Getter
@@ -18,20 +18,22 @@ import java.util.Date;
 @Log4j2
 
 // ENTITY
-@Entity(name = "Adresses") // JPQL için kullanılacak varlıklar için özelleştirme için
-@Table(name = "adresses") // Database tablo adı
+@Entity(name = "Products") // JPQL için kullanılacak varlıklar için özelleştirme için
+@Table(name = "product") // Database tablo adı
 
-// Address(1) - Customer(1)
-public class AddressEntity extends AuditingAwareBaseEntity {
+// Product(N) - Order(M)
+public class ProductEntity extends AuditingAwareBaseEntity {
 
     // FIELD
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Embedded
-    @Embedded
-    private AddressEntityEmbeddable addressEntityEmbeddable;
+    // FIRST NAME
+    private String name;
+
+    // LASTNAME
+    private String code;
 
     // DATE
     @CreationTimestamp
@@ -39,9 +41,10 @@ public class AddressEntity extends AuditingAwareBaseEntity {
     @Column(name = "system_created_date")
     private Date systemCreatedDate;
 
+    ///////////////////////////////////////////////////////////////////////////
     // RELATION
-    // Address(1) - Customer(1)
-    @OneToOne(mappedBy = "addressCustomerEntity",fetch =FetchType.LAZY)
-    private CustomerEntity customerEntity;
+    @ManyToMany(mappedBy = "orderProductEntityList",fetch = FetchType.LAZY)
+    List<OrderEntity> productOrderEntityList;
 
-} //end  AddressEntity
+} //end  ProductEntity
+

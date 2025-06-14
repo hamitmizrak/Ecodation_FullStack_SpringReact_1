@@ -1,13 +1,14 @@
 package com.hamitmizrak.data.entity;
 
 import com.hamitmizrak.audit.AuditingAwareBaseEntity;
-import com.hamitmizrak.data.embeddable.AddressEntityEmbeddable;
+import com.hamitmizrak.business.dto.OrderDto;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.extern.log4j.Log4j2;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
+import java.util.List;
 
 // LOMBOK
 @Getter
@@ -29,18 +30,18 @@ public class CustomerEntity extends AuditingAwareBaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-    // FIRSTNAME
-    @Column(name="first_name")
+    // FIRST NAME
+    @Column(name = "first_name")
     private String firstName;
 
     // LASTNAME
-    @Column(name="last_name")
+    @Column(name = "last_name")
     private String lastName;
 
-    // NOTES
-    private String notes;
 
+    // NOTES
+    @Column(name = "notes")
+    private String notes;
 
     // DATE
     @CreationTimestamp
@@ -49,10 +50,15 @@ public class CustomerEntity extends AuditingAwareBaseEntity {
     private Date systemCreatedDate;
 
     // RELATION
-    // Customer(1) - Address(1)
-    @OneToOne(cascade =CascadeType.ALL )
-    @JoinColumn(name = "address_id", referencedColumnName ="id", unique = true )
-    private AddressEntity addressCustomerRelationEntiy;
+    // Customer(1) - Adress(1)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="address_id", referencedColumnName = "id",unique=true)
+    private AddressEntity addressCustomerEntity;
 
+    // RELATION
+    // Customer(1) - Order(N)
+    @OneToMany(mappedBy = "customerOrderEntity", fetch = FetchType.LAZY)
+    private List<OrderEntity> orderCustomerEntityList;
 
-} //end  AddressEntity
+} //end  CustomerEntity
+

@@ -2,15 +2,12 @@ package com.hamitmizrak.business.services.impl;
 
 import com.hamitmizrak.bean.ModelMapperBean;
 import com.hamitmizrak.business.dto.CustomerDto;
-import com.hamitmizrak.business.mapper.AddressMapper;
 import com.hamitmizrak.business.mapper.CustomerMapper;
 import com.hamitmizrak.business.services.ICustomerService;
-import com.hamitmizrak.data.embeddable.AddressEntityEmbeddable;
 import com.hamitmizrak.data.entity.CustomerEntity;
 import com.hamitmizrak.data.repository.ICustomerRepository;
 import com.hamitmizrak.exception._404_NotFoundException;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,13 +16,13 @@ import java.util.stream.Collectors;
 
 // LOMBOK
 @RequiredArgsConstructor // for injection
-@Log4j2
 
 // Asıl iş yükünü yapan Bean
 @Service
 public class CustomerServiceImpl implements ICustomerService<CustomerDto, CustomerEntity> {
 
-    // FIELD INJECTION
+
+    // LOMBOK CONSTRUCTOR INJECTION
     private final ICustomerRepository iCustomerRepository;
     private final ModelMapperBean modelMapperBean;
 
@@ -52,8 +49,8 @@ public class CustomerServiceImpl implements ICustomerService<CustomerDto, Custom
     /////////////////////////////////////////////////////////////////
     // CRUD
     // CREATE
-    @Override
     @Transactional // create, delete, update (manipulation)
+    @Override
     public CustomerDto customerServiceCreate(CustomerDto customerDto) {
         CustomerEntity customerEntityCreate = dtoCustomerToEntity(customerDto);
         customerEntityCreate = iCustomerRepository.save(customerEntityCreate);
@@ -66,7 +63,6 @@ public class CustomerServiceImpl implements ICustomerService<CustomerDto, Custom
         return iCustomerRepository.findAll()
                 .stream()
                 //.map(CustomerMapper::CustomerEntityToDto)// 1.YOL Method Referance
-                //.sorted(Comparator.comparing((temp)->temp.getCustomerEntityEmbeddable().getCity()))
                 .map((temp) -> CustomerMapper.CustomerEntityToDto(temp))// 2.YOL Lambda Expression
                 .collect(Collectors.toList());
     }
@@ -76,13 +72,13 @@ public class CustomerServiceImpl implements ICustomerService<CustomerDto, Custom
     public CustomerDto customerServiceFindById(Long id) {
         return iCustomerRepository.findById(id)
                 .map(CustomerMapper::CustomerEntityToDto)// 1.YOL Method Referance
-                //.map((temp)->CustomerMapper.CustomerEntityToDto(temp))// 2.YOL Lambda Expression
-                .orElseThrow(() -> new _404_NotFoundException(id + " nolu Customer yoktur"));
+                //.map((temp)->customerMapper.customerEntityToDto(temp))// 2.YOL Lambda Expression
+                .orElseThrow(() -> new _404_NotFoundException(id + " nolu customer yoktur"));
     }
 
     // UPDATE
-    @Override
     @Transactional // create, delete, update (manipulation)
+    @Override
     public CustomerDto customerServiceUpdate(Long id, CustomerDto customerDto) {
         // ID Varsa
         CustomerEntity customerEntityUpdate = dtoCustomerToEntity(customerServiceFindById(id));
@@ -94,13 +90,12 @@ public class CustomerServiceImpl implements ICustomerService<CustomerDto, Custom
     }
 
     // DELETE
-    @Override
     @Transactional // create, delete, update (manipulation)
+    @Override
     public CustomerDto customerServiceDeleteById(Long id) {
         // ID Varsa
         CustomerEntity customerEntityDelete = dtoCustomerToEntity(customerServiceFindById(id));
         iCustomerRepository.delete(customerEntityDelete);
         return entityCustomerToDto(customerEntityDelete);
     }
-    
-} // end CustomerServiceImpl
+}
