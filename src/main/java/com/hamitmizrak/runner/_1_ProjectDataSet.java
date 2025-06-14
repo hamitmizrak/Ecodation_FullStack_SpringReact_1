@@ -39,7 +39,7 @@ public class _1_ProjectDataSet implements CommandLineRunner {
         List<AddressDto> addressDtoList = new ArrayList<>();
         for (int i = 1; i <= 15; i++) {
             AddressDto addressDto = new AddressDto();
-            addressDto.setCity("Hatay "+i);
+            addressDto.setCity("İl "+i);
             addressDto.setDescription("tanımlama "+i);
             addressDto.setStreet("cadde "+i);
             addressDto.setState("state "+i);
@@ -72,9 +72,9 @@ public class _1_ProjectDataSet implements CommandLineRunner {
 
         // Customer Dto Save
         CustomerDto customerDto = new CustomerDto();
-        customerDto.setFirstName("Hamit");
-        customerDto.setLastName("Mızrak");
-        customerDto.setNotes("Notes");
+        customerDto.setFirstName("Müşteri Adı");
+        customerDto.setLastName("Müşteri Soyadı");
+        customerDto.setNotes("Müşteri Notes");
 
         // Composition
         customerDto.setAddressDto(addressDto);
@@ -132,7 +132,6 @@ public class _1_ProjectDataSet implements CommandLineRunner {
         System.out.println(orderDtoSaved);
         return orderDto;
     }
-
 
     @Override
     public void run(String... args) throws Exception {

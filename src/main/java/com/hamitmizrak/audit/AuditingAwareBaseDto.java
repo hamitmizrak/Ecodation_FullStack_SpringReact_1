@@ -9,6 +9,10 @@ import java.util.Date;
 @Getter
 @Setter
 
+/**
+ Sisteme giriş yapmış kişinin bir tabloya ekleme, güncelleme yaptığında
+ Database eklenecek kısımdır.
+ */
 abstract public class AuditingAwareBaseDto {
 
     // Kim Ekledi

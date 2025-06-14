@@ -24,6 +24,7 @@ import java.util.Map;
 // ErrorAttributes
 // WebRequest
 
+// http://localhost:4444/error
 // Spring Boot defaulttan gelen error'ı kendimize göre customise yapıyoruz.
 @RestController
 @CrossOrigin(origins = FrontEnd.REACT_URL) //localhost:3000 portunu backentte kullanabiliriz.
