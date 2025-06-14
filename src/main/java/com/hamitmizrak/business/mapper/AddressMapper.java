@@ -50,4 +50,4 @@ public class AddressMapper {
 
         return addressEntity;
     }
-}
+} // end AddressMapper

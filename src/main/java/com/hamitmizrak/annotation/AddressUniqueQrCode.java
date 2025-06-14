@@ -6,9 +6,7 @@ import java.lang.annotation.*;
 
 @Target({ ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(
-        validatedBy = {AddressValidQrCode.class}
-)
+@Constraint(validatedBy = {AddressValidQrCode.class})
 public @interface AddressUniqueQrCode {
     String message() default "{address.qr_code.validation.constraints.unique.message}";
 

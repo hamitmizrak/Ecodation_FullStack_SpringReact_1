@@ -93,7 +93,7 @@ public class AddressApiImpl implements IAddressApi<AddressDto> {
         return ResponseEntity.ok(addressDtoFind);
     }
 
-    // http://localhost:4444/api/address/update/id
+    // http://localhost:4444/api/address/update/1
     // UPDATE
     @PutMapping(value ={"/update/", "/update/{id}"})
     @Override

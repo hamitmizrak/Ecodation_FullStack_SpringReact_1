@@ -175,5 +175,4 @@ public class AddressServiceImpl implements IAddressService<AddressDto, AddressEn
                 .map(AddressMapper::AddressEntityToDto)
                 .collect(Collectors.toList());
     }
-
-}
+} // end AddressServiceImpl
