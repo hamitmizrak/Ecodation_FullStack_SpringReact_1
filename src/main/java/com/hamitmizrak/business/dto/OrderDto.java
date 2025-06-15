@@ -32,6 +32,11 @@ public class OrderDto extends AuditingAwareBaseDto implements Serializable {
     @NotEmpty(message = "{order.code.validation.constraints.NotNull.message}")
     private String price;
 
+    // NOTES
+    @NotEmpty(message = "{order.notes.validation.constraints.NotNull.message}")
+    private String notes;
+
+
     //////////////////////////////////////////////////////////////////////////////////////
     // COMPOSITION
 

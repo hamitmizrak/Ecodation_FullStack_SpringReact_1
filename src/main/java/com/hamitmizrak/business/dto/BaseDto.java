@@ -1,16 +1,25 @@
 package com.hamitmizrak.business.dto;
 
 import com.hamitmizrak.audit.AuditingAwareBaseDto;
-import lombok.Getter;
-import lombok.Setter;
-
+import lombok.*;
+import java.io.Serializable;
 import java.util.Date;
+
 // LOMBOK
 @Getter
 @Setter
 
-public class BaseDto extends AuditingAwareBaseDto {
+// Serializable:
+// abstract: BaseDto instance(örnek) yapılmasını istemiyorum
+abstract public class BaseDto extends AuditingAwareBaseDto implements Serializable {
 
-    private Long id;
-    private Date systemCreatedDate;
-}
+    // SERILESTIRME
+    public static final Long serialVersionUID = 1L;
+
+    // FIELD
+    // ID
+    protected Long id;
+
+    // DATE
+    protected Date systemCreatedDate;
+} //end BaseDto

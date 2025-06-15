@@ -36,6 +36,9 @@ public class OrderEntity extends AuditingAwareBaseEntity {
     // LASTNAME
     private String price;
 
+    // NOTES
+    private String notes;
+
     // DATE
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
@@ -49,7 +52,7 @@ public class OrderEntity extends AuditingAwareBaseEntity {
     private CustomerEntity customerOrderEntity;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
+    @JoinTable(  // Eğer ManyToMany ilişkisi olan verilerimiz varsa 1 tane daha tabloya ihtiyacımız vardır
             name = "order_product",
             joinColumns = @JoinColumn(name="order_id"),
             inverseJoinColumns = @JoinColumn(name="product_id")

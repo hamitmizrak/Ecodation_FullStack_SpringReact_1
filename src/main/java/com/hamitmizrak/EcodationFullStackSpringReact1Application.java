@@ -3,6 +3,7 @@ package com.hamitmizrak;
 import jakarta.annotation.PostConstruct;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
@@ -35,7 +36,7 @@ import java.util.TimeZone;
         // Spring Security Dahil etme
         //SecurityAutoConfiguration.class,
         SecurityAutoConfiguration.class,
-        org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration.class
+        org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration.class,
 
         // JWT
         // Spring Security JWT kullanmak için exclude yapmamalıyız.......
@@ -44,7 +45,7 @@ import java.util.TimeZone;
 
         // REDIS
         // Eğer Redis bağımlılığını kaldırmak istemiyorsanız ancak Redis yapılandırmasını devre dışı bırakmak istiyorsanız
-        // RedisAutoConfiguration.class,
+         RedisAutoConfiguration.class,
 }
 )
 //@SpringBootApplication

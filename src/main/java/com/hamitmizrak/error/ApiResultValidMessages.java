@@ -1,4 +1,4 @@
-package com.hamitmizrak.config;
+package com.hamitmizrak.error;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -12,8 +12,11 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 import java.util.Locale;
 
+// src/resource/ValidationMessages.properties
+// ApiResultValidMessages : ValidationMessage'tan gelen verileri almak ve I18N için kullacağımız yapıdır.
+
 @Configuration
-public class ApiResultValidMessages  implements WebMvcConfigurer {
+public class ApiResultValidMessages implements WebMvcConfigurer {
 
     @Bean
     public MessageSource messageSource(){

@@ -4,9 +4,9 @@ import com.hamitmizrak.business.dto.AddressDto;
 import com.hamitmizrak.business.dto.CustomerDto;
 import com.hamitmizrak.business.dto.OrderDto;
 import com.hamitmizrak.business.dto.ProductDto;
-import com.hamitmizrak.business.services.IAddressService;
-import com.hamitmizrak.business.services.ICustomerService;
-import com.hamitmizrak.business.services.IOrderService;
+import com.hamitmizrak.business.services.interfaces.IAddressService;
+import com.hamitmizrak.business.services.interfaces.ICustomerService;
+import com.hamitmizrak.business.services.interfaces.IOrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.CommandLineRunner;
@@ -46,7 +46,7 @@ public class _1_ProjectDataSet implements CommandLineRunner {
             addressDto.setZipCode("zip code "+i);
             addressDto.setDoorNumber("door number "+i);
             addressDto.setAddressQrCode(UUID.randomUUID().toString());
-            iAddressService.addressServiceCreate(addressDto);
+            iAddressService.objectServiceCreate(addressDto);
             addressDtoList.add(addressDto);
         }
         return addressDtoList;
@@ -128,7 +128,7 @@ public class _1_ProjectDataSet implements CommandLineRunner {
         orderDto.setOrderProductDtoList(Arrays.asList(productSave()[0],productSave()[1]));
 
         // Database Kaydetmek
-        OrderDto orderDtoSaved = (OrderDto) iOrderService.orderServiceCreate(orderDto);
+        OrderDto orderDtoSaved = (OrderDto) iOrderService.objectServiceCreate(orderDto);
         System.out.println(orderDtoSaved);
         return orderDto;
     }

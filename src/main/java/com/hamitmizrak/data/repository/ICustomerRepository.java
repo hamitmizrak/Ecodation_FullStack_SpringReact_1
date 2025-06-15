@@ -9,8 +9,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ICustomerRepository extends JpaRepository<CustomerEntity, Long> {
-    // Delivered Query
+    // Delivered Query (Basit CRUD)
     // Named Query
     // JPQL
     // Native Query
-}
+
+} // end ICustomerRepository

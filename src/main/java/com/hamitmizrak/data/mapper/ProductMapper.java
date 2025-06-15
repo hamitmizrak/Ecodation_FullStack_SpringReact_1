@@ -1,4 +1,5 @@
-package com.hamitmizrak.business.mapper;
+package com.hamitmizrak.data.mapper;
+
 
 import com.hamitmizrak.business.dto.ProductDto;
 import com.hamitmizrak.data.entity.ProductEntity;
@@ -8,35 +9,32 @@ import java.util.stream.Collectors;
 
 public class ProductMapper {
 
-    // Customer Entity To Dto
-    public static ProductDto ProductEntityToDto(ProductEntity productEntity) {
-        // Instance (CustomerDto)
+    // 1- OrderEntity'i OrderDto'a çevir
+    public static ProductDto ProductEntityToProductDto(ProductEntity productEntity) {
+        // Instance(OrderDto)
         ProductDto productDto = new ProductDto();
 
-        // ID
+        // Field
         productDto.setId(productEntity.getId());
         productDto.setName(productEntity.getName());
         productDto.setCode(productEntity.getCode());
         return productDto;
     }
 
-    // Customer Dto To Entity
-    public static ProductEntity ProductDtoToEntity(ProductDto productDto) {
-        // Instance (CustomerDto)
+    // 2- OrderDto'u OrderEntity'e  çevir
+    public static ProductEntity ProductDtoToProductEntity(ProductDto productDto) {
+        // Instance(OrderEntity)
         ProductEntity productEntity = new ProductEntity();
 
-        // ID
+        // Field
         productEntity.setId(productDto.getId());
         productEntity.setName(productDto.getName());
         productEntity.setCode(productDto.getCode());
-
-        // DİKKAT: Composition (Order(N) - Product(M))
         return productEntity;
     }
 
-    // ProductDto'yu Listesi Product Entity Dönüştürmek
+    // 3- ProductDto nesnesini ProductEntity Listesine çevirmek
     public static List<ProductEntity> ProductDtoListToEntityList(List<ProductDto> productDtoList) {
-        // Her bir ProductDto Product Entity Dönüştür
-        return productDtoList.stream().map(ProductMapper::ProductDtoToEntity).collect(Collectors.toList());
+        return productDtoList.stream().map(ProductMapper::ProductDtoToProductEntity).collect(Collectors.toList());
     }
 }
