@@ -1,45 +1,50 @@
 package com.hamitmizrak.data.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
+import com.hamitmizrak.audit.AuditingAwareBaseEntity;
+import jakarta.persistence.*;
+import lombok.*;
+import lombok.extern.log4j.Log4j2;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.util.Date;
 import java.util.List;
 
 // LOMBOK
 @Getter
 @Setter
-//@ToString
-//@EqualsAndHashCode
-//@AllArgsConstructor
-//@NoArgsConstructor
-//@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Log4j2
 
-// Entity
-@Entity(name = "Products")
-@Table(name = "products")
+// ENTITY
+@Entity(name = "Products") // JPQL için kullanılacak varlıklar için özelleştirme için
+@Table(name = "product") // Database tablo adı
 
-//  Product(M)- Order(N)
-public class ProductEntity extends BaseEntity {
+// Product(N) - Order(M)
+public class ProductEntity extends AuditingAwareBaseEntity {
 
     // FIELD
-    // NAME
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    // FIRST NAME
     private String name;
 
-    // TRADE
-    private String trade;
+    // LASTNAME
+    private String code;
 
-    // NOTES
-    private String notes;
+    // DATE
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "system_created_date")
+    private Date systemCreatedDate;
 
-    ////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
     // RELATION
-    // COMPOSITION
+    @ManyToMany(mappedBy = "orderProductEntityList",fetch = FetchType.LAZY)
+    List<OrderEntity> productOrderEntityList;
 
-    // Product(M) - Order(N)
-    @ManyToMany(mappedBy = "productsOrdersEntity")
-    private List<OrderEntity> ordersProductsEntity;
+} //end  ProductEntity
 
-} //end CustomerEntity

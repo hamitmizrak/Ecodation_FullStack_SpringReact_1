@@ -1,17 +1,13 @@
 package com.hamitmizrak.business.services.impl;
 
-
 import com.hamitmizrak.bean.ModelMapperBean;
 import com.hamitmizrak.business.dto.OrderDto;
-import com.hamitmizrak.business.services.interfaces.IOrderService;
+import com.hamitmizrak.business.mapper.OrderMapper;
+import com.hamitmizrak.business.services.IOrderService;
 import com.hamitmizrak.data.entity.OrderEntity;
-import com.hamitmizrak.data.mapper.OrderMapper;
 import com.hamitmizrak.data.repository.IOrderRepository;
 import com.hamitmizrak.exception._404_NotFoundException;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,98 +15,88 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 // LOMBOK
-@Getter
-@Setter
-//@ToString
-//@EqualsAndHashCode
-//@AllArgsConstructor
-//@NoArgsConstructor
-//@Builder
-@RequiredArgsConstructor
-@Log4j2
+@RequiredArgsConstructor // for injection
 
-//Service:  Asıl İş Yükünü yapan bean
+// Asıl iş yükünü yapan Bean
 @Service
 public class OrderServiceImpl implements IOrderService<OrderDto, OrderEntity> {
 
-    // INJECTION
+
+    // LOMBOK CONSTRUCTOR INJECTION
     private final IOrderRepository iOrderRepository;
     private final ModelMapperBean modelMapperBean;
 
-    // Model Mapper
+    // MODEL MAPPER
     @Override
-    public OrderDto entityToDto(OrderEntity orderEntity) {
-        // 1.YOL (ModelMapper)
-        /*return modelMapperBean.getModelMapperBeanMethod().map(orderEntity, OrderDto.class);*/
+    public OrderDto entityOrderToDto(OrderEntity orderEntity) {
 
-        // 2.YOL (Mapper Special)
-        return OrderMapper.OrderEntityToOrderDto(orderEntity);
+        // 1.YOL
+        // return modelMapperBean.getModelMapper().map(orderEntity, orderDto.class);
+
+        // 2.YOL
+        return OrderMapper.OrderEntityToDto(orderEntity);
     }
 
     @Override
-    public OrderEntity dtoToEntity(OrderDto orderDto) {
-        // 1.YOL (ModelMapper)
-        // return modelMapperBean.getModelMapperBeanMethod().map(orderDto, OrderEntity.class);
+    public OrderEntity dtoOrderToEntity(OrderDto orderDto) {
+        // 1.YOL
+        // return modelMapperBean.getModelMapper().map(orderDto, orderEntity.class);
 
-        // 2.YOL (Mapper Special)
-        return OrderMapper.OrderDtoToOrderEntity(orderDto);
+        //  2.YOL
+        return OrderMapper.OrderDtoToEntity(orderDto);
     }
 
-    ////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
     // CRUD
-
-    // CREATE (Order)
-    // org.springframework.transaction
-    @Transactional //(propagation = ) // () // create, delete, update yani manipulation işlemlerin
+    // CREATE
+    @Transactional // create, delete, update (manipulation)
     @Override
-    public OrderDto objectServiceCreate(OrderDto orderDto) {
-        OrderEntity orderEntityCreate =dtoToEntity(orderDto);
-        // Not: Kayıt veya güncellemede ID içini set eder
-        orderEntityCreate= iOrderRepository.save(orderEntityCreate);
-        return entityToDto(orderEntityCreate);
+    public OrderDto orderServiceCreate(OrderDto orderDto) {
+        OrderEntity orderEntityCreate = dtoOrderToEntity(orderDto);
+        orderEntityCreate = iOrderRepository.save(orderEntityCreate);
+        return entityOrderToDto(orderEntityCreate);
     }
 
-    // LIST (Order)
+    // LIST
     @Override
-    public List<OrderDto> objectServiceList() {
-        List<OrderEntity> orderEntities = iOrderRepository.findAll();
-        return orderEntities.stream()
-                //.sorted(Comparator.comparing((temp)-> temp.getName))
-                //.map((temp)->OrderMapper.OrderEntityToOrderDto(temp)) // 1.YOL (Lambda Expression)
-                .map(OrderMapper::OrderEntityToOrderDto)                // 2.YOL (Method Referances)
+    public List<OrderDto> orderServiceList() {
+        return iOrderRepository.findAll()
+                .stream()
+                //.map(orderMapper::orderEntityToDto)// 1.YOL Method Referance
+                .map((temp) -> OrderMapper.OrderEntityToDto(temp))// 2.YOL Lambda Expression
                 .collect(Collectors.toList());
     }
 
-    // FIND BY ID (Order)
+    // FIND BY ID
     @Override
-    public OrderDto objectServiceFindById(Long id) {
+    public OrderDto orderServiceFindById(Long id) {
         return iOrderRepository.findById(id)
-                .map(OrderMapper::OrderEntityToOrderDto)
-                .orElseThrow(()-> new _404_NotFoundException(id+" nolu veri yoktur"));
+                .map(OrderMapper::OrderEntityToDto)// 1.YOL Method Referance
+                //.map((temp)->orderMapper.orderEntityToDto(temp))// 2.YOL Lambda Expression
+                .orElseThrow(() -> new _404_NotFoundException(id + " nolu order yoktur"));
     }
 
     // UPDATE
-    @Transactional // create, delete, update yani manipulation işlemlerin
+    @Transactional // create, delete, update (manipulation)
     @Override
-    public OrderDto objectServiceUpdate(Long id, OrderDto orderDto) {
-        // Öncelikle ilgili Adresi bulalım
-        OrderEntity orderEntityFindByUpdate= dtoToEntity(objectServiceFindById(id));
+    public OrderDto orderServiceUpdate(Long id, OrderDto orderDto) {
+        // ID Varsa
+        OrderEntity orderEntityUpdate = dtoOrderToEntity(orderServiceFindById(id));
 
-        orderEntityFindByUpdate.setName(orderDto.getName());
-        orderEntityFindByUpdate.setPrice(orderDto.getPrice());
-        orderEntityFindByUpdate.setNotes(orderDto.getNotes());
-
-        //return entityToDto(iOrderRepository.save(orderEntityFindByUpdate));         // 1.YOL
-        return entityToDto(iOrderRepository.saveAndFlush(orderEntityFindByUpdate));   // 2.YOL
+        // Embeddable
+        orderEntityUpdate.setName(orderDto.getName());
+        orderEntityUpdate.setPrice(orderDto.getPrice());
+        orderEntityUpdate = iOrderRepository.saveAndFlush(orderEntityUpdate);
+        return entityOrderToDto(orderEntityUpdate);
     }
 
     // DELETE
-    @Transactional // create, delete, update yani manipulation işlemlerin
+    @Transactional // create, delete, update (manipulation)
     @Override
-    public OrderDto objectServiceDelete(Long id) {
-        // Öncelikle ilgili Adresi bulalım
-        OrderEntity orderEntityFindByDelete= dtoToEntity(objectServiceFindById(id));
-        iOrderRepository.delete(orderEntityFindByDelete);
-        return entityToDto(orderEntityFindByDelete);
+    public OrderDto orderServiceDeleteById(Long id) {
+        // ID Varsa
+        OrderEntity orderEntityDelete = dtoOrderToEntity(orderServiceFindById(id));
+        iOrderRepository.delete(orderEntityDelete);
+        return entityOrderToDto(orderEntityDelete);
     }
-} //end OrdererviceImpl
+}

@@ -1,18 +1,13 @@
 package com.hamitmizrak.business.services.impl;
 
-
-
 import com.hamitmizrak.bean.ModelMapperBean;
 import com.hamitmizrak.business.dto.CustomerDto;
-import com.hamitmizrak.business.services.interfaces.ICustomerService;
+import com.hamitmizrak.business.mapper.CustomerMapper;
+import com.hamitmizrak.business.services.ICustomerService;
 import com.hamitmizrak.data.entity.CustomerEntity;
-import com.hamitmizrak.data.mapper.CustomerMapper;
 import com.hamitmizrak.data.repository.ICustomerRepository;
 import com.hamitmizrak.exception._404_NotFoundException;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,98 +15,87 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 // LOMBOK
-@Getter
-@Setter
-//@ToString
-//@EqualsAndHashCode
-//@AllArgsConstructor
-//@NoArgsConstructor
-//@Builder
-@RequiredArgsConstructor
-@Log4j2
+@RequiredArgsConstructor // for injection
 
-//Service:  Asıl İş Yükünü yapan bean
+// Asıl iş yükünü yapan Bean
 @Service
 public class CustomerServiceImpl implements ICustomerService<CustomerDto, CustomerEntity> {
 
-    // INJECTION
+
+    // LOMBOK CONSTRUCTOR INJECTION
     private final ICustomerRepository iCustomerRepository;
     private final ModelMapperBean modelMapperBean;
 
-    // Model Mapper
+    // MODEL MAPPER
     @Override
-    public CustomerDto entityToDto(CustomerEntity customerEntity) {
-        // 1.YOL (ModelMapper)
-        /*return modelMapperBean.getModelMapperBeanMethod().map(customerEntity, CustomerDto.class);*/
+    public CustomerDto entityCustomerToDto(CustomerEntity customerEntity) {
 
-        // 2.YOL (Mapper Special)
-        return CustomerMapper.CustomerEntityToCustomerDto(customerEntity);
+        // 1.YOL
+        // return modelMapperBean.getModelMapper().map(customerEntity, CustomerDto.class);
+
+        // 2.YOL
+        return CustomerMapper.CustomerEntityToDto(customerEntity);
     }
 
     @Override
-    public CustomerEntity dtoToEntity(CustomerDto customerDto) {
-        // 1.YOL (ModelMapper)
-        // return modelMapperBean.getModelMapperBeanMethod().map(customerDto, CustomerEntity.class);
+    public CustomerEntity dtoCustomerToEntity(CustomerDto customerDto) {
+        // 1.YOL
+        // return modelMapperBean.getModelMapper().map(customerDto, CustomerEntity.class);
 
-        // 2.YOL (Mapper Special)
-        return CustomerMapper.CustomerDtoToCustomerEntity(customerDto);
+        //  2.YOL
+        return CustomerMapper.CustomerDtoToEntity(customerDto);
     }
 
-    ////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
     // CRUD
-
-    // CREATE (Customer)
-    // org.springframework.transaction
-    @Transactional //(propagation = ) // () // create, delete, update yani manipulation işlemlerin
+    // CREATE
+    @Transactional // create, delete, update (manipulation)
     @Override
-    public CustomerDto objectServiceCreate(CustomerDto customerDto) {
-        CustomerEntity customerEntityCreate =dtoToEntity(customerDto);
-        // Not: Kayıt veya güncellemede ID içini set eder
-        customerEntityCreate= iCustomerRepository.save(customerEntityCreate);
-        return entityToDto(customerEntityCreate);
+    public CustomerDto customerServiceCreate(CustomerDto customerDto) {
+        CustomerEntity customerEntityCreate = dtoCustomerToEntity(customerDto);
+        customerEntityCreate = iCustomerRepository.save(customerEntityCreate);
+        return entityCustomerToDto(customerEntityCreate);
     }
 
-    // LIST (Customer)
+    // LIST
     @Override
-    public List<CustomerDto> objectServiceList() {
-        List<CustomerEntity> customerEntities = iCustomerRepository.findAll();
-        return customerEntities.stream()
-                //.sorted(Comparator.comparing((temp)-> temp.getName()))
-                //.map((temp)->CustomerMapper.CustomerEntityToCustomerDto(temp)) // 1.YOL (Lambda Expression)
-                .map(CustomerMapper::CustomerEntityToCustomerDto)                // 2.YOL (Method Referances)
+    public List<CustomerDto> customerServiceList() {
+        return iCustomerRepository.findAll()
+                .stream()
+                //.map(CustomerMapper::CustomerEntityToDto)// 1.YOL Method Referance
+                .map((temp) -> CustomerMapper.CustomerEntityToDto(temp))// 2.YOL Lambda Expression
                 .collect(Collectors.toList());
     }
 
-    // FIND BY ID (Customer)
+    // FIND BY ID
     @Override
-    public CustomerDto objectServiceFindById(Long id) {
+    public CustomerDto customerServiceFindById(Long id) {
         return iCustomerRepository.findById(id)
-                .map(CustomerMapper::CustomerEntityToCustomerDto)
-                .orElseThrow(()-> new _404_NotFoundException(id+" nolu veri yoktur"));
+                .map(CustomerMapper::CustomerEntityToDto)// 1.YOL Method Referance
+                //.map((temp)->customerMapper.customerEntityToDto(temp))// 2.YOL Lambda Expression
+                .orElseThrow(() -> new _404_NotFoundException(id + " nolu customer yoktur"));
     }
 
     // UPDATE
-    @Transactional // create, delete, update yani manipulation işlemlerin
+    @Transactional // create, delete, update (manipulation)
     @Override
-    public CustomerDto objectServiceUpdate(Long id, CustomerDto customerDto) {
-        // Öncelikle ilgili Adresi bulalım
-        CustomerEntity customerEntityFindByUpdate= dtoToEntity(objectServiceFindById(id));
-
-        customerEntityFindByUpdate.setFistname(customerDto.getFistname());
-        customerEntityFindByUpdate.setLastname(customerDto.getLastname());
-        customerEntityFindByUpdate.setNotes(customerDto.getNotes());
-
-        //return entityToDto(iCustomerRepository.save(customerEntityFindByUpdate));         // 1.YOL
-        return entityToDto(iCustomerRepository.saveAndFlush(customerEntityFindByUpdate));   // 2.YOL
+    public CustomerDto customerServiceUpdate(Long id, CustomerDto customerDto) {
+        // ID Varsa
+        CustomerEntity customerEntityUpdate = dtoCustomerToEntity(customerServiceFindById(id));
+        customerEntityUpdate.setFirstName(customerDto.getFirstName());
+        customerEntityUpdate.setLastName(customerDto.getLastName());
+        customerEntityUpdate.setNotes(customerDto.getNotes());
+        customerEntityUpdate = iCustomerRepository.saveAndFlush(customerEntityUpdate);
+        return entityCustomerToDto(customerEntityUpdate);
     }
 
     // DELETE
-    @Transactional // create, delete, update yani manipulation işlemlerin
+    @Transactional // create, delete, update (manipulation)
     @Override
-    public CustomerDto objectServiceDelete(Long id) {
-        // Öncelikle ilgili Adresi bulalım
-        CustomerEntity customerEntityFindByDelete= dtoToEntity(objectServiceFindById(id));
-        iCustomerRepository.delete(customerEntityFindByDelete);
-        return entityToDto(customerEntityFindByDelete);
+    public CustomerDto customerServiceDeleteById(Long id) {
+        // ID Varsa
+        CustomerEntity customerEntityDelete = dtoCustomerToEntity(customerServiceFindById(id));
+        iCustomerRepository.delete(customerEntityDelete);
+        return entityCustomerToDto(customerEntityDelete);
     }
-} //end CustomererviceImpl
+}

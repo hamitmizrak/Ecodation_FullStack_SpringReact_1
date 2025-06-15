@@ -1,33 +1,38 @@
 package com.hamitmizrak.business.dto;
 
+import com.hamitmizrak.audit.AuditingAwareBaseDto;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
+import lombok.extern.log4j.Log4j2;
+
+import java.io.Serializable;
 
 // LOMBOK
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
+@Log4j2
 
-//  Product(M)- Order(N)
-public class ProductDto extends BaseDto {
+// Product(N) - Order(M)
+public class ProductDto extends AuditingAwareBaseDto implements Serializable {
 
-    // NAME
+    // SERILEŞTIRME
+    public static final Long serialVersionUID = 1L;
+
+    // FIELD
+    private Long id;
+
     @NotEmpty(message = "{product.name.validation.constraints.NotNull.message}")
     private String name;
 
-    // TRADE
-    @NotEmpty(message = "{product.price.validation.constraints.NotNull.message}")
-    private String trade;
+    @NotEmpty(message = "{product.code.validation.constraints.NotNull.message}")
+    private String code;
 
-    // NOTES
-    @NotEmpty(message = "{product.notes.validation.constraints.NotNull.message}")
-    private String notes;
-
-    ////////////////////////////////////////////////////////////////////////////
-    // RELATION
+    //////////////////////////////////////////////////////////////////////////////////////
     // COMPOSITION
 
-} // end CustomerDto
+    // RELATION
 
+} //end class CustomerDto

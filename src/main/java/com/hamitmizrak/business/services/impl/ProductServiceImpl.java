@@ -1,18 +1,13 @@
 package com.hamitmizrak.business.services.impl;
 
-
-
 import com.hamitmizrak.bean.ModelMapperBean;
 import com.hamitmizrak.business.dto.ProductDto;
-import com.hamitmizrak.business.services.interfaces.IProductService;
+import com.hamitmizrak.business.mapper.ProductMapper;
+import com.hamitmizrak.business.services.IProductService;
 import com.hamitmizrak.data.entity.ProductEntity;
-import com.hamitmizrak.data.mapper.ProductMapper;
 import com.hamitmizrak.data.repository.IProductRepository;
 import com.hamitmizrak.exception._404_NotFoundException;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,98 +15,88 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 // LOMBOK
-@Getter
-@Setter
-//@ToString
-//@EqualsAndHashCode
-//@AllArgsConstructor
-//@NoArgsConstructor
-//@Builder
-@RequiredArgsConstructor
-@Log4j2
+@RequiredArgsConstructor // for injection
 
-//Service:  Asıl İş Yükünü yapan bean
+// Asıl iş yükünü yapan Bean
 @Service
 public class ProductServiceImpl implements IProductService<ProductDto, ProductEntity> {
 
-    // INJECTION
+
+    // LOMBOK CONSTRUCTOR INJECTION
     private final IProductRepository iProductRepository;
     private final ModelMapperBean modelMapperBean;
 
-    // Model Mapper
+    // MODEL MAPPER
     @Override
-    public ProductDto entityToDto(ProductEntity productEntity) {
-        // 1.YOL (ModelMapper)
-        /*return modelMapperBean.getModelMapperBeanMethod().map(productEntity, ProductDto.class);*/
+    public ProductDto entityProductToDto(ProductEntity productEntity) {
 
-        // 2.YOL (Mapper Special)
-        return ProductMapper.ProductEntityToProductDto(productEntity);
+        // 1.YOL
+        // return modelMapperBean.getModelMapper().map(productEntity, ProductDto.class);
+
+        // 2.YOL
+        return ProductMapper.ProductEntityToDto(productEntity);
     }
 
     @Override
-    public ProductEntity dtoToEntity(ProductDto productDto) {
-        // 1.YOL (ModelMapper)
-        // return modelMapperBean.getModelMapperBeanMethod().map(productDto, ProductEntity.class);
+    public ProductEntity dtoProductToEntity(ProductDto productDto) {
+        // 1.YOL
+        // return modelMapperBean.getModelMapper().map(productDto, ProductEntity.class);
 
-        // 2.YOL (Mapper Special)
-        return ProductMapper.ProductDtoToProductEntity(productDto);
+        //  2.YOL
+        return ProductMapper.ProductDtoToEntity(productDto);
     }
 
-    ////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
     // CRUD
-
-    // CREATE (product)
-    // org.springframework.transaction
-    @Transactional //(propagation = ) // () // create, delete, update yani manipulation işlemlerin
+    // CREATE
+    @Transactional // create, delete, update (manipulation)
     @Override
-    public ProductDto objectServiceCreate(ProductDto productDto) {
-        ProductEntity productEntityCreate =dtoToEntity(productDto);
-        // Not: Kayıt veya güncellemede ID içini set eder
-        productEntityCreate= iProductRepository.save(productEntityCreate);
-        return entityToDto(productEntityCreate);
+    public ProductDto productServiceCreate(ProductDto productDto) {
+        ProductEntity productEntityCreate = dtoProductToEntity(productDto);
+        productEntityCreate = iProductRepository.save(productEntityCreate);
+        return entityProductToDto(productEntityCreate);
     }
 
-    // LIST (product)
+    // LIST
     @Override
-    public List<ProductDto> objectServiceList() {
-        List<ProductEntity> productEntities = iProductRepository.findAll();
-        return productEntities.stream()
-                //.sorted(Comparator.comparing((temp)-> temp.getName))
-                //.map((temp)->ProductMapper.ProductEntityToProductDto(temp)) // 1.YOL (Lambda Expression)
-                .map(ProductMapper::ProductEntityToProductDto)                // 2.YOL (Method Referances)
+    public List<ProductDto> productServiceList() {
+        return iProductRepository.findAll()
+                .stream()
+                //.map(ProductMapper::ProductEntityToDto)// 1.YOL Method Referance
+                .map((temp) -> ProductMapper.ProductEntityToDto(temp))// 2.YOL Lambda Expression
                 .collect(Collectors.toList());
     }
 
-    // FIND BY ID (product)
+    // FIND BY ID
     @Override
-    public ProductDto objectServiceFindById(Long id) {
+    public ProductDto productServiceFindById(Long id) {
         return iProductRepository.findById(id)
-                .map(ProductMapper::ProductEntityToProductDto)
-                .orElseThrow(()-> new _404_NotFoundException(id+" nolu veri yoktur"));
+                .map(ProductMapper::ProductEntityToDto)// 1.YOL Method Referance
+                //.map((temp)->ProductMapper.ProductEntityToDto(temp))// 2.YOL Lambda Expression
+                .orElseThrow(() -> new _404_NotFoundException(id + " nolu product yoktur"));
     }
 
     // UPDATE
-    @Transactional // create, delete, update yani manipulation işlemlerin
+    @Transactional // create, delete, update (manipulation)
     @Override
-    public ProductDto objectServiceUpdate(Long id, ProductDto productDto) {
-        // Öncelikle ilgili Adresi bulalım
-        ProductEntity productEntityFindByUpdate= dtoToEntity(objectServiceFindById(id));
+    public ProductDto productServiceUpdate(Long id, ProductDto productDto) {
+        // ID Varsa
+        ProductEntity productEntityUpdate = dtoProductToEntity(productServiceFindById(id));
 
-        productEntityFindByUpdate.setName(productDto.getName());
-        productEntityFindByUpdate.setTrade(productDto.getTrade());
-        productEntityFindByUpdate.setNotes(productDto.getNotes());
-
-        //return entityToDto(iProductRepository.save(productEntityFindByUpdate));         // 1.YOL
-        return entityToDto(iProductRepository.saveAndFlush(productEntityFindByUpdate));   // 2.YOL
+        // Embeddable
+        productEntityUpdate.setName(productDto.getName());
+        productEntityUpdate.setCode(productDto.getCode());
+        productEntityUpdate = iProductRepository.saveAndFlush(productEntityUpdate);
+        return  entityProductToDto(productEntityUpdate);
     }
 
     // DELETE
-    @Transactional // create, delete, update yani manipulation işlemlerin
+    @Transactional // create, delete, update (manipulation)
     @Override
-    public ProductDto objectServiceDelete(Long id) {
-        // Öncelikle ilgili Adresi bulalım
-        ProductEntity productEntityFindByDelete= dtoToEntity(objectServiceFindById(id));
-        iProductRepository.delete(productEntityFindByDelete);
-        return entityToDto(productEntityFindByDelete);
+    public ProductDto productServiceDeleteById(Long id) {
+        // ID Varsa
+        ProductEntity productEntityDelete = dtoProductToEntity(productServiceFindById(id));
+        iProductRepository.delete(productEntityDelete);
+        return entityProductToDto(productEntityDelete);
     }
-} //end ProducterviceImpl
+}

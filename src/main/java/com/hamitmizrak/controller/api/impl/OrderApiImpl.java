@@ -1,16 +1,12 @@
 package com.hamitmizrak.controller.api.impl;
 
-
-
 import com.hamitmizrak.business.dto.OrderDto;
-import com.hamitmizrak.business.services.interfaces.IOrderService;
-import com.hamitmizrak.controller.api.interfaces.IOrderApi;
+import com.hamitmizrak.business.services.IOrderService;
+import com.hamitmizrak.controller.api.IOrderApi;
 import com.hamitmizrak.error.ApiResult;
 import com.hamitmizrak.exception._400_BadRequestException;
-import com.hamitmizrak.utily.FrontEnd;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
@@ -19,95 +15,98 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+// 1xx: Information
+// 2xx: Success
+// 3xx: Direction
+// 4xx: Client Error
+// 5xx: Server Error
+
 // LOMBOK
 @RequiredArgsConstructor
-@Log4j2
 
-// Api: Dış dünyaya açılan kapı
+// API: Dış dünyaya açılan kapı
 @RestController
-@RequestMapping("/api/order/v1.0.0")
-// @CrossOrigin
-// @CrossOrigin(origins = "http://localhost:4000")
-@CrossOrigin(origins = {FrontEnd.REACT_URL, FrontEnd.ANGULAR_URL})
+@CrossOrigin // Backendten giden veriyi yakalacak frontend için farklı portlara izin vermek
+@RequestMapping("/api/order")
 public class OrderApiImpl implements IOrderApi<OrderDto> {
 
-    // Injection
+    // INJECTION
     private final IOrderService iOrderService;
     private final MessageSource messageSource;
 
-    // ApiResult Instance
+    // Api Result
     private ApiResult apiResult;
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////
-    // CRUD
-
-    // CREATE
-    // http://localhost:4444/api/order/v1.0.0/create
+    // http://localhost:4444/api/order/create
+    // CREATE (order)
     @PostMapping("/create")
     @Override
-    public ResponseEntity<?> objectApiCreate(@Valid @RequestBody OrderDto orderDto) {
-        OrderDto orderDtoCreate= (OrderDto) iOrderService.objectServiceCreate(orderDto);
-        // return ResponseEntity.status(201).body(orderDtoCreate); //1.YOL
-        // return ResponseEntity.status(HttpStatus.CREATED).body(orderDtoCreate); //2.YOL
-        // return new ResponseEntity<>(orderDtoCreate,HttpStatus.CREATED); //3.YOL
-        // return  ResponseEntity.ok().body(orderDtoCreate); //4.YOL
-        return  ResponseEntity.ok(orderDtoCreate); //5.YOL
+    public ResponseEntity<?> orderApiCreate(@Valid @RequestBody OrderDto orderDto) {
+        OrderDto orderDtoCreate = (OrderDto) iOrderService.orderServiceCreate(orderDto);
+        // return ResponseEntity.status(200).body(OrderDtoCreate);
+        // return ResponseEntity.status(HttpStatus.OK).body(OrderDtoCreate);
+        // return new ResponseEntity<>(OrderDtoCreate, HttpStatus.CREATED);
+        // return ResponseEntity.ok().body(OrderDtoCreate);
+        return ResponseEntity.ok(orderDtoCreate);
     }
 
+    // http://localhost:4444/api/order/list
     // LIST
-    // http://localhost:4444/api/order/v1.0.0/list
     @GetMapping(value = "/list")
     @Override
-    public ResponseEntity<List<OrderDto>> objectApiList() {
-        List<OrderDto> orderDtoList = iOrderService.objectServiceList();
-        // Stream Value
+    public ResponseEntity<List<OrderDto>> orderApiList() {
+        List<OrderDto> orderDtoList = iOrderService.orderServiceList();
+        // Stream
         return ResponseEntity.ok(orderDtoList);
     }
 
-    // FIND BY ID
-    // http://localhost:4444/api/order/v1.0.0/find
-    // http://localhost:4444/api/order/v1.0.0/find/0
-    // http://localhost:4444/api/order/v1.0.0/find/-1
-    // http://localhost:4444/api/order/v1.0.0/find/%20%    boşluk:%20%
-    // http://localhost:4444/api/order/v1.0.0/find/1
-    @GetMapping({"/find/","/find/{id}"})
+    // http://localhost:4444/api/order/find
+    // http://localhost:4444/api/order/find/0
+    // http://localhost:4444/api/order/find/-1
+    // http://localhost:4444/api/order/find/%20%
+    // http://localhost:4444/api/order/find/44
+    // @PathVariable Long id
+    // @PathVariable(name="id") Long id, @PathVariable(name="id") Long id
+    // FIND
+    @GetMapping(value ={"/find/", "/find/{id}"})
     @Override
-    public ResponseEntity<?> objectApiFindById(@PathVariable(name="id",required = false) Long id) { //NOT: @PathVariable sadece yazabiliriz
-        String message="";
-        if(id ==null){
-            throw new NullPointerException("Null Pointer Exception: Null değer");
-        }else if(id==0){
-            throw new _400_BadRequestException("Bad Request Exception: Kötü istek");
-        } else if(id<0){
-            // Config ApiResultValidationMessage
-            // resource/ValidationMessages/ValidationMessages.properties => error.unauthorized
-            message= messageSource.getMessage("error.unauthorized",null, LocaleContextHolder.getLocale());
-            apiResult= new ApiResult();
+    public ResponseEntity<?> orderApiFindById(@PathVariable(name = "id", required = false) Long id) {
+       String message="";
+        if (id == null) {
+            throw new NullPointerException("Null Pointer Exception");
+        } else if (id == 0) {
+            throw new _400_BadRequestException("Bad Request: Kötü istek");
+        } else if (id < 0) {
+            // config > ApiResultValidMessages
+            message=messageSource.getMessage("error.unauthorized",null, LocaleContextHolder.getLocale());
+            apiResult = new ApiResult();
             apiResult.setError("unAuthorized: Yetkisiz Giriş");
-            apiResult.setPath("/api/order/v1.0.0/find");
+            apiResult.setPath("/api/order/find");
             apiResult.setStatus(HttpStatus.UNAUTHORIZED.value());
             apiResult.setMessage(message);
             return ResponseEntity.ok(apiResult);
         }
-        // order Find By Id
-        OrderDto orderDtoFind= (OrderDto) iOrderService.objectServiceFindById(id);
-        return ResponseEntity.ok(orderDtoFind);
+
+        // Yukarıdakilerden herhangi bir sıkıntı söz konusu değilse
+        OrderDto OrderDtoFind = (OrderDto) iOrderService.orderServiceFindById(id);
+        return ResponseEntity.ok(OrderDtoFind);
     }
 
+    // http://localhost:4444/api/order/update/id
     // UPDATE
-    // http://localhost:4444/api/order/v1.0.0/update/1
-    @PutMapping({"/update/","/update/{id}"})
+    @PutMapping(value ={"/update/", "/update/{id}"})
     @Override
-    public ResponseEntity<?> objectApiUpdate(@PathVariable(name = "id",required = false)  Long id, @Valid @RequestBody OrderDto orderDto) {
-        return ResponseEntity.ok(iOrderService.objectServiceUpdate(id, orderDto));
+    public ResponseEntity<?> orderApiUpdate(
+            @PathVariable(name = "id", required = false) Long id,
+            @Valid @RequestBody OrderDto orderDto) {
+        return  ResponseEntity.ok(iOrderService.orderServiceUpdate(id, orderDto));
     }
 
-    // DELETE
-    // http://localhost:4444/api/order/v1.0.0/delete/1
-    @DeleteMapping({"/delete/","/delete/{id}"})
+    // http://localhost:4444/api/order/delete/id
+    // DELETE BY ID
+    @DeleteMapping(value ={"/delete/", "/delete/{id}"})
     @Override
-    public ResponseEntity<?> objectApiDelete(@PathVariable(name = "id",required = false) Long id) {
-        return ResponseEntity.ok(iOrderService.objectServiceDelete(id));
+    public ResponseEntity<?> orderApiDeleteById(@PathVariable(name = "id", required = false)  Long id) {
+        return ResponseEntity.ok(iOrderService.orderServiceDeleteById(id));
     }
-
-} //end OrderApiImpl
+} //end orderApiImpl

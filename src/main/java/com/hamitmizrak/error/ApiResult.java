@@ -1,49 +1,48 @@
 package com.hamitmizrak.error;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 
 import java.util.Date;
 import java.util.Map;
 
 // LOMBOK
-@Getter
-@Setter
-@ToString
-@AllArgsConstructor
+@Data
 @Builder
+@AllArgsConstructor
 
-// Spring Framuworkun Error mekanizması yerine bizim yazdığımız hata yakalama mekanizmasıdır
-// Jackson: Objeyi , Json'a çevirmek
-// @JsonInclude(JsonInclude.Include.NON_NULL): Eğer ApiResultta null değer varsa backent'te gönder
+// spring Frameworkta gelen Error'ları kendimize göre yakalamak
+// (Jackson: objeyi json'a çevirir)
+// Eğer sistemde null değer varsa backentte gönderme
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ApiResult {
 
     // sem pvc
-    private int status;
-    private String error;
-    private String message;
     private String path;
-    private Map<String,Object> validationErrors;
-    private Date createdDate = new Date(System.currentTimeMillis());
+    private String message;
+    private String error;
+    private Integer status;
+    private Date createdDate=new Date(System.currentTimeMillis());
+    private Map<String,String> validationErrors;
 
-    // Constructor Parametresiz
+    // parametresiz constructor
     public ApiResult() {
     }
 
-    // Constructor (Parametreli)  pmes
-    public ApiResult(String path, String message, String error, int status) {
+    // parametreli constructor pms
+    public ApiResult(String path, String message, Integer status) {
+        this.path = path;
+        this.message = message;
+        this.status = status;
+    }
+
+    // parametreli constructor pmes
+    public ApiResult(String path, String message, String error, Integer status) {
         this.path = path;
         this.message = message;
         this.error = error;
         this.status = status;
     }
-
-    // Constructor (Parametreli)  pms
-    public ApiResult(String path, String message, int status) {
-        this.path = path;
-        this.message = message;
-        this.status = status;
-    }
-
-} //end Class ApiResult
+} //end class
