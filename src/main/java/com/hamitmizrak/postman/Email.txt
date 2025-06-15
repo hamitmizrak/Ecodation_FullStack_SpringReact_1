@@ -1,0 +1,23 @@
+{
+  "createdUser": "string",
+  "createdDate": "2023-12-09T10:52:34.544Z",
+  "lastUser": "string",
+  "lastDate": "2023-12-09T10:52:34.544Z",
+  "id": 0,
+  "systemCreatedDate": "2023-12-09T10:52:34.544Z",
+  "emailTo": "denememalatya4444@gmail.com",
+  "emailFrom": "denememalatya4444@gmail.com",
+  "emailSubject": "konu",
+  "emailText": "text",
+  "emailCc": "denememalatya4444@gmail.com",
+  "emailCcArray": [
+    "denememalatya4444@gmail.com"
+  ],
+  "emailBcc": "denememalatya4444@gmail.com",
+  "emailBccArray": [
+    "denememalatya4444@gmail.com"
+  ],
+  "image": "string",
+  "sentDate": "2023-12-09T10:52:34.544Z",
+  "url": "string"
+}

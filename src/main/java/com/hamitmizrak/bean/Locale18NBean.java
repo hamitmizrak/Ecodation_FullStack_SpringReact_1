@@ -30,7 +30,11 @@ public class Locale18NBean extends AcceptHeaderLocaleResolver {
     }
 
     // LIST
-    List<Locale> localeList = Arrays.asList(new Locale("tr"), new Locale("en"), new Locale("ge"));
+    List<Locale> localeList = Arrays.asList(
+            new Locale("tr"),
+            new Locale("en"),
+            new Locale("ge")
+    );
 
     // ResolveLocale
     @Override

@@ -1,7 +1,5 @@
 package com.hamitmizrak.audit;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
@@ -14,43 +12,47 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serializable;
-import java.util.Date;
 
 // LOMBOK
-@Getter
 @Setter
+@Getter
 
-// AUDITING
+// ENTITY SUPER CLASS
+@MappedSuperclass
+
+// AUDITING ÇALIŞMASI İÇİN
 @EntityListeners(AuditingEntityListener.class)
 
-// SUPER CLASS
-@MappedSuperclass
-@JsonIgnoreProperties(value = {"created_date","last_user_date"},allowGetters = true)  // Backend'ten Frontend'e bu veriler gitmesin
-abstract public class AuditingAwareBaseEntity implements Serializable {
+// Backtend'ten Frontend'e Verilerin görünmemesi için:
+// @JsonIgnoreProperties(value = {"created_date","last_modified_date"},allowGetters = true)
+abstract  public class AuditingAwareBaseEntity implements Serializable {
 
     // SERILEŞTIRME
     public static final Long serialVersionUID = 1L;
 
-    // Kim Ekledi
+    // AUDITING
+    // Kim ekledi
     @CreatedBy
-    @Column(name = "created_by")
-    @JsonIgnore
-    private String createdBy;
+    @Column(name="created_by")
+    //@JsonIgnore // Backentend'ten Frontend'e veri gönderme
+    protected String createdBy;
 
-    // Kim Ne zaman Ekledi
+    // Kim ne zaman ekledi
     @CreatedDate
-    @Column(name = "created_date")
-    private Date createdDate;
+    @Column(name="created_date")
+    //@JsonIgnore // Backentend'ten Frontend'e veri gönderme
+    protected String createdDate;
 
-    // Kim Güncelledi
+    // Kim güncelledi
     @LastModifiedBy
-    @Column(name = "last_user_by")
-    @JsonIgnore
-    private String lastUserBy;
+    @Column(name="last_modified_by")
+    //@JsonIgnore // Backentend'ten Frontend'e veri gönderme
+    protected String lastModifiedBy;
 
-    // Kim Ne Zaman Güncelledi
+    // Kim ne zaman güncelledi
     @LastModifiedDate
-    @Column(name = "last_user_date")
-    private Date lastUserDate;
+    @Column(name="last_modified_date")
+    //@JsonIgnore // Backentend'ten Frontend'e veri gönderme
+    protected String lastModifiedDate;
 
 } //end AuditingAwareBaseEntity

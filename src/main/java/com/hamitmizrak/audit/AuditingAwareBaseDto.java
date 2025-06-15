@@ -3,27 +3,27 @@ package com.hamitmizrak.audit;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.io.Serializable;
 
 // LOMBOK
 @Getter
 @Setter
 
-/**
- Sisteme giriş yapmış kişinin bir tabloya ekleme, güncelleme yaptığında
- Database eklenecek kısımdır.
- */
-abstract public class AuditingAwareBaseDto {
+abstract public class AuditingAwareBaseDto implements Serializable {
 
-    // Kim Ekledi
-    private String createdBy;
+    // SERILEŞTIRME
+    public static final Long serialVersionUID = 1L;
 
-    // Kim Ne zaman Ekledi
-    private Date createdDate;
+    // AUDITING
+    // Kim ekledi ?
+    protected String createdBy;
 
-    // Kim Güncelledi
-    private String lastUserBy;
+    // Kim ne zaman ekledi ?
+    protected String createdDate;
 
-    // Kim Ne Zaman Güncelledi
-    private Date lastUserDate;
+    // Kim güncelledi ?
+    protected String lastModifiedBy;
+
+    // Kim ne zaman güncelledi ?
+    protected String lastModifiedDate;
 }

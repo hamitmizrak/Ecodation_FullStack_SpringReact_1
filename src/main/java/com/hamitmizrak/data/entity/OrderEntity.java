@@ -1,60 +1,58 @@
 package com.hamitmizrak.data.entity;
 
-import com.hamitmizrak.audit.AuditingAwareBaseEntity;
 import jakarta.persistence.*;
-import lombok.*;
-import lombok.extern.log4j.Log4j2;
-import org.hibernate.annotations.CreationTimestamp;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.Date;
 import java.util.List;
 
 // LOMBOK
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-@Log4j2
+//@ToString
+//@EqualsAndHashCode
+//@AllArgsConstructor
+//@NoArgsConstructor
+//@Builder
 
-// ENTITY
-@Entity(name = "Orders") // JPQL için kullanılacak varlıklar için özelleştirme için
-@Table(name = "orders") // Database tablo adı
+// Entity
+@Entity(name = "Orders")
+@Table(name = "orders")
 
-// Customer(1) - Address(1)
-// Order(N) - Product(M)
-public class OrderEntity extends AuditingAwareBaseEntity {
+//  Order(N) - Customer(1)
+//  Order(N) - Product(M)
+public class OrderEntity extends BaseEntity {
 
     // FIELD
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    // FIRST NAME
+    // NAME
     private String name;
 
-    // LASTNAME
+    // PRICE
     private String price;
 
-    // DATE
-    @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "system_created_date")
-    private Date systemCreatedDate;
+    // NOTES
+    private String notes;
 
+    ////////////////////////////////////////////////////////////////////////////
     // RELATION
+    // COMPOSITION
+
     // Order(N) - Customer(1)
+    // Order(1) - Customer(1) NOT: Customer bilgilerine Order üzerinden erişimden sağlayacağım.
+    // Bundan dolayı @JoinColumn Order içinde yazıyoruz
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="customer_id", referencedColumnName = "id",unique=true)
+    //@JoinColumn(name = "customer_id", referencedColumnName = "id",unique = true) //FK için
+    @JoinColumn(name = "customer_id", referencedColumnName = "id",unique = false) //FK için
     private CustomerEntity customerOrderEntity;
 
+    // Order(N) - Product(M)
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
+    @JoinTable( // Eğer ManyToMany ilişkisi olan verilerimiz varsa 1 tane daha tabloya ihtiyacımız vardır
             name = "order_product",
-            joinColumns = @JoinColumn(name="order_id"),
+            joinColumns =@JoinColumn(name="order_id"),
             inverseJoinColumns = @JoinColumn(name="product_id")
     )
-    private List<ProductEntity> orderProductEntityList;
+    private List<ProductEntity> productsOrdersEntity; //NOT: ProductEntity içinde mappedBy ekle => productsOrdersEntity
 
-} //end  CustomerEntity
-
+    // Customer(1) - Order(N)
+} //end CustomerEntity

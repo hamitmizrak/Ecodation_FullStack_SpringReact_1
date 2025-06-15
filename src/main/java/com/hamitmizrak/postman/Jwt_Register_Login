@@ -1,0 +1,39 @@
+
+     *** POSTMAN (REGİSTER) **********************************************
+    METHOD: POST
+    URL   : http://localhost:4444/api/auth/register
+    BODY  :
+    {
+      "username": "root",
+      "password": "root"
+    }
+
+
+    *** CURL (REGİSTER) ***************************************************
+    curl -X POST http://localhost:4444/api/auth/register \
+    -H "Content-Type: application/json" \
+    -d '{
+      "username": "root",
+      "password": "root"
+    }'
+
+     #######################################################################
+     #######################################################################
+
+     *** POSTMAN (LOGIN)  **********************************************
+     METHOD: POST
+     URL   : http://localhost:4444/api/auth/login
+     BODY  :
+     {
+       "username": "root",
+       "password": "root"
+     }
+
+     *** cURL  **********************************************************
+     curl -X POST http://localhost:4444/api/auth/login \
+     -H "Content-Type: application/json" \
+     -d '{
+       "username": "root",
+       "password": "root"
+     }'
+
