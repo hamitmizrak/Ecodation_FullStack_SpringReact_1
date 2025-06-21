@@ -51,6 +51,30 @@ Spring Boot And React JS
 
 ---
 
+## Google Chrome React Web  for Developer
+1- Google React JS Developer : https://chromewebstore.google.com/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi
+
+2- Google React Redux Developer : https://chromewebstore.google.com/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd
+
+
+---
+
+
+
+
+## Fira Code
+1- Google Font: https://fonts.google.com/specimen/Fira+Code?subset=greek&preview.text=%C4%9F%C3%BC%C5%9F%C3%A7i&preview.text_type=custom
+
+2- Settings
+Font Family: Fira Code
+
+3- Settings JSON
+  "editor.fontFamily": "Fira Code",
+  "editor.fontLigatures": true,
+
+---
+
+
 ## REACTJS INSTALL
 ``sh
 npx create-react-app blog
