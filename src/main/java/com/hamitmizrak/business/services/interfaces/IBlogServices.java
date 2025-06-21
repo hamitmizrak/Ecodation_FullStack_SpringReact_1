@@ -1,37 +1,15 @@
 package com.hamitmizrak.business.services.interfaces;
 
-import java.util.List;
+import com.hamitmizrak.business.services.ICrudService;
+import com.hamitmizrak.business.services.IModelMapperService;
 
 // D: Dto
 // E: Entity
-public interface IBlogServices<D, E> {
+public interface IBlogServices<D, E>  extends IModelMapperService<D,E>,ICrudService<D,E>{
 
-    // Model Mapper
-    public D entityToDto(E e);
-
-    public E dtoToEntity(D d);
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////
     // SPEED DATA
     public String blogSpeedData(Long data);
 
     // ALL DELETE
     public String blogAllDelete();
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////
-    // C R U D
-    // CREATE
-    public D blogServiceCreate(D d);
-
-    // LIST
-    public List<D> blogServiceList();
-
-    // FIND BY
-    public D blogServiceFindById(Long id);
-
-    // UPDATE
-    public D blogServiceUpdate(Long id,D d);
-
-    // DELETE
-    public D blogServiceDeleteById(Long id);
 }

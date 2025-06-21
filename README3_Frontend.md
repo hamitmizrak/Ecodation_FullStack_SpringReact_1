@@ -11,8 +11,8 @@
 ## Blog Project:
 Spring Boot And React JS
 
-- Backend: Java Core, Spring Framework
-- Frontend:  React JS, JS, +ES5
+- Backend: Java Core, Spring Framework, Spring Boot
+- Frontend:  React JS, JS, +ES5, Html5, Css3, Js, TS
 - 🎁 BLOG
 --- 
 
@@ -22,7 +22,7 @@ Spring Boot And React JS
 - RESPONSIVE DESIGN
 - JS
 - BOOTSTRAP5
-- JQUERY
+- JQUERY/REACTJS
 - JAVASCRIPT
 - SQL
 - H2DB
@@ -33,7 +33,7 @@ Spring Boot And React JS
 - SPRING BOOT
 ---
 
-## Libraries && Programming
+## Backend - Libraries && Programming
 - Thymeleaf
 - Lombok
 - Validation
@@ -51,7 +51,7 @@ Spring Boot And React JS
 
 ---
 
-## REACT INSTALL
+## REACTJS INSTALL
 ``sh
 npx create-react-app blog
 cd blog

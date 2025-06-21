@@ -48,40 +48,40 @@ public class BlogCategoryApiImpl implements IBlogCategoryApi<BlogCategoryDto> {
     // http://localhost:4444/blog/category/api/v1/create
     @Override
     @PostMapping("/create")
-    public ResponseEntity<?> categoryApiCreate(@Valid @RequestBody BlogCategoryDto categoryDto) {
-        return ResponseEntity.ok(iCategoryServices.categoryServiceCreate(categoryDto));
+    public ResponseEntity<?> objectApiCreate(@Valid @RequestBody BlogCategoryDto categoryDto) {
+        return ResponseEntity.ok(iCategoryServices.objectServiceCreate(categoryDto));
     }
 
     // LIST
     // http://localhost:4444/blog/category/api/v1/list
     @Override
     @GetMapping(value="/list")
-    public ResponseEntity<List<BlogCategoryDto>> categoryApiList() {
-        return ResponseEntity.status(HttpStatus.OK).body(iCategoryServices.categoryServiceList());
+    public ResponseEntity<List<BlogCategoryDto>> objectApiList() {
+        return ResponseEntity.status(HttpStatus.OK).body(iCategoryServices.objectServiceList());
     }
 
     // FIND
     // http://localhost:4444/blog/category/api/v1/find/1
     @Override
     @GetMapping(value="/find/{id}")
-    public ResponseEntity<?> categoryApiFindById(@PathVariable(name = "id") Long id) {
-        return ResponseEntity.status(200).body(iCategoryServices.categoryServiceFindById(id));
+    public ResponseEntity<?> objectApiFindById(@PathVariable(name = "id") Long id) {
+        return ResponseEntity.status(200).body(iCategoryServices.objectServiceFindById(id));
     }
 
     // UPDATE
     // http://localhost:4444/blog/category/api/v1/update/1
     @Override
     @PutMapping(value="/update/{id}")
-    public ResponseEntity<?> categoryApiUpdate(@PathVariable(name = "id") Long id, @Valid @RequestBody BlogCategoryDto categoryDto) {
-        return ResponseEntity.ok().body(iCategoryServices.categoryServiceUpdate(id,categoryDto));
+    public ResponseEntity<?> objectApiUpdate(@PathVariable(name = "id") Long id, @Valid @RequestBody BlogCategoryDto categoryDto) {
+        return ResponseEntity.ok().body(iCategoryServices.objectServiceUpdate(id,categoryDto));
     }
 
     // DELETE BY ID
     // http://localhost:4444/blog/category/api/v1/delete/1
     @Override
     @DeleteMapping(value="/delete/{id}")
-    public ResponseEntity<?> categoryApiDeleteById(@PathVariable(name = "id") Long id) {
-        return new ResponseEntity<>(iCategoryServices.categoryServiceDeleteById(id),HttpStatus.OK);
+    public ResponseEntity<?> objectApiDelete(@PathVariable(name = "id") Long id) {
+        return new ResponseEntity<>(iCategoryServices.objectServiceDelete(id),HttpStatus.OK);
     }
 
 } //end class

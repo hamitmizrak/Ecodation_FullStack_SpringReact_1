@@ -58,7 +58,7 @@ public class BlogServicesImpl implements IBlogServices<BlogDto, BlogEntity> {
     // CREATE
     @Override
     @Transactional // create, delete, update
-    public BlogDto  blogServiceCreate(BlogDto blogDto) {
+    public BlogDto  objectServiceCreate(BlogDto blogDto) {
         if(blogDto!=null){
             BlogEntity blogEntity=dtoToEntity(blogDto);
             iBlogRepository.save(blogEntity);
@@ -72,7 +72,7 @@ public class BlogServicesImpl implements IBlogServices<BlogDto, BlogEntity> {
 
     // LIST
     @Override
-    public List<BlogDto>  blogServiceList() {
+    public List<BlogDto> objectServiceList() {
         Iterable<BlogEntity> entityIterable=  iBlogRepository.findAll();
         // Dto To entityb List
         List<BlogDto> categoryDtoList=new ArrayList<>();
@@ -86,7 +86,7 @@ public class BlogServicesImpl implements IBlogServices<BlogDto, BlogEntity> {
 
     // FIND
     @Override
-    public BlogDto  blogServiceFindById(Long id) {
+    public BlogDto objectServiceFindById(Long id) {
         // 1.YOL (FIND)
         /*
         Optional<BlogEntity> findOptionalBlogEntity=  iCategoryRepository.findById(id);
@@ -110,9 +110,9 @@ public class BlogServicesImpl implements IBlogServices<BlogDto, BlogEntity> {
     // UPDATE
     @Override
     @Transactional // create, delete, update
-    public BlogDto  blogServiceUpdate(Long id, BlogDto blogDto) {
+    public BlogDto objectServiceUpdate(Long id, BlogDto blogDto) {
         // Önce Bul
-        BlogDto blogFindDto= blogServiceFindById(id);
+        BlogDto blogFindDto= objectServiceFindById(id);
        if(blogFindDto!=null){
            BlogEntity blogEntity=dtoToEntity(blogFindDto);
            blogEntity.getBlogEntityEmbeddable().setTitle(blogDto.getTitle());
@@ -127,9 +127,9 @@ public class BlogServicesImpl implements IBlogServices<BlogDto, BlogEntity> {
     // DELETE
     @Override
     @Transactional // create, delete, update
-    public BlogDto blogServiceDeleteById(Long id) {
+    public BlogDto objectServiceDelete(Long id) {
         // Önce Bul
-        BlogDto categoryFindDto= blogServiceFindById(id);
+        BlogDto categoryFindDto= objectServiceFindById(id);
         if(categoryFindDto!=null){
             iBlogRepository.deleteById(id);
             // Dönüştede ID ve Date Set et

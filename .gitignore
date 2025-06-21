@@ -1,5 +1,5 @@
 # Special
-frontend/
+frontend/blog/node_modules
 log/
 database_memory_persist/
 target/

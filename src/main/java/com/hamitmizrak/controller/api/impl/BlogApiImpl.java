@@ -46,40 +46,40 @@ public class BlogApiImpl implements IBlogApi<BlogDto> {
     // http://localhost:4444/blog/api/v1/create
     @Override
     @PostMapping("/create")
-    public ResponseEntity<?> blogApiCreate(@Valid @RequestBody BlogDto categoryDto) {
-        return ResponseEntity.ok(iBlogServices.blogServiceCreate(categoryDto));
+    public ResponseEntity<?> objectApiCreate(@Valid @RequestBody BlogDto categoryDto) {
+        return ResponseEntity.ok(iBlogServices.objectServiceCreate(categoryDto));
     }
 
     // LIST
     // http://localhost:4444/blog/api/v1/list
     @Override
     @GetMapping(value="/list")
-    public ResponseEntity<List<BlogDto>> blogApiList() {
-        return ResponseEntity.status(HttpStatus.OK).body(iBlogServices.blogServiceList());
+    public ResponseEntity<List<BlogDto>> objectApiList() {
+        return ResponseEntity.status(HttpStatus.OK).body(iBlogServices.objectServiceList());
     }
 
     // FIND
     // http://localhost:4444/blog/api/v1/find/1
     @Override
     @GetMapping(value="/find/{id}")
-    public ResponseEntity<?> blogApiFindById(@PathVariable(name = "id") Long id) {
-        return ResponseEntity.status(200).body(iBlogServices.blogServiceFindById(id));
+    public ResponseEntity<?> objectApiFindById(@PathVariable(name = "id") Long id) {
+        return ResponseEntity.status(200).body(iBlogServices.objectServiceFindById(id));
     }
 
     // UPDATE
     // http://localhost:4444/blog/api/v1/update/1
     @Override
     @PutMapping(value="/update/{id}")
-    public ResponseEntity<?> blogApiUpdate(@PathVariable(name = "id") Long id, @Valid @RequestBody BlogDto categoryDto) {
-        return ResponseEntity.ok().body(iBlogServices.blogServiceUpdate(id,categoryDto));
+    public ResponseEntity<?> objectApiUpdate(@PathVariable(name = "id") Long id, @Valid @RequestBody BlogDto categoryDto) {
+        return ResponseEntity.ok().body(iBlogServices.objectServiceUpdate(id,categoryDto));
     }
 
     // DELETE BY ID
     // http://localhost:4444/blog/api/v1/delete/1
     @Override
     @DeleteMapping(value="/delete/{id}")
-    public ResponseEntity<?> blogApiDeleteById(@PathVariable(name = "id") Long id) {
-        return new ResponseEntity<>(iBlogServices.blogServiceDeleteById(id),HttpStatus.OK);
+    public ResponseEntity<?> objectApiDelete(@PathVariable(name = "id") Long id) {
+        return new ResponseEntity<>(iBlogServices.objectServiceDelete(id),HttpStatus.OK);
     }
 
 } //end class

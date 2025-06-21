@@ -84,7 +84,7 @@ public class BlogCategoryServicesImpl implements IBlogCategoryServices<BlogCateg
     // CREATE
     @Override
     @Transactional // create, delete, update
-    public BlogCategoryDto categoryServiceCreate(BlogCategoryDto blogCategoryDto) {
+    public BlogCategoryDto objectServiceCreate(BlogCategoryDto blogCategoryDto) {
         if (blogCategoryDto != null) {
             BlogCategoryEntity categoryEntity = dtoToEntity(blogCategoryDto);
             iCategoryRepository.save(categoryEntity);
@@ -98,7 +98,7 @@ public class BlogCategoryServicesImpl implements IBlogCategoryServices<BlogCateg
 
     // LIST
     @Override
-    public List<BlogCategoryDto> categoryServiceList() {
+    public List<BlogCategoryDto> objectServiceList() {
         Iterable<BlogCategoryEntity> entityIterable = iCategoryRepository.findAll();
         // Dto To entityb List
         List<BlogCategoryDto> categoryDtoList = new ArrayList<>();
@@ -112,7 +112,7 @@ public class BlogCategoryServicesImpl implements IBlogCategoryServices<BlogCateg
 
     // FIND
     @Override
-    public BlogCategoryDto categoryServiceFindById(Long id) {
+    public BlogCategoryDto objectServiceFindById(Long id) {
         // 1.YOL (FIND)
         /*
         Optional<CategoryEntity> findOptionalCategoryEntity=  iCategoryRepository.findById(id);
@@ -136,9 +136,9 @@ public class BlogCategoryServicesImpl implements IBlogCategoryServices<BlogCateg
     // UPDATE
     @Override
     @Transactional // create, delete, update
-    public BlogCategoryDto categoryServiceUpdate(Long id, BlogCategoryDto categoryDto) {
+    public BlogCategoryDto objectServiceUpdate(Long id, BlogCategoryDto categoryDto) {
         // Önce Bul
-        BlogCategoryDto categoryFindDto = categoryServiceFindById(id);
+        BlogCategoryDto categoryFindDto = objectServiceFindById(id);
         if (categoryFindDto != null) {
             BlogCategoryEntity categoryEntity = dtoToEntity(categoryFindDto);
             categoryEntity.setCategoryName(categoryDto.getCategoryName());
@@ -151,15 +151,13 @@ public class BlogCategoryServicesImpl implements IBlogCategoryServices<BlogCateg
     // DELETE
     @Override
     @Transactional // create, delete, update
-    public BlogCategoryDto categoryServiceDeleteById(Long id) {
+    public BlogCategoryDto objectServiceDelete(Long id) {
         // Önce Bul
-        BlogCategoryDto categoryFindDto = categoryServiceFindById(id);
+        BlogCategoryDto categoryFindDto = objectServiceFindById(id);
         if (categoryFindDto != null) {
             iCategoryRepository.deleteById(id);
             // Dönüştede ID ve Date Set et
         }
         return categoryFindDto;
     }
-
-
 } //end class
