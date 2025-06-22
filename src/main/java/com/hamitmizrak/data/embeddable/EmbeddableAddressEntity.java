@@ -2,7 +2,6 @@ package com.hamitmizrak.data.embeddable;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,7 +11,7 @@ import lombok.Setter;
 
 // EMBEDDABLE
 @Embeddable // Class Entity yapıları için daha okunaklı olması içindir
-public class AddressEntityEmbeddable {
+public class EmbeddableAddressEntity {
 
     // DOOR NUMBER
     @Column(name = "door_number")

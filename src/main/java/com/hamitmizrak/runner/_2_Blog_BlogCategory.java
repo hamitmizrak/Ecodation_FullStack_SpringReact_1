@@ -16,8 +16,8 @@ import org.springframework.core.annotation.Order;
 @RequiredArgsConstructor
 @Log4j2
 @Configuration
-@Order(2)
-public class _2_ProjectDataSet {
+@Order(2) // Runner Sırası
+public class _2_Blog_BlogCategory {
 
 
     // INJECTION

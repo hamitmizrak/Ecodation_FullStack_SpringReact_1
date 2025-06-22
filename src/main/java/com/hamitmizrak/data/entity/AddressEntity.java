@@ -1,7 +1,7 @@
 package com.hamitmizrak.data.entity;
 
 import com.hamitmizrak.audit.AuditingAwareBaseEntity;
-import com.hamitmizrak.data.embeddable.AddressEntityEmbeddable;
+import com.hamitmizrak.data.embeddable.EmbeddableAddressEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.extern.log4j.Log4j2;
@@ -47,7 +47,7 @@ public class AddressEntity extends AuditingAwareBaseEntity {
     // Embedded
     // Dikkat: IRepository Delivered Query için `addressEntityEmbeddable.address` şeklinde yazalır.
     @Embedded
-    private AddressEntityEmbeddable addressEntityEmbeddable;
+    private EmbeddableAddressEntity addressEntityEmbeddable;
 
     // Soft Delete (Yumuşak Silme)
     // Verileri silmek database çok doğru bir davranış değildir.

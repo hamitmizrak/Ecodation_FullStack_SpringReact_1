@@ -1,7 +1,7 @@
 package com.hamitmizrak.data.mapper;
 
 import com.hamitmizrak.business.dto.AddressDto;
-import com.hamitmizrak.data.embeddable.AddressEntityEmbeddable;
+import com.hamitmizrak.data.embeddable.EmbeddableAddressEntity;
 import com.hamitmizrak.data.entity.AddressEntity;
 
 public class AddressMapper {
@@ -13,7 +13,7 @@ public class AddressMapper {
         AddressDto addressDto = new AddressDto();
 
         // Embeddable
-        AddressEntityEmbeddable addressDetailsDto;
+        EmbeddableAddressEntity addressDetailsDto;
 
         // Common BaseDto için
         addressDto.setId(addressEntity.getId());
@@ -50,7 +50,7 @@ public class AddressMapper {
         AddressEntity addressEntity = new AddressEntity();
 
         // Embeddable
-        AddressEntityEmbeddable addressDetailsEntity=new AddressEntityEmbeddable();
+        EmbeddableAddressEntity addressDetailsEntity=new EmbeddableAddressEntity();
 
         // Common BaseDto için
         addressDto.setId(addressDto.getId());

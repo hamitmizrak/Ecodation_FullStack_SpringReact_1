@@ -3,7 +3,7 @@ package com.hamitmizrak.business.services.impl;
 import com.hamitmizrak.bean.ModelMapperBean;
 import com.hamitmizrak.business.dto.AddressDto;
 import com.hamitmizrak.business.services.interfaces.IAddressService;
-import com.hamitmizrak.data.embeddable.AddressEntityEmbeddable;
+import com.hamitmizrak.data.embeddable.EmbeddableAddressEntity;
 import com.hamitmizrak.data.entity.AddressEntity;
 import com.hamitmizrak.data.mapper.AddressMapper;
 import com.hamitmizrak.data.repository.IAddressRepository;
@@ -234,7 +234,7 @@ public class AddresServiceImpl implements IAddressService<AddressDto, AddressEnt
         AddressEntity addressEntityUpdate = dtoToEntity(objectServiceFindById(id));
 
         // Embeddable Set
-        AddressEntityEmbeddable addressEntityEmbeddable = new AddressEntityEmbeddable();
+        EmbeddableAddressEntity addressEntityEmbeddable = new EmbeddableAddressEntity();
         addressEntityEmbeddable.setState(addressDto.getState());
         addressEntityEmbeddable.setCity(addressDto.getCity());
         addressEntityEmbeddable.setStreet(addressDto.getStreet());
