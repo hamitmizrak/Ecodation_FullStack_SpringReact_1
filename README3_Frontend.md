@@ -267,7 +267,7 @@ port 8080 of the Docker (or whatever port was exposed in the Dockerfile):
 ```sh
 docker-compose up -d
 docker-compose down
-Dockerfile build -t .
+Dockerfile_Basic build -t .
 
 docker container run -d -p 4444:4444 --name backend blog
 docker run -d -p 8000:8080 --restart=always --cap-add=SYS_ADMIN --name=dillinger <youruser>/dillinger:${package.json.version}

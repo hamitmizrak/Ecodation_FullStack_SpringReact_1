@@ -36,7 +36,7 @@ abstract public class AuditingAwareBaseEntity implements Serializable {
     @Column(name = "created_by")
     @JsonIgnore
     private String createdBy;
-    
+
     // Kim Ne zaman Ekledi
     @CreatedDate
     @Column(name = "created_date")

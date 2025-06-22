@@ -1,13 +1,24 @@
+# mvn clean package
+# mvn clean package -DskipTests
 
+# docker-compose --version
+# docker-compose up
+# docker-compose up -d
+# docker-compose -f docker-compose-my.yml up
+# docker-compose down
+# docker-compose restart
+# docker-compose ps
+
+# Version
 version: '3.1'
 
 # Services
 services:
   backend:
-    container_name: container_blog
-    image: image_blog
-    restart: on-failure
-    build: .
+    container_name: container_blog_springboot_react
+    image: image_blog_springboot_react
+    restart: on-failure # unless-stopped
+    build: ./
     ports:
       - "4444:4444"
     networks:
