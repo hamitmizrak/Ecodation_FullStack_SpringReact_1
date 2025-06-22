@@ -1,0 +1,17 @@
+#button_input_val{
+    position:absolute;
+     top:4;
+     right: 0;
+     margin-right:4.9rem;
+     margin-top:.1rem;
+     width:8%;
+     height: 2rem;
+}
+
+#check_id{
+    position:absolute;
+    right: 0;
+    width: 7%;
+    height: 1.3rem;
+    margin-right:1rem;
+}

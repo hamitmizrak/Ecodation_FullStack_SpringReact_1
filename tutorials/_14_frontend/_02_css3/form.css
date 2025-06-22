@@ -1,0 +1,77 @@
+/*Root*/
+:root {
+    --button_background_color: #000000;
+    --button_color: #ffffff;
+}
+
+html{
+    font-size:10px;
+}
+
+body{
+    background-color: rgb(243, 179, 101);
+}
+
+/*Common Property*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*/////////////////////////////*/
+
+.full {
+    width: 100%;
+    position: relative;
+    margin-left: 10%;
+    margin-top: 10%;
+}
+
+
+.inputContainer i {
+    position: absolute;
+}
+
+.icon_data {
+    color: blueviolet;
+    width: 3rem;
+    text-align: left;
+    padding: 1rem;
+    margin-top: -0.7rem;
+}
+
+
+.iconInput {
+    width: 70%;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+    width: 80%;
+    padding: .4rem;
+    margin-bottom: .2rem;
+}
+
+button[type="reset"],
+button[type="submit"] {
+    width: 40%;
+    margin-top: 1rem;
+    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, .8);
+    background-color: var(--button_background_color);
+    color: var(--button_color);
+    cursor: pointer;
+    padding:.3rem;
+}
+
+/*responsive design: boşluğu unutma*/
+@media screen and (min-width:600px){
+    input[type="text"],
+    input[type="password"]{
+    width: 48%;
+    display:inline-block;
+}
+}

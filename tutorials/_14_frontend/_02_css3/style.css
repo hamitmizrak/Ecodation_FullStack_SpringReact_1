@@ -1,0 +1,154 @@
+/*css3: author,*/
+/* h3 {
+    background-color: red;
+    font-size: 2rem;
+} */
+
+/* div {
+    color: red;
+} */
+/* #div_id {
+    color: red;
+    important > inline CSS > internal CSS > external CSS
+} */
+
+.div_class {
+    /*color*/
+    color: red;
+    color: #a3f;
+    color: #2c0c0c;
+    color: rgb(0, 50, 96);
+    color: rgba(146, 231, 0, 0.4);
+    color: white;
+
+    /*background-color*/
+    background-color: black;
+
+    /*margin:dış boşluk*/
+    margin-top: .1rem;
+    margin: .1rem;
+    margin: .3rem 1rem;
+    margin: .1rem .2rem .3rem .1rem;
+
+    /*padding:iç boşluk*/
+    padding-top: .1rem;
+    padding: .1rem;
+    padding: .3rem 1rem;
+    padding: 14px;
+
+    /*border*/
+    border: 3px dotted yellow;
+    border-width: 3px;
+    border-style: dotted;
+    border-color: yellow;
+    /* border-radius: 50%; */
+
+    /*text*/
+    font-size: 10px;
+    font-style: italic;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: justify;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-indent: 15px;
+    line-height: 25px;
+    letter-spacing: 4px;
+    text-shadow: 1px -2px rgba(255, 255, 255, .5);
+    width: 50px;
+    min-width: 50px;
+    max-width: 200px;
+    height: 25px;
+}
+
+.div_class:hover {
+    cursor: pointer;
+    /* display: none; */
+}
+
+#a_link {
+    background-color: #2c0c0c;
+    color: aqua;
+    padding: 1px;
+    border-radius: 3px;
+    text-decoration: none;
+}
+
+#a_link:hover {
+    color: red;
+    float: right;
+}
+
+.clearfix_data {
+    content: "";
+    clear: both;
+    display: block;
+}
+
+/* group selector */
+/* div,p{
+    border:1px solid black;
+} */
+
+/* div>p{
+    border:1px solid black;
+} */
+
+/* div p {
+    border: 1px solid black;
+} */
+
+/* div+p {
+    border: 1px solid black;
+}  */
+
+/* div~p {
+    border: 1px solid black;
+}  */
+/* 
+*{
+    color:blue
+} */
+
+#parag_6 {
+    margin-top: 2rem;
+
+    /*1*2+100+10*2=122px*/
+    border: 1px solid blue;
+    width: 100px;
+    padding: 10px;
+    /*1*2+100+10*2=100px*/
+    box-sizing: border-box;
+}
+
+ul {
+    list-style-type: none;
+}
+
+ul li {
+    color: blue;
+    background-color: black;
+    display: inline-block;
+    padding: 2px 10px;
+    transition: all 1.5s;
+}
+
+ul li:hover {
+    color: black;
+    background-color: blue;
+    cursor: pointer;
+    box-shadow: 1px 1px 8px 1px rgba(0, 0, 0.8);
+    transform: rotate(360deg);
+    text-transform: capitalize;
+}
+
+
+/* 
+html{
+
+}
+
+body{
+
+} */
+
+/*FORM*/

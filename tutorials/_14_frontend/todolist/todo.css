@@ -1,0 +1,63 @@
+/*
+project author:By Hamit Mızrak
+project created Date: 12/11/2022
+*/
+
+/*Common property*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 20px;
+}
+
+body {
+    background-color: rgb(39, 37, 37);
+    color: white;
+}
+
+li {
+    overflow: hidden;
+}
+
+
+/*////////////////////////////////*/
+#todo_container ul {
+    list-style-type: none;
+}
+
+button:hover {
+    box-shadow: 1px 1px 3px 1px rgba(244, 236, 236, 0.8);
+}
+
+/* ////////////////////////////////////////////////  */
+/* add item */
+input[type="text"]:focus {
+    color: rgba(55, 59, 62, .8);
+}
+
+
+/* ////////////////////////////////////////////////  */
+/*Todo List*/
+
+.edit_list label {
+    display: none;
+}
+
+/* ////////////////////////////////////////////////  */
+/* complete_item */
+#complete_list label {
+    text-decoration: line-through;
+    color: red;
+}
+
+ul li input[type=text]{
+    display: none;
+}
+
+ul li.edit_list label{
+    display:none;
+}

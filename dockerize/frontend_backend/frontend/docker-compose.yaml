@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+#Nginx Service
+  webserver:
+    image: nginx:alpine
+    container_name: webserver
+    # restart: unless-stopped
+    restart: always
+    ports:
+       - "80:80"
+       - "443:443"
+    # volumes:
+    #    - ./nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - springmysql
+    depends_on:
+      - frontend 
+
+  frontend:
+    container_name: devop_frontend
+    image: devops_frontend
+    restart: always
+    build: ./
+    ports: 
+      - "3000:3000"
+    networks:
+      - springmysql 
+
+networks:
+  springmysql:
+    name: springmysql
+    driver: bridge     

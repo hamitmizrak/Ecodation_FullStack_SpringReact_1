@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="tr">
+
+<head>
+    <!-- title-->
+    <title>My Portfolyo Sites</title>
+
+    <!-- favicon -->
+    <link rel="icon" href="pictures/logo.png" />
+
+    <!-- Turkce karakter -->
+    <meta charset="utf-8" />
+
+    <!-- responsive design -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- seo -->
+    <meta name="keywords" content="html5,css3,js,jquery,bootstrap,react,es5,es6" />
+    <meta name="description" content="my portfolyo sites, html5,css3,js,jquery,bootstrap,seo" />
+    <meta name="author" content="Hamit Mızrak" />
+
+    <!-- Font awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+
+    <!-- Bootstrap CSS v5.0.2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="bootstrap.css"> -->
+
+    <!-- jquery UI -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    </head>
+<body class="container-fluid">
+    <!-- starts codes -->
+
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" aria-current="page">Home <span
+                                class="visually-hidden">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownId">
+                            <a class="dropdown-item" href="#">Action 1</a>
+                            <a class="dropdown-item" href="#">Action 2</a>
+                        </div>
+                    </li>
+                </ul>
+                <form class="d-flex my-2 my-lg-0">
+                    <input class="form-control me-sm-2" type="text" placeholder="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-bs-target="#carouselId" data-bs-slide-to="0" class="active" aria-current="true"
+                aria-label="First slide"></li>
+            <li data-bs-target="#carouselId" data-bs-slide-to="1" aria-label="Second slide"></li>
+            <li data-bs-target="#carouselId" data-bs-slide-to="2" aria-label="Third slide"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <div class="carousel-item active">
+                <img src="../images/startup-g6e99aed34_1920.jpg" class="w-100 d-block" alt="First slide">
+            </div>
+            <div class="carousel-item">
+                <img src="../images/startup-g6e99aed34_1920.jpg" class="w-100 d-block" alt="Second slide">
+            </div>
+            <div class="carousel-item">
+                <img src="../images/startup-g6e99aed34_1920.jpg" class="w-100 d-block" alt="Third slide">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="triggerId" data-bs-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Dropdown
+        </button>
+        <div class="dropdown-menu" aria-labelledby="triggerId">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item disabled" href="#">Disabled action</a>
+            <h6 class="dropdown-header">Section header</h6>
+            <a class="dropdown-item" href="#">Action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">After divider action</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <img class="card-img-top" src="../images/background-gd25ecfcaa_1920.jpg" alt="Title">
+        <div class="card-body">
+            <h4 class="card-title">Title</h4>
+            <p class="card-text">Text</p>
+        </div>
+    </div>
+
+    <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                    aria-expanded="true" aria-controls="collapseOne">
+                    Accordion Item #1
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    This is the first item's accordion body.
+                </div>
+            </div>
+
+
+            <h2 class="accordion-header" id="asd">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                    aria-expanded="true" aria-controls="collapseOne">
+                    Accordion Item #1
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="asd"
+                data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    This is the first item's accordion body.
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Modal trigger button -->
+    <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modalId">
+        Register
+    </button>
+
+    <!-- Modal Body -->
+    <div class="modal fade " id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
+        aria-labelledby="modalTitleId" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitleId">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div>
+                        <h1>Register</h1>
+                        <form action="#" action="get">
+                            <!-- username -->
+                            <div class="container">
+                                <div class="row">
+
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control mb-3" autofocus required="true"
+                                                id="username" name="username" placeholder="Kullanıcı adınız ..." />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <!-- email -->
+                                        <div class="form-group">
+                                            <input type="email" class="form-control mb-3" required="true" id="email"
+                                                name="email" placeholder="Kullanıcı email ..." />
+                                        </div>
+                                    </div>
+
+                                    <!-- password -->
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <input type="password" class="form-control mb-3" required="true"
+                                                id="password" name="password" placeholder="Kullanıcı şifreniz ..." />
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <button type="reset" class="btn btn-danger">Temizle</button>
+                                        <button type="submit" class="btn btn-primary">Üye ol</button>
+                                    </div>
+                                </div> <!-- ends row -->
+                            </div><!-- ends container -->
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Optional: Place to the bottom of scripts -->
+    <script>
+        const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
+
+    </script>
+
+    <hr>
+    <hr>
+    <hr>
+
+
+    <hr>
+    <hr>
+    <hr>
+
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>adi</th>
+                <th>soyadı</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>1</th>
+                <th>adi1</th>
+                <th>soyadı</th>
+            </tr>
+            <tr>
+                <th>2</th>
+                <th>adi2</th>
+                <th>soyadı2</th>
+            </tr>
+            <tr>
+                <th>3</th>
+                <th>adi3</th>
+                <th>soyadı3</th>
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+    <br>
+    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+    </div>
+
+    <hr>
+    <br>
+    <ul class="list-group d-grid gap-2">
+        <li class="list-group-item bg-danger">item 1</li>
+        <li class="list-group-item">item 2</li>
+        <li class="list-group-item bg-dark text-light">item 3</li>
+        <li class="list-group-item">item 4</li>
+        <li class="list-group-item">item 5</li>
+    </ul>
+
+    <hr>
+    <br>
+    <img src="../images/city-ge60cc7757_1920.jpg" alt="is not picture"
+        class="rounded rounded-circle44 img-thumbnail shadow-lg" />
+
+
+    <div style="height: 300px;">
+        <div class="bg-primary text-white m-4 p-4 border border-warning w-50 h-75">Border</div>
+        <div class="bg-primary text-white m-4 p-4 border-warning border-top">Border</div>
+    </div>
+
+
+    <hr>
+    <br>
+    <a href="#" class="btn btn-danger d-block deneme">1.click</a>
+    <a href="#" class="btn btn-danger d-inline-block">2.click</a>
+    <a href="#" class="btn btn-danger">3.click</a>
+    <a href="#" class="btn btn-danger d-none">4.click</a>
+
+    <div class="d-grid gap-2 mt-5">
+        <button class="btn btn-primary">1.alan</button>
+        <button class="btn btn-primary">2.alan</button>
+        <button class="btn btn-primary">2.alan</button>
+        <button class="btn btn-primary">2.alan</button>
+    </div>
+
+    <hr>
+    <br>
+    <button class="btn btn-primary btn-sm">gönder</button>
+    <button class="btn btn-primary btn-md">gönder</button>
+    <button class="btn btn-primary btn-lg">gönder</button>
+    <button class="btn btn-outline-warning btn-lg">gönder</button>
+    <button class="btn btn-outline-danger btn-lg">gönder</button>
+    <button class="btn  btn-link">gönder</button>
+
+    <hr>
+    <br>
+    <div class="bg-dark text-white mt-5 mb-4 ms-4 me-1 p-4">division data</div>
+
+    <hr>
+    <br>
+    <p class="text-white bg-primary text-lowercase text-start">TEXTdata</p>
+    <p class="text-white bg-primary text-uppercase text-center">TEXTdata</p>
+    <p class="text-capitalize text-end text-muted fw-bold fst-italic">text data</p>
+
+
+    <hr>
+    <br>
+    <p class="text-white bg-success">primary</p>
+    <p class="text-secondary bg-dark">secondary</p>
+    <p class="text-warning bg-dark">warning</p>
+    <p class="text-danger bg-dark">danger</p>
+    <p class="text-success bg-dark">success</p>
+    <p class="text-info bg-dark">info</p>
+    <p class="text-light bg-dark">dark</p>
+    <p class="text-white bg-dark">white</p>
+    <p class="text-white bg-danger">white</p>
+
+    <hr>
+    <br>
+    <p class="display-1">display -1</p>
+    <p class="display-2">display -2</p>
+    <p class="display-3">display -3</p>
+    <p class="display-4">display -4</p>
+    <p class="display-5">display -5</p>
+    <p class="display-6">display -6</p>
+    <hr>
+    <br>
+
+    <p class="h1">heading1</p>
+    <p class="h2">heading2</p>
+    <p class="h3">heading3</p>
+    <p class="h4">heading4</p>
+    <p class="h5">heading5</p>
+    <p class="h6">heading6</p>
+    <hr>
+    <br>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-4 bg-primary">1.alan</div>
+            <div class="col-8 bg-warning">2.alan</div>
+        </div>
+    </div>
+
+    <!-- ends codes -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>

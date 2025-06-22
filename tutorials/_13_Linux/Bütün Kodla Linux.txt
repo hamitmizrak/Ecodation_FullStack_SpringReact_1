@@ -1,0 +1,63 @@
+$ sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade
+$ sudo ufw enable
+$ sudo ufw allow 22
+$ sudo snap install vlc
+$ sudo apt install curl
+$ 
+$ sudo apt-get install -f 
+$ sudo apt install curl
+$ curl --version
+$ sudo apt-get install zip
+$ sudo apt-get install gunzip
+$ sudo apt install vim 
+$ ping google.com
+$ curl google.com
+$
+$ cat /etc/password
+$ 
+$ man  mkdir
+$ info mkdir
+$ whatis mkdir
+$ which java 
+$ which git 
+$ which docker
+$ whereis java
+$ whereis maven
+$ whereis git
+$ hostname --help
+$ 
+$ cd ~
+$ cd Masaustu
+$ 
+$ head –n 25 deneme.txt   ==>  baştan 25 satırı getirir.
+$ tail deneme.txt         ==> sondan 10 satırı gösterir.
+$ tail -f deneme.txt      ==> yeni yazılan yerleri gösterir.
+$ tail -n 15 deneme.txt   ==> sondan 15 satırı göster
+$ 
+$ gzip -9 deneme.txt
+$ gunzip ./deneme.txt.gz
+$ 
+$ grep kelime deneme.txt  ==>  deneme  içinde kelime aramak
+$ 
+$ uname 
+$ df 
+$ free -m
+$ 
+$ shred deneme.txt  ==> Güvenli Silmek
+$ 
+$ paste  deneme.txt   deneme4.txt
+$ 
+$ 
+$ 
+$ 
+$ 
+$ 
+$ 
+$ 
+$ 
+$ 
+$ 
+$ 
+$ 
+$ 
+$ 

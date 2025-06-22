@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Css3 -part 2 </title>
+    <!-- Font awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" href="form.css" />
+</head>
+
+<body>
+    <!-- start codes -->
+    <div class="full">
+        <h1>Register</h1>
+        <form action="form.html" action="get">
+            <!-- username -->
+            <div class="inputContainer">
+                <i class="fa-solid fa-user icon_data"></i>
+                <input type="text" class="iconInput" autofocus required="true" id="username" name="username"
+                    placeholder="Kullanıcı adınız ..." />
+            </div>
+
+            <!-- password -->
+            <div class="inputContainer">
+                <i class="fa-solid fa-lock icon_data"></i>
+                <input type="password" class="iconInput" required="true" id="password" name="password"
+                    placeholder="Kullanıcı şifreniz ..." />
+            </div>
+
+            <!-- email -->
+            <div class="inputContainer">
+                <i class="fa-solid fa-envelope icon_data"></i>
+                <input type="email" class="iconInput" required="true" id="email" name="email"
+                    placeholder="Kullanıcı emailiniz ...." />
+            </div>
+
+            <div>
+                <input type="checkbox" checked /> Readme
+            </div>
+            <div>
+                <button type="reset">Temizle</button>
+                <button type="submit">Üye ol</button>
+            </div>
+        </form>
+    </div>
+    <!-- end codes -->
+</body>
+
+</html>
