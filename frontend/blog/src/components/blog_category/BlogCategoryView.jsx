@@ -57,7 +57,5 @@ function BlogCategoryView({ props, t, i18n }) {
   );
 }
 
-export default BlogCategoryView;
-
-
-// systemCreatedDate, createdBy
+// EXPORT
+export default withTranslation()(BlogCategoryView);
