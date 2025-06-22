@@ -16,7 +16,7 @@ Spring Boot And React JS
 - 🎁 BLOG
 --- 
 
-## TECHNOLOGY && Features
+## Technology && Features
 - HTML5
 - CSS3
 - RESPONSIVE DESIGN
@@ -48,18 +48,13 @@ Spring Boot And React JS
 - JAVA CORE
 - SPRING FRAMEWORK
 - SPRING BOOT
-
 ---
 
-## Google Chrome React Web  for Developer
+## Google Chrome React Web for Developer
 1- Google React JS Developer : https://chromewebstore.google.com/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi
 
 2- Google React Redux Developer : https://chromewebstore.google.com/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd
-
-
 ---
-
-
 
 
 ## Fira Code
@@ -71,7 +66,6 @@ Font Family: Fira Code
 3- Settings JSON
   "editor.fontFamily": "Fira Code",
   "editor.fontLigatures": true,
-
 ---
 
 
