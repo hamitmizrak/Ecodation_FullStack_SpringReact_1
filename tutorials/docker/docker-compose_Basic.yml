@@ -14,6 +14,6 @@ services:
     container_name: container_spring_react
     image: image_spring_react
     restart: unless-stopped #on-failure
-    build: ..
+    build: ../..
     ports:
       - "4444:4444"
