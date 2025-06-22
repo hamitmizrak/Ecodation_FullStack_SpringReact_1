@@ -3,7 +3,9 @@ frontend/blog/node_modules
 log/
 database_memory_persist/
 target/
-tutorials/nodejs
+tutorials/_05_Nodejs
+tutorials/_01_Docker/tutorials
+tutorials/_08_Common_Devops
 
 
 HELP.md
