@@ -1,0 +1,20 @@
+# React için Node tabanlı imaj
+FROM node:18
+
+# Çalışma dizini
+WORKDIR /usr/src/app
+
+# package.json ve lock dosyasını kopyala
+COPY package*.json ./
+
+# Bağımlılıkları yükle
+RUN npm install
+
+# Tüm dosyaları kopyala (src, public, vs.)
+COPY . .
+
+# Geliştirme portunu aç
+EXPOSE 3000
+
+# React uygulamasını başlat
+CMD ["npm", "start"]

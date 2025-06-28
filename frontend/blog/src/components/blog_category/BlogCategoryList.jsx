@@ -30,6 +30,13 @@ function BlogCategoryList({ props, t, i18n }) {
     try {
       const response = await BlogCategoryApi.objectApiList(); //fetch('https://api.example.com/users');
       setBlogCategoryApiListData(response.data);
+      console.log(response);
+      console.log(response.data);
+      console.log(response.status);
+      console.log(response.headers);
+      if (response.status === 200) {
+        setBlogCategoryApiListData(response.data);
+      }
     } catch (error) {
       console.error("Error fetching users:", error);
     }
