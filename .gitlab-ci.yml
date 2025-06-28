@@ -31,8 +31,8 @@ bash_script_job:
   script: 
     - echo "$bash_script_variable"
     - ls -lab
-    - chmod 755 project.sh
-    - ./project.sh 
+    - chmod 755 shell_project_maven_docker_deployment.sh
+    - ./shell_project_maven_docker_deployment.sh
  
 maven_job:
   stage: bash_script
