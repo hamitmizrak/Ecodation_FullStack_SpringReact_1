@@ -37,6 +37,12 @@ ADD ${JAR_FILE} blog_springboot_react
 ENTRYPOINT ["java","-jar","/blog_springboot_react"]
 
 
+# HEALTHCHECK: Sağlık kontrolünü Eklesin
+# HEALTHCHECK: Bu container çalışıyor mu ?
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:3000/ || exit 1
+
+
 
 
 

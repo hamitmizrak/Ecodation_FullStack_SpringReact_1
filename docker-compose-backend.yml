@@ -18,14 +18,21 @@ services:
     container_name: container_blog_springboot_react
     image: image_blog_springboot_react
     restart: on-failure # unless-stopped
-    build: ./
+    #build: ./  # default Dockefile
+    build:
+      context: .
+      dockerfile: DockerfileBackend
     ports:
       - "4444:4444"
     networks:
-      - blog_network
+      - fullstack_network
 
 # Network
+#networks:
+#  blog_network:
+#    name: blog_network
+#    driver: bridge
+
 networks:
-  blog_network:
-    name: blog_network
-    driver: bridge
+  fullstack_network:
+    external: true
