@@ -1,251 +1,164 @@
-
-
 // rfce
-// REACT
 import React, { useEffect, useState } from "react";
-
-// ROUTER
-import { Link, Route, useNavigate, useParams } from "react-router-dom";
-
-// I18N
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 
-// CATEGORY API
+import BlogApi from "../../services/BlogApi";
 import BlogCategoryApi from "../../services/BlogCategoryApi";
 
-// FUNCTION COMPONENT (BlogUpdate)
-function BlogUpdate({ props, t, i18n }) {
+function BlogUpdate({ t }) {
+  const { id } = useParams();
+  const navigate = useNavigate();
 
-  // REDIRECT
-  let navigate = useNavigate();
+  const [blogHeader, setBlogHeader] = useState("");
+  const [blogContent, setBlogContent] = useState("");
+  const [blogTitle, setBlogTitle] = useState("");
+  const [categoryId, setCategoryId] = useState(null);
+  const [categories, setCategories] = useState([]);
+  const [error, setError] = useState(null);
+  const [spinner, setSpinner] = useState(false);
 
-  // STATE
-  const [categoryName, setCategoryName] = useState(null); // Category name state
-  const [error, setError] = useState(undefined); // Error state
-  const [spinner, setSpinner] = useState(false); // Spinner state : başlangıç değeri false
-  const [multipleRequest, setMultipleRequest] = useState(false); // Multiple request state (Aynı anda çok kere isteği kapatmak
-
-
-  // PARAMS
-  // const { id } = useParams(); // Get the id from the URL params (1.YOL)
-  // console.log(id); // Log the id
-  const [paramID, setParamID] = useState(null); // State for param ID
-  const updateBlogCategoryID = useParams(); // Get the id from the URL params (2.YOL)
-
-  // EFFECT
+  // Blog verisini çek
   useEffect(() => {
-    // Set the param ID from the URL params
-    setParamID(updateBlogCategoryID.id);
-    localStorage.setItem("blog_category_update_id", updateBlogCategoryID.id); // Store the param ID in localStorage
-    console.log("Param ID: ", updateBlogCategoryID.id); // Log the param ID
-
-    BlogCategoryApi.objectApiFindById(updateBlogCategoryID.id) // Fetch the blog category by ID
-      .then((response) => {
-        console.log(response);
-        console.log(response.data);
-        console.log(response.status);
-        console.log(response.headers);
-        if (response.status === 200) {
-          // If the response is successful, set the category name
-          setCategoryName(response.data.categoryName);
-        }
+    BlogApi.objectApiFindById(id)
+      .then((res) => {
+        const data = res.data;
+        setBlogHeader(data.header);
+        setBlogContent(data.content);
+        setBlogTitle(data.title);
+        setCategoryId(data.blogCategoryDto?.categoryId ?? null);
       })
       .catch((err) => {
-        console.log(err);
-        console.error("Error fetching blog category by ID: ", err);
-        // Alert ile kullanıcıya bilgi ver
-        window.alert("Error fetching blog category by ID: " + err.message);
-      })},
-      []); // end BlogCategoryApi.objectApiFindById
+        console.error("Blog verisi alınamadı", err);
+        alert("Blog verisi alınamadı");
+      });
+  }, [id]);
 
+  // Kategorileri çek
+  useEffect(() => {
+    BlogCategoryApi.objectApiList()
+      .then((res) => setCategories(res.data))
+      .catch((err) => console.error("Kategoriler alınamadı", err));
+  }, []);
 
-  // CLEAR
-  const clearFunction = () => {
-    setCategoryName(null);
-    setError(undefined);
-    setSpinner(false);
-    setMultipleRequest(false);
-  };
+  // Güncelleme işlemi
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  // FORM SUBMIT
-  const onSubmitForm = async (e) => {
-    e.preventDefault(); // Prevent default form submission
-  };
-
-  // SPINNER DATA
-  const spinnerData = () => {
-    if (spinner) {
-      return (
-        <div
-          className="spinner-border text-warning spinner-border-sm"
-          role="status"
-          aria-hidden="true"
-        >
-          {/* <span className="visually-hidden">Loading...</span> */}
-          <span className="sr-only">Loading...</span>
-        </div>
-      );
-    } else {
-      return "";
+    if (!categoryId) {
+      setError({ categoryId: "Kategori seçimi zorunludur." });
+      return;
     }
-  };
 
-  // ERROR INPUT
-  const inputInvalidErrorClass =  error 
-    ? "form-control is-invalid"
-    : "form-control";
+    const updatedBlog = {
+      header: blogHeader,
+      content: blogContent,
+      title: blogTitle,
+      blogCategoryDto: {
+        categoryId: categoryId,
+      },
+    };
 
-  // INPUT ON-CHANGE
-  const categoryNameOnChange = (e) => {
-    // e.preventDefault(); // Prevent default form submission
-
-    // TARGET
-    const { name, value } = e.target; // Get the name and value of the input
-    console.log(name, value); // Log the name and value of the input
-    // Set the state
-    // if (name === "categoryName") setCategoryName(value); // Set category name state
-    setCategoryName(value); // Set category name state
-    //setCategoryName(e.target.value); // Set category name state
-
-    // Eğer hata yoksa hata mesajını kaldır
-    if (error)
-    setError(undefined);
-  };
-
-  // SUBMIT
-  const blogCategoryUpdateSubmit = async (e) => {
-    // e.preventDefault(); // Prevent default form submission
-
-    // FORMU GÖNDERME
-    const blogCategoryObject = { categoryName };
-
-    // Hataları Göster
+    setSpinner(true);
     setError(null);
 
-    // SPINNER
-    setSpinner(true);
-
-    // MULTIPLE REQUEST (İsteği çok kere yapmamak için)
-    setMultipleRequest(true);
     try {
-      const response = await BlogCategoryApi.objectApiUpdate(
-       localStorage.getItem("blog_category_update_id"), blogCategoryObject
-      ); // API'den blog category ekle
-      console.log(response);
-      console.log(response.data);
-      console.log(response.status);
-      console.log(response.headers);
-
-      // Eğer başarılı ise
+      const response = await BlogApi.objectApiUpdate(id, updatedBlog);
       if (response.status === 200) {
-        // Update işlemi başarılı ise 200 döner 201
-        // Başarılı ise
-        console.log("Blog Kategory Güncellendi!");
-        console.log(response.data);
-        setSpinner(false); // SPINNER KAPAT
-        setMultipleRequest(false); // MULTIPLE REQUEST KAPAT
-        clearFunction(); // Formu temizle
-        // REDIRECT
-        navigate("/blog/category/list"); // Blog category list sayfasına yönlendir
-        // Alert ile kullanıcıya bilgi ver
-        window.alert("Blog Kategory Güncellendi!");
+        alert("Blog başarıyla güncellendi");
+        navigate("/blog/list");
       }
     } catch (err) {
-      console.error(err, "Blog Kategory Eklenmedi!");
-      console.error(err.message || "Blog Kategory Eklenmedi!");
-
-      // Hata mesajını göster Not: validationErrors => Javadan geliyor
-      setError(err.response.data.validationErrors);
-
-      // Eğer hata varsa (4xx = Client Error, 5xx = Server Error)
-      if (err.response.status === 400) {
-        // 400 Bad Request
-        console.error("Bad Request: ", err.response.data);
-        setError(err.response.data.validationErrors); // Hata mesajını göster
-        //window.alert("Bad Request: " + err.response.data.message); // Alert ile kullanıcıya bilgi ver
-      } else if (err.response.status === 500) {
-        // 500 Internal Server Error
-        console.error("Internal Server Error: ", err.response.data);
-        setError("Internal Server Error: " + err.response.data.message); // Hata mesajını göster
-        window.alert("Internal Server Error: " + err.response.data.message); // Alert ile kullanıcıya bilgi ver
+      console.error("Blog güncellenemedi", err);
+      if (err.response?.status === 400) {
+        setError(err.response.data.validationErrors);
       } else {
-        console.error("Error: ", err.response.data);
-        setError("Error: " + err.response.data.message); // Hata mesajını göster
-        window.alert("Error: " + err.response.data.message); // Alert ile kullanıcıya bilgi ver
+        alert("Bir hata oluştu: " + err.response?.data?.message);
       }
     } finally {
-      // SPINNER AÇ
-      setSpinner(true);
-
-      // MULTIPLE REQUEST KAPAT
-      setMultipleRequest(false);
+      setSpinner(false);
     }
   };
 
-  // RETURN
   return (
-    <React.Fragment>
-      <div class="container mt-5">
-        <h1 class="text-center mb-4 mt-4"> {t("blog_category_update")}</h1>
+    <div className="container mt-5">
+      <h1 className="text-center mb-4">{t("blog_update")}</h1>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label className="mb-1">{t("blog_header")}</label>
+          <input
+            type="text"
+            className={`form-control ${error?.header ? "is-invalid" : ""}`}
+            value={blogHeader}
+            onChange={(e) => setBlogHeader(e.target.value)}
+          />
+          {error?.header && (
+            <div className="invalid-feedback">{error.header}</div>
+          )}
+        </div>
 
-        <form onSubmit={onSubmitForm} action="GET">
-          {/* INPUT CATEGORY NAME */}
-          <div class="form-group">
-            <label htmlFor="categoryName" className="mb-2">{t("blog_category_name")}</label>
-            <input
-              type="text"
-              className={inputInvalidErrorClass}
-              id="categoryName"
-              name="categoryName"
-              autoFocus={true}
-              required={true}
-              placeholder={t("blog_category_name")}
-              value={categoryName || ""}
-              onChange={categoryNameOnChange}
-            />
-            {/* {error && <div className="invalid-feedback">{error}</div>} */}
-            {error ? (
-              <div className="invalid-feedback">{error.categoryName}</div>
-            ) : (
-              ""
-            )}
-          </div>
+        <div className="form-group mt-3">
+          <label className="mb-1">{t("blog_title")}</label>
+          <input
+            type="text"
+            className={`form-control ${error?.title ? "is-invalid" : ""}`}
+            value={blogTitle}
+            onChange={(e) => setBlogTitle(e.target.value)}
+          />
+          {error?.title && (
+            <div className="invalid-feedback">{error.title}</div>
+          )}
+        </div>
 
-          {/* RESET - BUTTON  */}
-          <button
-            type="reset"
-            className="btn btn-secondary mt-3 me-2"
-            onClick={clearFunction}
+        <div className="form-group mt-3">
+          <label className="mb-1">{t("blog_content")}</label>
+          <textarea
+            className={`form-control ${error?.content ? "is-invalid" : ""}`}
+            value={blogContent}
+            onChange={(e) => setBlogContent(e.target.value)}
+          />
+          {error?.content && (
+            <div className="invalid-feedback">{error.content}</div>
+          )}
+        </div>
+
+        <div className="form-group mt-3">
+          <label className="mb-1">{t("blog_category_name")}</label>
+          <select
+            className={`form-control ${error?.categoryId ? "is-invalid" : ""}`}
+            value={categoryId ?? ""}
+            onChange={(e) => setCategoryId(Number(e.target.value))}
           >
-            {t("clear")}
-          </button>
+            <option value="">{t("select_category")}</option>
+            {categories.map((cat) => (
+              <option key={cat.categoryId} value={cat.categoryId}>
+                {cat.categoryName}
+              </option>
+            ))}
+          </select>
+          {error?.categoryId && (
+            <div className="invalid-feedback">{error.categoryId}</div>
+          )}
+        </div>
 
-          {/* SUBMIT - BUTTON  */}
-          <button
-            type="submit"
-            className="btn btn-warning mt-3 ms-2 shadow"
-            onClick={blogCategoryUpdateSubmit}
-            disabled={multipleRequest}
-          >
-            {/* SPINNER */}
-            {spinnerData()}
-            {/* {spinner ? (
-              <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-            ) : (
-              "Ekle"
-            )} */}
-            {t("update")}
-          </button>
+        <button
+          type="submit"
+          className="btn btn-warning mt-4"
+          disabled={spinner}
+        >
+          {spinner ? (
+            <span className="spinner-border spinner-border-sm me-2" />
+          ) : null}
+          {t("update")}
+        </button>
 
-          <Link class="btn btn-primary mt-3 ms-3" to={`/blog/category/list/`}>
-            {t("home")}
-          </Link>
-        </form>
-      </div>
-    </React.Fragment>
+        <Link className="btn btn-secondary mt-4 ms-3" to="/blog/list">
+          {t("home")}
+        </Link>
+
+      </form>
+    </div>
   );
 }
 
-// EXPORT
-// i18n
 export default withTranslation()(BlogUpdate);

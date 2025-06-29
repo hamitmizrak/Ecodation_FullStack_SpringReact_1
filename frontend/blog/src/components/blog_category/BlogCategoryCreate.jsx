@@ -151,7 +151,7 @@ function BlogCategoryCreate({ props, t, i18n }) {
       <div class="container mt-5">
         <h1 class="text-center mb-4 mt-4"> {t("blog_category_create")}</h1>
 
-        <form onSubmit={onSubmitForm} action="GET">
+        <form onSubmit={onSubmitForm}>
           {/* INPUT CATEGORY NAME */}
           <div class="form-group">
             <label htmlFor="categoryName" className="mb-2">{t("blog_category_name")}</label>
