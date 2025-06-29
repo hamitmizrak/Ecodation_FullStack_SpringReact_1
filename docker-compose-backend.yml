@@ -15,8 +15,8 @@ version: '3.1'
 # Services
 services:
   backend:
-    container_name: container_blog_springboot_react
-    image: image_blog_springboot_react
+    container_name: container_blog_springboot
+    image: image_blog_springboot
     restart: on-failure # unless-stopped
     #build: ./  # default Dockefile
     build:

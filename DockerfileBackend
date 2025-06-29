@@ -11,7 +11,7 @@ FROM openjdk:17
 LABEL maintainer="hamitmizrak@gmail.com"
 
 #Çevresel değişkenler
-ENV APP_NAME="Full Stack 14"
+ENV APP_NAME="Full Stack Spring Boot"
 ENV VERSION="v1.0.0"
 ENV PORT="4444"
 
@@ -40,12 +40,7 @@ ENTRYPOINT ["java","-jar","/blog_springboot_react"]
 # HEALTHCHECK: Sağlık kontrolünü Eklesin
 # HEALTHCHECK: Bu container çalışıyor mu ?
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:3000/ || exit 1
-
-
-
-
-
+    CMD curl -f http://localhost:4444/ || exit 1
 
 
 

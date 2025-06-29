@@ -3,7 +3,7 @@
 # bash (tercihiniz olsun) ancak bh eskidi
 
 # Eğer database_memory_persist varsa sil
-echo "Spring Boot Starting Dockerize"
+echo "Backend (Spring Boot) - Frontend(React JS) Starting Dockerize"
 
 #########################################################
 # User Variable
@@ -37,7 +37,7 @@ chmod +x shell_countdown.sh
 
 
 #########################################################
-# Maven deployment
+# Version info
 version_info(){
   ./shell_countdown.sh
   mvn -v
@@ -49,16 +49,11 @@ version_info(){
 version_info
 
 #########################################################
-# 2 tane docker-compose aynı anda çalışsın
-# docker-compose -f docker-compose-backend.yml -f docker-compose-frontend.yml up --build
-
-
-
-#########################################################
-# Maven deployment
+# docker_network
 docker_network(){
   # Backend ve Frontent ortaklaşa çalışması için network external olmalıdır.
   ./shell_countdown.sh
+  echo -e "######### Docker Network eğer oluşturmazsak frontend ve backend servisler ortaklaşa çalışamıyacaktır#########\n"
   docker network rm fullstack_network
   docker network ls
   docker network create fullstack_network
@@ -79,10 +74,8 @@ database_memory_file_delete() {
     read -p "database_memory_persist Dosyasını Silmek İstiyor musunuz ? e/h " databaseMemoryDeleteResult
     if [[ $databaseMemoryDeleteResult == "e" || $databaseMemoryDeleteResult == "E" ]]; then
         echo -e "database_memory_file Silmeye Başladı ..."
-
         # Geri Sayım
         ./shell_countdown.sh
-
         #mvn clean package
         rm -rf database_memory_persist
         echo -e "Bulunduğum dizin => $(pwd)\n"
@@ -95,22 +88,18 @@ database_memory_file_delete
 #########################################################
 # Target JAR File Delete
 target_file_delete() {
-
     # Geri Sayım
     ./shell_countdown.sh
-
     echo -e "\n###### ${DELETED} ######  "
     # shellcheck disable=SC2162
     read -p "Target JAR File Delete Dosyasını Silmek İstiyor musunuz ? e/h " targetFileDeleteResult
     if [[ $databaseMemoryDeleteResult == "e" || $databaseMemoryDeleteResult == "E" ]]; then
         echo -e "Maven Compiler Yükleme Başladı ..."
-
         # Geri Sayım
         ./shell_countdown.sh
 
         #mvn clean package
         rm -rf target
-
     else
         echo -e "Target File Silme İşlemi Yapılmadı...."
     fi
@@ -120,23 +109,18 @@ target_file_delete
 #########################################################
 # Maven deployment
 maven_deployment() {
-
     # Geri Sayım
     ./shell_countdown.sh
-
     echo -e "\n###### ${INSTALL} ######  "
     # shellcheck disable=SC2162
-    read -p "Maven Compile Yapmak İstiyor musunuz ? e/h " dockerCompileInstallResult
-    if [[ $dockerCompileInstallResult == "e" || $dockerCompileInstallResult == "E" ]]; then
+    read -p "Maven Compile Yapmak İstiyor musunuz ? e/h " mavenCompileInstallResult
+    if [[ $mavenCompileInstallResult == "e" || $mavenCompileInstallResult == "E" ]]; then
         echo -e "Maven Compiler Yükleme Başladı ..."
-
         # Geri Sayım
         ./shell_countdown.sh
-
         echo -e "Bulunduğum dizin => $(pwd)\n"
         sleep 1
         echo -e "######### MAVEN #########\n"
-
         # Yükleme
         #mvn clean package
         ##cd ..
@@ -144,11 +128,78 @@ maven_deployment() {
         #mvn clean package
         mvn clean package -DskipTests
     else
-        echo -e "VSCode Yüklenmesi Yapılmadı...."
+        echo -e "Maven Yüklenmesi Yapılmadı...."
     fi
 }
 maven_deployment
 
+#########################################################
+# backend_frontend_deployment
+backend_frontend_deployment() {
+    # Geri Sayım
+    ./shell_countdown.sh
+    echo -e "\n###### ${INSTALL} ######  "
+    # shellcheck disable=SC2162
+    read -p "Backend ve Frontend Maven Compile Yapmak İstiyor musunuz ? e/h " mavenCompileInstallResult
+    if [[ $mavenCompileInstallResult == "e" || $mavenCompileInstallResult == "E" ]]; then
+        echo -e "Backend ve Frontend Compiler Yükleme Başladı ..."
+        # Geri Sayım
+        ./shell_countdown.sh
+        echo -e "Bulunduğum dizin => $(pwd)\n"
+        sleep 1
+
+        ./shell_countdown.sh
+        echo -e "######### Docker Network Listesi #########\n"
+        docker network ls
+        #docker network create fullstack_network
+        #docker network rm fullstack_network
+
+        ./shell_countdown.sh
+        echo -e "######### BACKEND/FRONTEND #########\n"
+        # 2 tane docker-compose aynı anda çalışsın
+        docker-compose -f docker-compose-backend.yml -f docker-compose-frontend.yml up --build
+        # docker compose durdur
+        #docker-compose -f docker-compose-backend.yml down
+        #docker-compose -f docker-compose-frontend.yml down
+        #docker-compose -f docker-compose-backend.yml down -f docker-compose-frontend.yml down
+
+        ./shell_countdown.sh
+        echo -e "######### Docker Backend Actuator Health #########\n"
+        curl http://localhost:4444/actuator/health
+
+        ./shell_countdown.sh
+        echo -e "######### Docker Backend application/json testi #########\n"
+        curl -H "Accept: application/json" http://container_blog_springboot_react:4444/blog/category/api/v1/list
+
+        ./shell_countdown.sh
+        echo -e "######### Docker Backend Container Listesi #########\n"
+        docker ps
+        #docker stop container_blog_springboot
+        docker ps | grep container_blog_springboot
+        docker logs container_blog_springboot
+        cat /container_blog_springboot
+
+        ./shell_countdown.sh
+        echo -e "######### Docker Frontend Container Listesi #########\n"
+        docker ps
+        docker ps | grep container_blog_react
+
+        ./shell_countdown.sh
+        echo -e "######### Docker Frontend Bash Terminal #########\n"
+        docker logs container_blog_react
+        docker exec -it container_blog_react sh
+        ping container_blog_springboot
+        curl http://container_blog_springboot:4444/blog/category/api/v1/list
+
+        ./shell_countdown.sh
+        echo -e "######### Docker Network Listesini Bulma #########\n"
+        docker network ls | grep fullstack_network
+
+    else
+        echo -e "Backend-Frontend Yüklenmesi Yapılmadı...."
+    fi
+}
+backend_frontend_deployment
 
 
 #########################################################
@@ -159,8 +210,9 @@ docker_deployment_backend() {
     ./shell_countdown.sh
 
     echo -e "\n###### ${INSTALL} ######  "
-    read -p "Docker Deployment Backend Yapmak İstiyor musunuz ? e/h " dockerCompileInstallResult
-    if [[ $dockerCompileInstallResult == "e" || $dockerCompileInstallResult == "E" ]]; then
+    # shellcheck disable=SC2162
+    read -p "Sadece Backend için Docker Deployment Backend Yapmak İstiyor musunuz ? e/h " backenddockerCompileInstallResult
+    if [[ $backenddockerCompileInstallResult == "e" || $backenddockerCompileInstallResult == "E" ]]; then
         echo -e "Docker Deployment Backend Yükleme Başladı ..."
 
         # Geri Sayım
@@ -168,7 +220,7 @@ docker_deployment_backend() {
 
         echo -e "Bulunduğum dizin => $(pwd)\n"
         sleep 1
-        echo -e "######### DOCKER COMPOSE #########\n"
+        echo -e "######### BACKEND DOCKER COMPOSE #########\n"
 
         # Yükleme
         # docker-compose up
@@ -178,7 +230,7 @@ docker_deployment_backend() {
         echo -e "docker deployment Yüklenmesi Yapılmadı...."
     fi
 }
-docker_deployment_backend
+#docker_deployment_backend
 
 #########################################################
 # Profiles
@@ -231,22 +283,20 @@ springboot_profiles_chooise() {
 #springboot_profiles_chooise
 
 #########################################################
-
 #ls -al
 #cd frontend/blog/
 #npm start
 
-
 # Docker deployment (Frontend)
 docker_deployment_frontend() {
-
     # Geri Sayım
     ./shell_countdown.sh
 
     echo -e "\n###### ${INSTALL} ######  "
-    read -p "Docker Deployment Frontend Yapmak İstiyor musunuz ? e/h " dockerCompileInstallResult
-    if [[ $dockerCompileInstallResult == "e" || $dockerCompileInstallResult == "E" ]]; then
-        echo -e "Docker Deployment Frontend Yükleme Başladı ..."
+    # shellcheck disable=SC2162
+    read -p "Sadece Frontend Docker Deployment Frontend Yapmak İstiyor musunuz ? e/h " frontenddockerCompileInstallResult
+    if [[ $frontenddockerCompileInstallResult == "e" || $frontenddockerCompileInstallResult == "E" ]]; then
+        echo -e "Sadece Frontend Docker Deployment Frontend Yükleme Başladı ..."
 
         # Geri Sayım
         ./shell_countdown.sh
@@ -260,7 +310,14 @@ docker_deployment_frontend() {
         # docker-compose up -d
         docker-compose -f docker-compose-frontend.yml up --build
     else
-        echo -e "docker deployment Yüklenmesi Yapılmadı...."
+        echo -e "docker Frontend deployment Yüklenmesi Yapılmadı...."
     fi
 }
 #docker_deployment_frontend
+
+
+#########################################################
+#########################################################
+#########################################################
+#########################################################
+#########################################################
