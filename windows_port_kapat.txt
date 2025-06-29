@@ -1,0 +1,6 @@
+netstat -aon | findstr :4444
+
+tasklist | findstr PID
+tasklist | findstr 1234
+taskkill /PID 1234 /F
+

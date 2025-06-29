@@ -18,22 +18,24 @@ function HeaderComponent(props) {
   // object destructing (t= I18N)
   const { t } = props;
   return (
-  // <i class={props.logo}></i>
+    // <i class={props.logo}></i>
     <React.Fragment>
-      <header >
+      <header>
         <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
           <div className="container">
             {/* LOGO */}
-              <Link className="navbar-brand"  style={{ color: `#123}` }} to="/"><i className={props.logo}></i></Link>
+            <Link className="navbar-brand" style={{ color: `#123}` }} to="/">
+              <i className={props.logo}></i>
+            </Link>
 
             <button
-                className="navbar-toggler d-lg-none"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapsibleNavId"
-                aria-controls="collapsibleNavId"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
+              className="navbar-toggler d-lg-none"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapsibleNavId"
+              aria-controls="collapsibleNavId"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
             >
               <span className="navbar-toggler-icon" />
             </button>
@@ -43,8 +45,12 @@ function HeaderComponent(props) {
                   {/* Root: relative Path */}
                   <Link to="/blog/category/list">Blog Category</Link>
                 </li>
-              </ul>
 
+                <li className="nav-item ms-3">
+                  {/* Root: relative Path */}
+                  <Link to="/blog/list">Blog</Link>
+                </li>
+              </ul>
 
               {/* Dark Mode */}
               <ul className="navbar-nav mr-1 me-auto44 mt-2 mt-lg-0">
@@ -53,17 +59,16 @@ function HeaderComponent(props) {
                   <DarkMode />
                 </li>
 
-
                 <li className="nav-item dropdown">
                   <a
-                      className="nav-link dropdown-toggle"
-                      href="#"
-                      id="dropdownId"
-                      data-bs-toggle="dropdown"
-                      aria-haspopup="true"
-                      aria-expanded="false"
+                    className="nav-link dropdown-toggle"
+                    href="#"
+                    id="dropdownId"
+                    data-bs-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
                   >
-                    {t('language')}
+                    {t("language")}
                   </a>
 
                   <div className="dropdown-menu" aria-labelledby="dropdownId">
@@ -73,48 +78,49 @@ function HeaderComponent(props) {
 
                 <li className="nav-item dropdown">
                   <a
-                      className="nav-link dropdown-toggle"
-                      href="#"
-                      id="dropdownId"
-                      data-bs-toggle="dropdown"
-                      aria-haspopup="true"
-                      aria-expanded="false"
+                    className="nav-link dropdown-toggle"
+                    href="#"
+                    id="dropdownId"
+                    data-bs-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
                   >
-                    {t('login')}
+                    {t("login")}
                   </a>
 
                   <div className="dropdown-menu" aria-labelledby="dropdownId">
-                    <Link className="dropdown-item" to="/login" >{t('login')}</Link>
-                    <Link className="dropdown-item" to="/register/create" >{t('register')} </Link>
+                    <Link className="dropdown-item" to="/login">
+                      {t("login")}
+                    </Link>
+                    <Link className="dropdown-item" to="/register/create">
+                      {t("register")}{" "}
+                    </Link>
                   </div>
                 </li>
 
-                  {/* Search Form */}
-                  <form  className="d-flex my-2 my-lg-0 ">
+                {/* Search Form */}
+                <form className="d-flex my-2 my-lg-0 ">
                   <input
-                      type="text"
-                      id="tags"
-                      className="form-control me-sm-2"
-                      placeholder={t('search')}
+                    type="text"
+                    id="tags"
+                    className="form-control me-sm-2"
+                    placeholder={t("search")}
                   />
                   <button
-                      type="submit"
-                      className="btn btn-outline-success my-2 my-sm-0"
-                     >
-                    {t('search')}
+                    type="submit"
+                    className="btn btn-outline-success my-2 my-sm-0"
+                  >
+                    {t("search")}
                   </button>
                 </form>
-
               </ul>
-
             </div>
           </div>
         </nav>
         <span style={{ marginBottom: "2rem" }}>.</span>
       </header>
-
     </React.Fragment>
-  )
+  );
 }
 
 // EXPORT

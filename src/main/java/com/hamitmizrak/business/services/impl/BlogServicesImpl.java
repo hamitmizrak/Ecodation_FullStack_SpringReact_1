@@ -5,6 +5,7 @@ import com.hamitmizrak.bean.ModelMapperBean;
 import com.hamitmizrak.business.dto.BlogDto;
 import com.hamitmizrak.business.services.interfaces.IBlogServices;
 import com.hamitmizrak.data.entity.BlogEntity;
+import com.hamitmizrak.data.mapper.BlogMapper;
 import com.hamitmizrak.data.repository.IBlogRepository;
 import com.hamitmizrak.exception.HamitMizrakException;
 import com.hamitmizrak.exception._404_NotFoundException;
@@ -46,12 +47,20 @@ public class BlogServicesImpl implements IBlogServices<BlogDto, BlogEntity> {
     // MODEL MAPPER
     @Override
     public BlogDto entityToDto(BlogEntity blogEntity) {
-        return modelMapperBeanClass.modelMapperMethod().map(blogEntity,BlogDto.class);
+        // 1.YOL
+        //return modelMapperBeanClass.modelMapperMethod().map(blogEntity,BlogDto.class);
+
+        // 2.YOL
+        return BlogMapper.BlogEntityToBlogDto(blogEntity);
     }
 
     @Override
     public BlogEntity dtoToEntity(BlogDto blogDto) {
-        return  modelMapperBeanClass.modelMapperMethod().map(blogDto,BlogEntity.class);
+        // 1.YOL
+        //return  modelMapperBeanClass.modelMapperMethod().map(blogDto,BlogEntity.class);
+
+        // 2.YOL
+        return BlogMapper.BlogDtoToBlogEntity(blogDto);
     }
 
     //////////////////////////////////////////////////////////////////////////////
@@ -115,9 +124,9 @@ public class BlogServicesImpl implements IBlogServices<BlogDto, BlogEntity> {
         BlogDto blogFindDto= objectServiceFindById(id);
        if(blogFindDto!=null){
            BlogEntity blogEntity=dtoToEntity(blogFindDto);
-           blogEntity.getBlogEntityEmbeddable().setTitle(blogDto.getTitle());
-           blogEntity.getBlogEntityEmbeddable().setHeader(blogDto.getHeader());
-           blogEntity.getBlogEntityEmbeddable().setContent(blogDto.getContent());
+           blogEntity.setTitle(blogDto.getTitle());
+           blogEntity.setHeader(blogDto.getHeader());
+           blogEntity.setContent(blogDto.getContent());
            iBlogRepository.save(blogEntity);
            // Dönüştede ID ve Date Set et
        }

@@ -14,7 +14,9 @@ function MainComponent() {
     Animi cupiditate maxime ipsam non porro ratione pariatur placeat optio, enim ducimus id nobis. Unde, officia eius esse asperiores ratione veniam assumenda pariatur molestiae est, id omnis dolorem, provident cupiditate.
   
   <br/>
+  <br/>
   <Link to="/blog/category/list" className="btn btn-primary">Blog Category</Link>
+  <Link to="/blog/list" className="ms-3 btn btn-primary">Blog List</Link>
    </>
   )
 }

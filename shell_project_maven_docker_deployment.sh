@@ -134,13 +134,13 @@ maven_deployment() {
 maven_deployment
 
 #########################################################
-# backend_frontend_deployment
+# Docker backend_frontend_deployment
 backend_frontend_deployment() {
     # Geri Sayım
     ./shell_countdown.sh
     echo -e "\n###### ${INSTALL} ######  "
     # shellcheck disable=SC2162
-    read -p "Backend ve Frontend Maven Compile Yapmak İstiyor musunuz ? e/h " mavenCompileInstallResult
+    read -p "Docker Backend ve Frontend Compile Yapmak İstiyor musunuz ? e/h " mavenCompileInstallResult
     if [[ $mavenCompileInstallResult == "e" || $mavenCompileInstallResult == "E" ]]; then
         echo -e "Backend ve Frontend Compiler Yükleme Başladı ..."
         # Geri Sayım
@@ -165,11 +165,11 @@ backend_frontend_deployment() {
 
         ./shell_countdown.sh
         echo -e "######### Docker Backend Actuator Health #########\n"
-        curl http://localhost:4444/actuator/health
+        # curl http://localhost:4444/actuator/health
 
         ./shell_countdown.sh
         echo -e "######### Docker Backend application/json testi #########\n"
-        curl -H "Accept: application/json" http://container_blog_springboot_react:4444/blog/category/api/v1/list
+        # curl -H "Accept: application/json" http://container_blog_springboot_react:4444/blog/category/api/v1/list
 
         ./shell_countdown.sh
         echo -e "######### Docker Backend Container Listesi #########\n"
@@ -187,9 +187,9 @@ backend_frontend_deployment() {
         ./shell_countdown.sh
         echo -e "######### Docker Frontend Bash Terminal #########\n"
         docker logs container_blog_react
-        docker exec -it container_blog_react sh
-        ping container_blog_springboot
-        curl http://container_blog_springboot:4444/blog/category/api/v1/list
+        #docker exec -it container_blog_react sh
+        #ping container_blog_springboot
+        #curl http://container_blog_springboot:4444/blog/category/api/v1/list
 
         ./shell_countdown.sh
         echo -e "######### Docker Network Listesini Bulma #########\n"

@@ -13,6 +13,7 @@ import lombok.extern.log4j.Log4j2;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 // LOMBOK
 @Data
@@ -42,5 +43,11 @@ public class BlogCategoryDto extends AuditingAwareBaseDto implements Serializabl
     @NotEmpty(message = "{blog.category.validation.constraints.NotNull.message}")
     @Size(min=2,message = "{blog.category.least.validation.constraints.NotNull.message}")
     private String categoryName;
+
+    /////////////////////////////////////////////////////////////////////////////////////////
+    // COMPOSITION
+    // RELATION
+    // BlogCategory(1) - Blog(N)
+    private List<BlogDto>  blogDtoList;
 
 } //end class

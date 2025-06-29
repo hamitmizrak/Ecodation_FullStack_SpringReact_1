@@ -5,21 +5,22 @@ import com.hamitmizrak.audit.AuditingAwareBaseDto;
 import jakarta.persistence.Lob;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.extern.log4j.Log4j2;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 // LOMBOK
-@Data
+// @Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Log4j2
 @Builder
+
 // Validation
 // BlogDto(N) BlogCategory(1)
 public class BlogDto extends AuditingAwareBaseDto implements Serializable {
@@ -55,5 +56,11 @@ public class BlogDto extends AuditingAwareBaseDto implements Serializable {
     @NotEmpty(message = "{blog.title.validation.constraints.NotNull.message}")
     @Builder.Default
     private String image="resim.png";
+
+    /////////////////////////////////////////////////////////////////////////////////////////
+    // COMPOSITION
+    // RELATION
+    // Blog(N) - BlogCategory(1)
+    private BlogCategoryDto blogCategoryDto;
 
 } //end class

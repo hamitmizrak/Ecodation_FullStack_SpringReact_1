@@ -5,6 +5,7 @@ import com.hamitmizrak.bean.ModelMapperBean;
 import com.hamitmizrak.business.dto.BlogCategoryDto;
 import com.hamitmizrak.business.services.interfaces.IBlogCategoryServices;
 import com.hamitmizrak.data.entity.BlogCategoryEntity;
+import com.hamitmizrak.data.mapper.BlogCategoryMapper;
 import com.hamitmizrak.data.repository.IBlogCategoryRepository;
 import com.hamitmizrak.exception.HamitMizrakException;
 import com.hamitmizrak.exception._404_NotFoundException;
@@ -72,12 +73,20 @@ public class BlogCategoryServicesImpl implements IBlogCategoryServices<BlogCateg
     // MODEL MAPPER
     @Override
     public BlogCategoryDto entityToDto(BlogCategoryEntity blogCategoryEntity) {
-        return modelMapperBeanClass.modelMapperMethod().map(blogCategoryEntity, BlogCategoryDto.class);
+        // 1.YOL
+        // return modelMapperBeanClass.modelMapperMethod().map(blogCategoryEntity, BlogCategoryDto.class);
+
+        // 2.YOL
+        return BlogCategoryMapper.BlogCategoryEntityToBlogCategoryDto(blogCategoryEntity);
     }
 
     @Override
     public BlogCategoryEntity dtoToEntity(BlogCategoryDto categoryDto) {
-        return modelMapperBeanClass.modelMapperMethod().map(categoryDto, BlogCategoryEntity.class);
+        // 1.YOL
+        //return modelMapperBeanClass.modelMapperMethod().map(categoryDto, BlogCategoryEntity.class);
+
+        // 2.YOL
+        return BlogCategoryMapper.BlogCategoryDtoToBlogCategoryEntity(categoryDto);
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////

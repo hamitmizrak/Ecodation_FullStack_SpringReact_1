@@ -47,7 +47,6 @@ public class CustomerMapper {
         //customerEntity.setSystemCreatedDate(customerDto.getSystemCreatedDate());
 
         // DİKKAT: Composition (Customer(1) -Address(1))
-        // DİKKAT: Composition (Customer(1) -Address(1))
         if(customerDto.getAddressDto() != null){
             customerEntity.setAddressCustomerEntity(AddressMapper.AddressDtoToAddressEntity(customerDto.getAddressDto()));
         }else{

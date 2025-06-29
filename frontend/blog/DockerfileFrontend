@@ -4,6 +4,8 @@
 # docker image build -t imageAdi .
 # docker container run -d -p 3000:3000 --rm --name blog
 
+# React için Node tabanlı imaj
+FROM node:18
 
 # Bilgilendirme
 LABEL maintainer="hamitmizrak@gmail.com"
@@ -18,9 +20,6 @@ RUN echo "App Name: $APP_NAME"
 RUN echo "Version: $VERSION"
 RUN echo "Port: $PORT"
 
-# React için Node tabanlı imaj
-FROM node:18
-
 # Çalışma dizini
 WORKDIR /usr/src/app
 
@@ -32,6 +31,12 @@ RUN npm install
 
 # Tüm dosyaları kopyala (src, public, vs.)
 COPY . .
+
+# Geliştirme portunu aç
+EXPOSE 3000
+
+# React uygulamasını başlat
+CMD ["npm", "start"]
 
 # Kalıcılık
 # VOLUME /tmp

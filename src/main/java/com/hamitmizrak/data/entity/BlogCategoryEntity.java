@@ -2,10 +2,7 @@ package com.hamitmizrak.data.entity;
 
 import com.hamitmizrak.audit.AuditingAwareBaseEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.extern.log4j.Log4j2;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -14,7 +11,9 @@ import java.util.Date;
 import java.util.List;
 
 // LOMBOK
-@Data
+//@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -53,11 +52,14 @@ public class BlogCategoryEntity extends AuditingAwareBaseEntity implements Seria
     // Constructor (parametreli)
     public BlogCategoryEntity(String categoryName, List<BlogEntity> relationBlogEntityList) {
         this.categoryName = categoryName;
-        this.relationBlogEntityList = relationBlogEntityList;
+        this.blogCategoryBlogEntityList = relationBlogEntityList;
     }
 
+    //////////////////////////////////////////////////////////////////////////////////////
+    // COMPOSITION
     // RELATION
-    @OneToMany(mappedBy = "relationCategoryEntity",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    List<BlogEntity> relationBlogEntityList;
+    // BlogCategory(1) - Blog(N)
+    @OneToMany(mappedBy = "blogCategoryBlogEntity",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    List<BlogEntity> blogCategoryBlogEntityList;
 
 } //end class

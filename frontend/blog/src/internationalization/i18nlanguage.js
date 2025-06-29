@@ -29,7 +29,16 @@ i18n.use(initReactI18next).init({
                     'blog_category_update': 'Blog Category Update',
                     'blog_category_view': 'Blog Category View',
                     'blog_category_create': 'Blog Category Create',
-                    'blog_category_name':'Blog Category Name'
+                    'blog_category_name':'Blog Category Name',
+                    'blog_list': 'Blog Category List',
+                    'blog_update': 'Blog Category Update',
+                    'blog_view': 'Blog Category View',
+                    'blog_create': 'Blog Category Create',
+                    'blog_name':'Blog Category Name',
+                    'blog_header':'Blog Header',
+                    'blog_title':'Blog Title',
+                    'blog_content':'Blog Content',
+                    'actions':'Actions',
                 }
             },
         tr:
@@ -54,7 +63,16 @@ i18n.use(initReactI18next).init({
                     'blog_category_update': 'Blog Kategori Güncelleme',
                     'blog_category_view': 'Blog Kategori Göster',
                     'blog_category_create': 'Blog Kategori Oluştur',
-                    'blog_category_name':'Blog Kategori Adı'
+                    'blog_category_name':'Blog Kategori Adı',
+                    'blog_list': 'Blog Listesi',
+                    'blog_update': 'Blog Güncellemesi',
+                    'blog_view': 'Blog Gösterimi',
+                    'blog_create': 'Blog oluştur',
+                    'blog_name':'Blog adı',
+                    'blog_header':'Blog Ana Başlık',
+                    'blog_title':'Blog Alt Başlık',
+                    'blog_content':'Blog İçerik',
+                    'actions':'Hareketler',
                 }
             }
     },

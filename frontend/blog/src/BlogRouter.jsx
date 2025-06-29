@@ -19,6 +19,12 @@ import BlogCategoryCreate from './components/blog_category/BlogCategoryCreate';
 import BlogCategoryView from './components/blog_category/BlogCategoryView';
 import BlogCategoryUpdate from './components/blog_category/BlogCategoryUpdate';
 
+// BLOG 
+import BlogList from './components/blog/BlogList';
+import BlogCreate from './components/blog/BlogCreate';
+import BlogView from './components/blog/BlogView';
+import BlogUpdate from './components/blog/BlogUpdate';
+
 // CLASS COMPONENT BlogRouter
 function BlogRouter() {
 
@@ -36,6 +42,12 @@ function BlogRouter() {
                             {/* Root Path */}
                             <Route path={"/"} element={<MainComponent />} />
                             <Route path={"/index"} element={<MainComponent />} />
+
+                             {/* Blog Categories */}
+                            <Route path={"/blog/list"} element={<BlogList/>} />
+                            <Route path={"/blog/create"} element={<BlogCreate/>} />
+                            <Route path={"/blog/view/:id"} element={<BlogView/>} />
+                            <Route path={"/blog/update/:id"} element={<BlogUpdate/>} />
 
 
                             {/* Blog Categories */}
