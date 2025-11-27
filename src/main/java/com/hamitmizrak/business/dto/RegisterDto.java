@@ -17,7 +17,7 @@ import java.util.Collection;
 import java.util.Date;
 
 // LOMBOK
-@Data // @Setter @Getter
+@Data  // Getter + Setter + Equals + HashCode + toString
 @AllArgsConstructor
 @NoArgsConstructor
 @Log4j2
